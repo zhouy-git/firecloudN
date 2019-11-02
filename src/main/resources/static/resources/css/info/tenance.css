@@ -1,0 +1,107 @@
+html body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(241,244,251);
+    overflow-x: hidden;
+}
+
+.div1-top {
+    position: relative;
+    width: 100%;
+    height: 78px;
+    margin: 8px 0px;
+    left: 3px;
+    display: flex;
+}
+
+.div1-top .div1-pc {
+    height: 90%;
+    width: calc(96.8%/4);
+    margin:auto;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+.left-img {
+    width: 15%;
+    height: 60%;
+    border: 1px solid #eea236;
+    margin: auto 15px;
+}
+
+.div1-pc-right {
+    width: 40%;
+    height: 60%;
+
+}
+
+.div1-pc-right p {
+    font-size: 18px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+
+.div1-pc-right span {
+    font-size: 10px;
+    font-weight: 600;
+    color: transparent;
+    background-color : grey;
+    text-shadow : rgba(255,255,255,0.5) 0 5px 6px,
+    rgba(255,255,255,0.2) 1px 3px 3px;
+    -webkit-background-clip : text;
+}
+
+.layui-table-page {
+    width: 28% !important;
+    float: right;
+}
+
+.layui-table thead tr{
+    height: 22px !important;
+    font-size: 12px !important;
+}
+
+.tenance-center {
+    width: 99%;
+    margin: 0 auto;
+}
+
+/*
+日期时间选择*/
+.tenance-header .layui-inline .layui-input-inline input{
+    width: 250px !important;
+    border-radius: 30px;
+    margin: 0 0 0 10px;
+    text-align: center;
+    height: 33px !important;
+}
+
+/*.tenance-header {
+    width: 100%;
+    height: 35px;
+    display: flex;
+    align-items: center;
+}*/
+
+.layui-input::-webkit-input-placeholder { /* WebKit browsers */
+    margin: auto 10px;
+    font-size: 10px;
+}
+
+/*.plxz {
+    width: 120px;
+    height: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+}
+.btn-plxz {
+    background-color: deepskyblue;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    background-repeat: no-repeat;
+    color: white;
+}*/

@@ -1,0 +1,76 @@
+server:
+  port: 8182
+
+
+#配置数据源的属性
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://39.104.16.168:3306/firecloud?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=UTC
+      username: root
+      password: admin
+      max-active: 20
+      max-wait: 5000
+      initial-size: 1
+      filters: stat,log4j,wall
+      validationQuery: SELECT 'x'   #验证连接
+      enable: true
+      #监控配置
+      stat-view-servlet:
+        enabled: true
+        login-username: root
+        login-password: admin
+        allow:
+        deny:
+        url-pattern: /druid/*
+  #thymeleaf的配置
+  thymeleaf:
+    cache: true
+    enabled: true
+    mode: LEGACYHTML5
+    #      web-stat-filter:
+    #        enabled: true
+    #        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+    prefix: classpath:/templates/
+    suffix: .html
+    servlet:
+      content-type: text/html
+    encoding: UTF-8
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8  #日期加上8小时才是北京时间
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+  freemarker:
+    cache: false #页面不加载缓存，修改即时生效
+
+#配置mybatisplus
+mybatis-plus:
+  mapper-locations:
+  - classpath:mapper/*/*Mapper.xml
+  global-config:
+    db-config:
+      id-type: auto
+    banner: true
+    configuration:
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#shiro的配置
+shiro:
+  hash-algorithm-name: md5
+  hash-iterations: 2
+  anon-urls:
+  - /index.html*
+  - /sys/toLogin*
+  - /login/login*
+  - /resources/**
+  login-url: /index.html
+  log-out-url: /login/logout*
+  authc-ulrs:
+  - /**
+debug: false
+
+
+api-url: /api

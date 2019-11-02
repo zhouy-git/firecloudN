@@ -1,0 +1,102 @@
+html body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(241,244,251);
+}
+
+.div1-top {
+    position: relative;
+    width: 100%;
+    height: 78px;
+    margin: 3px 0px;
+    left: 3px;
+    display: flex;
+}
+
+.div1-top .div1-pc {
+    height: 90%;
+    width: calc(96.8%/5);
+    margin:auto;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+.left-img {
+    width: 20%;
+    height: 60%;
+    border: 1px solid #eea236;
+    margin: auto 10px;
+}
+
+.div1-pc-right {
+    width: 40%;
+    height: 60%;
+
+}
+
+.div1-pc-right p {
+    font-size: 18px;
+    font-weight: 600;
+    padding-top: 3px;
+}
+
+.div1-pc-right span {
+    font-size: 10px;
+    font-weight: 600;
+    color: transparent;
+    background-color : grey;
+    text-shadow : rgba(255,255,255,0.5) 0 5px 6px,
+    rgba(255,255,255,0.2) 1px 3px 3px;
+    -webkit-background-clip : text;
+}
+/*表格搜索框*/
+.tab-search {
+    width: 100%;
+    display: flex;
+    font-family: "Sitka Heading";
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.tab-search-are {
+    width: 15%;
+}
+
+.tab-search-company {
+    width: 13%;
+}
+
+.tab-search-company input {
+    border-radius: 50px;
+    height: 26px;
+    margin-left:20px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance:none ;
+    outline: 0;
+    background-image: url("../../images/lwdw/search.png");
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position:  95%;
+}
+
+.tab-search-are input{
+    border-radius: 50px;
+    height: 26px;
+    margin-left:10px;
+}
+
+.div2-center {
+    position: relative;
+    width: 100%;
+}
+
+.page-count {
+    width: 51%;
+    bottom: 0;
+    margin-right: 5px;
+    float: right;
+    text-align: right;
+}
+

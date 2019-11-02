@@ -1,0 +1,4 @@
+{"code":0,"msg":"","count":1000,
+  "data":[{"id":10000,"username":"辉煌国际","sex":"10500.0","city":"轻钢结构","sign":"2012-10-12","experience": "二类高层建筑","logins":"10000","wealth":82830700,"classify":"现代","score":"河北石家庄所在地"},
+    {"id":10001,"username":"user-1","sex":"c-12212","city":"CA1221-1","sign":"2019-10-12 21:09:78-1","experience":884,"logins":58,"wealth":64928690,"classify":"现代","score":27},
+    {"id":10002,"username":"user-2","sex":"A-1231","city":"CA1221-2","sign":"2019-10-12 21:09:78-2","experience":650,"logins":77,"wealth":6298078,"classify":"现代","score":31}]}
