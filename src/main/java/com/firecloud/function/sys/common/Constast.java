@@ -48,4 +48,9 @@ public class Constast {
     public static final String WENGAN = "温感";
     public static final String XIAOHUOSUAN = "消火栓";
 
+    /**
+     * 1：设备状态正常
+     */
+    public static final Integer NORMARL = 1;
+
 }

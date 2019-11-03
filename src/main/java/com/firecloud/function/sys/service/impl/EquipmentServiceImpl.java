@@ -57,19 +57,20 @@ public class EquipmentServiceImpl extends ServiceImpl<EquipmentMapper, Equipment
     /**
      * 获取发送过来的数据最新状态来更新设备表中的状态
      */
-    private Integer DevStatusId;
+    private String DevStatusId;
     @Override
-    public Integer getDevStatus(Integer statusid) {
+    public String getDevStatus(String statusid) {
         IPage<Devinfo> page=new Page<>(1, 1);
         QueryWrapper<Devinfo> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("DEV_ID", statusid);
-        queryWrapper.orderByDesc("DATA_DATE");
+        queryWrapper.lambda().orderByDesc(Devinfo::getDataDate);
+        queryWrapper.lambda().orderByDesc(Devinfo::getDataTime);
         List<Devinfo> devinfoList = this.devinfoService.page(page, queryWrapper).getRecords();
 
         if (devinfoList.size() > 0) {
-            DevStatusId = Integer.parseInt(devinfoList.get(0).getDevStatus());
+            DevStatusId = devinfoList.get(0).getDevStatus();
         }else {
-            DevStatusId = 1;
+            DevStatusId = String.valueOf(Constast.NORMARL);
         }
         return DevStatusId;
     }
