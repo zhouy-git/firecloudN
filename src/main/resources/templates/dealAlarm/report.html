@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>报告受理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8"/>
+    <link rel="stylesheet" href="/resources/css/font.css">
+    <link rel="stylesheet" href="/resources/css/deal/report.css">
+    <link rel="stylesheet" href="/resources/layui/css/layui.css">
+</head>
+<body>
+
+   <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+       <ul class="layui-tab-title">
+           <li lay-id="fire" class="layui-this">火警</li>
+           <li lay-id="trouble">故障</li>
+           <li lay-id="hideDan">隐患</li>
+           <li>异常</li>
+       </ul>
+       <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <iframe id="fire" src="/api/getPage?pageName=dealAlarm/fire" style="width: 100%; height: 100%" frameborder="0"></iframe>
+            </div>
+           <div class="layui-tab-item">
+               <iframe id="trouble" src="/api/getPage?pageName=dealAlarm/trouble" style="width: 100%; height: 100%" frameborder="0" scrolling="auto" overflow="hidden"></iframe>
+           </div>
+           <div class="layui-tab-item">
+               <iframe id="hideDan" src="/api/getPage?pageName=dealAlarm/breakdown" style="width: 100%; height: 100%" frameborder="0" scrolling="auto" overflow="hidden"></iframe>
+           </div>
+       </div>
+   </div>
+
+   <script src="/resources/layui/layui.js" charset="UTF-8"></script>
+    <script src="/resources/js/report/report.js" th:inline="none"></script>
+    <script type="text/javascript" th:inline="none">
+        var $, element;
+        layui.use(['jquery','element'],function () {
+            $ = layui.jquery;
+            element = layui.element;
+
+            function FramenWH() {
+                var h = $(window).height() - 100;
+                var w = $(window).width()- 220;
+                $("iframe").css("height",h +'px','width',w+'px');
+            }
+            FramenWH();
+
+            $(window).resize(function () {
+                FramenWH();
+            });
+        });
+
+    </script>
+</body>
+</html>

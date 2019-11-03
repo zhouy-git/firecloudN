@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台登录-X-admin2.0</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <link rel="stylesheet" href="/resources/layui/css/layui.css">
+    <style>
+        body {
+            overflow-y: auto;
+        }
+    </style>
+    <STYLE>
+        html {
+            /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
+            -ms-overflow-style:none;
+            /*火狐下隐藏滚动条*/
+            overflow:-moz-scrollbars-none;
+        }
+        /*Chrome下隐藏滚动条，溢出可以透明滚动*/
+        html::-webkit-scrollbar{width:0px}
+    </STYLE>
+</head>
+<body>
+<div class="x-body">
+    <blockquote class="layui-elem-quote">
+        装有火警报警器的建筑正负条形图
+    </blockquote>
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main" style="width: 80%;height:310px;margin: auto"></div>
+    <blockquote class="layui-elem-quote">
+        建筑数据表格
+    </blockquote>
+    <table class="layui-hide" id="test" lay-filter="demo"></table>
+
+</div>
+<div id="barDemo" style="display: none;">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</div>
+</div>
+<script src="https://cdn.bootcss.com/echarts/3.7.0/echarts.min.js"></script>
+<script src="/resources/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var labelRight = {
+        normal: {
+            position: 'right'
+        }
+    };
+    option = {
+        title: {
+            text: '建筑情况',
+            subtext: 'Building Desc',
+            sublink: '#'
+        },
+        tooltip : {
+            trigger: 'axis',
+            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        grid: {
+            top: 80,
+            bottom: 30
+        },
+        xAxis: {
+            type : 'value',
+            position: 'top',
+            splitLine: {lineStyle:{type:'dashed'}},
+        },
+        yAxis: {
+            type : 'category',
+            axisLine: {show: false},
+            axisLabel: {show: false},
+            axisTick: {show: false},
+            splitLine: {show: false},
+            data : ['H-楼', 'G-楼', 'F-楼', 'E-楼', 'G-楼', 'F-楼', 'D-楼', 'C-楼', 'B-楼', 'A-楼']
+        },
+        series : [
+            {
+                name:'火警器数量',
+                type:'bar',
+                stack: '总量',
+                label: {
+                    normal: {
+                        show: true,
+                        formatter: '{b}'
+                    }
+                },
+                data:[
+                    {value: -1, label: labelRight},
+                    {value: -0.9, label: labelRight},
+                    0.2, 0.44,
+                    {value: -0.23, label: labelRight},
+                    0.48,
+                    {value: -0.87, label: labelRight},
+                    0.47,
+                    {value: -0.36, label: labelRight},
+                    0.18
+                ]
+            }
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+    layui.use(['table','layer'],function () {
+        var table = layui.table, layer = layui.layer;
+
+        table.render({
+            elem: '#test'
+            ,url:'/resources/json/fireInfo.json'
+            ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            ,page: true
+            ,cols: [ [
+                {field:'id', title: 'ID', sort: true}
+                ,{field:'username', title: '建筑名称'}
+                ,{field:'sex', title: '建筑面积'}
+                ,{field:'city', title: '建筑结构'}
+                ,{field:'sign', title: '建筑年代'} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                ,{field:'experience', title: '建筑风格'}
+                ,{field:'score', title: '建筑平面图'}
+                ,{field:'allbuildarea', title: '总建筑面积'}
+                ,{field:'classify', title: '建筑类型'}
+                ,{field:'wealth', title: '建筑类型'}
+                ,{fixed: 'right', title: '操作', width:200, align:'center', toolbar: '#barDemo'}
+            ] ]
+        });
+
+        table.on('tool(demo)',function (obj) {
+            switch (obj.event) {
+                case 'detail':
+                    detail();
+                    break;
+                case 'del':
+                    layer.confirm('您确定要删除该条数据吗？',function (index) {
+                        obj.del();
+                        layer.close(index);
+                    })
+                    break;
+            }
+        });
+
+
+        function detail() {
+            layer.open({
+                type: 2 //Page层类型
+                ,area: ['75%', '73%']
+                ,title: '建筑基本信息'
+                ,shade: 0.6 //遮罩透明度
+                ,maxmin: true //允许全屏最小化
+                ,anim: 1 //0-6的动画形式，-1不开启
+                ,skin: 'layui-layer-rim'
+                ,content: '/api/getPage?pageName=statistical/buildInfo-detail'
+            });
+        }
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" th:href="@{/resources/css/index/index.css}">
+    <STYLE>
+        html {
+            /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
+            -ms-overflow-style:none;
+            /*火狐下隐藏滚动条*/
+            overflow:-moz-scrollbars-none;
+        }
+        /*Chrome下隐藏滚动条，溢出可以透明滚动*/
+        html::-webkit-scrollbar{width:0px}
+    </STYLE>
+</head>
+<body>
+    <div class="c1">
+        <div class="c1-middle-box">
+            <div class="m-d1" style="background-color: #514CFB;">
+                <div class="lef-name-res">
+                    <p>
+                        0
+                        <span class="name">个</span>
+                    </p>
+                    <span class="name">
+                        报警总数
+                    </span>
+                </div>
+                <div class="right-img">
+                    <img th:src="@{/resources/images/index/jb.png}" alt="">
+                </div>
+            </div>
+            <div class="m-d1" style="background-color: #FC6D21;">
+                <div class="lef-name-res">
+                    <p>
+                        0
+                        <span class="name">个</span>
+                    </p>
+                    <span class="name">
+                        火警数
+                    </span>
+                </div>
+                <div class="right-img">
+                    <img th:src="@{/resources/images/index/fire.png}" alt="">
+                </div>
+
+            </div>
+            <div class="m-d1" style="background-color: #3096EA;">
+                <div class="lef-name-res">
+                    <p>
+                        2
+                        <span class="name">个</span>
+                    </p>
+                    <span class="name">
+                        故障数
+                    </span>
+                </div>
+                <div class="right-img">
+                    <img th:src="@{/resources/images/index/gz.png}" alt="">
+                </div>
+            </div>
+            <div class="m-d1" style="background-color: #4E72DA;">
+                <div class="lef-name-res">
+                    <p>
+                        3
+                        <span class="name">个</span>
+                    </p>
+                    <span class="name">
+                        异常数
+                    </span>
+                </div>
+                <div class="right-img">
+                    <img th:src="@{/resources/images/index/yc.png}" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+        <!--<div id="echarts-main" class="echarts-main"></div>-->
+    </div>
+
+    <div class="div3" id="mapController">
+        <div id="div-mapinfo" class="d3-map">
+            图片
+        </div>
+    </div>
+
+    <div class="div2">
+
+        <div class="fxpg-center-left">
+            <div class="div-top">
+                <div class="div-top-left">
+                    <p>
+                        <span>风险评估</span>
+                    </p>
+                </div>
+                <!--<div class="div-top-right">
+                    <img th:src="../images/index/more.png" alt="">
+                </div>-->
+            </div>
+            <div class="d2-col-left">
+                <div class="title">
+                    <p class="div-title">建议关注单位top5</p>
+                </div>
+                <div class="adgzdw-center">
+                    <ul class="center-dw-ul">
+                        <li>
+                            <span class="font-danger-css">联网单位360</span>
+                            <strong>3</strong>
+                            <div class="layui-progress">
+                                <div class="layui-progress-bar layui-bg-green" lay-percent="30%"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="font-danger-css">网易多媒体互联公司</span>
+                            <strong>4</strong><br>
+                            <div class="layui-progress">
+                                <div class="layui-progress-bar layui-bg-green" lay-percent="40%"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="font-danger-css">三盛股份有限公司</span>
+                            <strong>5</strong>
+                            <div class="layui-progress">
+                                <div class="layui-progress-bar layui-bg-green" lay-percent="50%"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="font-danger-css">辉煌国际</span>
+                            <strong>7</strong>
+                            <div class="layui-progress">
+                                <div class="layui-progress-bar layui-bg-green" lay-percent="70%"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="font-danger-css">百度搜索技术有限公司</span>
+                            <strong>6</strong>
+                            <div class="layui-progress">
+                                <div class="layui-progress-bar layui-bg-green" lay-percent="60%"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="d2-col-right">
+                <div class="title">
+                    <p class="div-title">单位风险等级占比</p>
+                </div>
+                <div class="dwfxdj-center">
+                    <div id="echarts-dwfxdj" class="center-left-nav">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="div4">
+        <div class="div4-pc">
+            <div class="top-pic">
+                <div class="top-pic-left">
+                    <img th:src="@{/resources/images/index/bottom-water.png}" alt="">
+                    <p>水位报警:
+                        <span>0个</span>
+                    </p>
+                </div>
+                <div class="top-pic-right">
+                    <img th:src="@{/resources/images/index/watertemperature.png}" alt="">
+                    <p>水温报警:
+                        <span>0个</span>
+                    </p>
+                </div>
+            </div>
+            <div class="bottom-info">
+                <div class="bottom-info-left">
+                    <span class="layui-badge-dot layui-bg-green"></span>
+                    <span>在线</span>
+                    <strong>0</strong>
+                </div>
+                <div class="layui-bg-grey">
+                </div>
+
+                <div class="bottom-info-right">
+                    <span>智能烟感</span>
+                    <strong>19个</strong>
+                </div>
+            </div>
+        </div>
+        <div class="div4-pc">
+            <div class="top-pic-hydrostatic">
+                <img th:src="@{/resources/images/index/instrument.png}" alt="">
+                <p>报警数:
+                    <span>0个</span>
+                </p>
+            </div>
+            <div class="bottom-info">
+                <div class="bottom-info-left">
+                    <span class="layui-badge-dot layui-bg-green"></span>
+                    <span>在线</span>
+                    <strong>0</strong>
+                </div>
+                <div class="layui-bg-cyan">
+                </div>
+
+                <div class="bottom-info-right">
+                    <span>智能燃气浓度</span>
+                    <strong>19个</strong>
+                </div>
+            </div>
+        </div>
+        <div class="div4-pc">
+            <div class="top-pic-hydrostatic">
+                <img th:src="@{/resources/images/index/alarm.png}" alt="">
+                <p>报警数:
+                    <span>0个</span>
+                </p>
+            </div>
+            <div class="bottom-info">
+                <div class="bottom-info-left">
+                    <span class="layui-badge-dot layui-bg-green"></span>
+                    <span>在线</span>
+                    <strong>0</strong>
+                </div>
+                <div class="layui-bg-cyan">
+                </div>
+
+                <div class="bottom-info-right">
+                    <span>无线智能水压表</span>
+                    <strong>19个</strong>
+                </div>
+            </div>
+        </div>
+        <div class="div4-pc">
+            <div class="top-pic-hydrostatic">
+                <img th:src="@{/resources/images/index/alarm.png}" alt="">
+                <p>报警数:
+                    <span>0个</span>
+                </p>
+            </div>
+            <div class="bottom-info">
+                <div class="bottom-info-left">
+                    <span class="layui-badge-dot layui-bg-green"></span>
+                    <span>在线</span>
+                    <strong>0</strong>
+                </div>
+                <div class="layui-bg-cyan">
+                </div>
+
+                <div class="bottom-info-right">
+                    <span>智能温感</span>
+                    <strong>19个</strong>
+                </div>
+            </div>
+        </div>
+        <div class="div4-pc">
+            <div class="top-pic-hydrostatic">
+                <img th:src="@{/resources/images/index/alarm.png}" alt="">
+                <p>报警数:
+                    <span>0个</span>
+                </p>
+            </div>
+            <div class="bottom-info">
+                <div class="bottom-info-left">
+                    <span class="layui-badge-dot layui-bg-green"></span>
+                    <span>在线</span>
+                    <strong>1</strong>
+                </div>
+                <div class="layui-bg-gren">
+                </div>
+
+                <div class="bottom-info-right">
+                    <span>室外消火栓</span>
+                    <strong>1个</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="div5">
+        <!--<div class="div-top">
+
+            <div class="div-top-right">
+                <img th:src="../images/index/more.png" alt="">
+            </div>
+
+            <div class="div-top-left">
+                <p>
+                    <span>通知公告</span>
+                </p>
+            </div>
+
+        </div>
+        <div class="tzgz-center">
+            <div class="center-left">
+                <a href="#">
+                    <img th:src="../images/index/email-right.jpg" alt="">
+                    <div class="center-left-num">
+                        <p>2</p>
+                    </div>
+                </a>
+
+            </div>
+            <div class="center-right">
+                <img th:src="../images/index/email-weidu.png" alt="">
+                <span class="email_message">未读消息</span>
+                <strong>1</strong>
+                <hr class="layui-bg-green">
+                <img th:src="../images/index/email-yidu.png" alt="">
+                <span class="email_message">已读消息</span>
+                <strong>1</strong>
+
+            </div>
+        </div>-->
+
+       <div class="div-oneweektrend">
+           <div class="div-top">
+               <div class="div-top-left">
+                   <p>
+                       <span>一周报警趋势图</span>
+                   </p>
+               </div>
+<!--               <div class="div-top-right">
+                   <img th:src="../images/index/more.png" alt="">
+               </div>-->
+           </div>
+           <div id="echarts-dwtype"  class="center-oneweek">
+            //环形饼图
+           </div>
+       </div>
+
+        <div class="div-n4f">
+            <div class="div-top">
+                <div class="div-top-left">
+                    <p>
+                        <span>近四个月报警统计</span>
+                    </p>
+                </div>
+
+            </div>
+            <div id="echarts-n4m" class="center-n4f">
+                <!--<div class="center-wbinfo-left">
+
+                </div>
+                <div class="center-wbinfo-rightcenter-wbinfo-right">
+
+                </div>-->
+                <!--<ul class="center-dw-ul">
+                    <li>
+                        <span class="font-danger-css">已累计收到维保报告</span>
+                        <strong>4</strong>
+                    </li>
+                    <li>
+                        <hr class="layui-bg-orange">
+                    </li>
+                    <li>
+                        100%
+                    </li>
+                    <li>
+                        <span class="layui-badge-dot layui-bg-blue"></span>
+                        <span class="font-danger-css">本月已收到维保报告</span>
+                        <strong>10</strong>
+                    </li>
+                    <li>
+                        <span class="layui-badge-dot layui-bg-red"></span>
+                        <span class="font-danger-css">本月未提交维保报告</span>
+                        <strong>5</strong>
+                    </li>
+                </ul>-->
+            </div>
+        </div>
+
+        <div class="real-timeAlerm">
+            <div class="div-top">
+                <div class="div-top-left">
+                    <p>
+                        <span>实时报警信息</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="center-n4f">
+                <div class="lwdwbj" id="scrollBlock">
+                    <ul id="contentBlock">
+                        <li>
+                            <p>
+                                <span class="font-danger-css">编码型烟感（智能烟感）</span>
+                            </p>
+                            <p>
+                                展厅
+                                <strong>2019-06-28 22:33:00</strong>
+                            </p>
+
+                        </li>
+                        <li>
+                            <p>
+                                <span class="font-danger-css">开关量烟感（继电器烟感）</span>
+                            </p>
+                            <p>
+                                机房
+                                <strong>2019-06-28 19:47:09</strong>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <span class="font-danger-css">多线烟感（传统型烟感）</span>
+                            </p>
+                            <p>
+                                会议室一
+                                <strong>2019-06-29 18:20:14</strong>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <span class="font-danger-css">离子式感烟探测器</span>
+                            </p>
+                            <p>
+                                会议室二
+                                <strong>2019-06-29 18:20:14</strong>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <span class="font-danger-css">Lora烟感</span>
+                            </p>
+                            <p>
+                                会议室三
+                                <strong>2019-06-29 18:29:14</strong>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <span class="font-danger-css">独立型烟感器</span>
+                            </p>
+                            <p>
+                                展厅二
+                                <strong>2019-06-30 19:31:08</strong>
+                            </p>
+
+                        </li>
+                        <li>
+                            <p>
+                                <span class="font-danger-css">多线烟感（传统型烟感）</span>
+                            </p>
+                            <p>
+                                展厅三
+                                <strong>2019-06-30 19:31:08</strong>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <span class="font-danger-css">多线烟感（传统型烟感）</span>
+                            </p>
+                            <p>
+                                展厅四
+                                <strong>2019-06-30 19:31:08</strong>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <span class="font-danger-css">多线烟感（传统型烟感）</span>
+                            </p>
+                            <p>
+                                展厅六
+                                <strong>2019-06-31 19:31:08</strong>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <span class="font-danger-css">多线烟感（传统型烟感）</span>
+                            </p>
+                            <p>
+                                展厅七
+                                <strong>2019-06-31 19:31:08</strong>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <span class="font-danger-css">多线烟感（传统型烟感）</span>
+                            </p>
+                            <p>
+                                展厅八
+                                <strong>2019-06-31 19:31:08</strong>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script th:src="@{/resources/layui/layui.js}" charset="UTF-8"></script>
+    <script th:src="@{https://cdn.bootcss.com/echarts/3.7.0/echarts.min.js}"></script>
+    <script th:src="@{/resources/js/index/index.js}"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=Popoh5leBcaPXEEAgvpoG0kjPh57OOy6"></script>
+
+</body>
+</html>
