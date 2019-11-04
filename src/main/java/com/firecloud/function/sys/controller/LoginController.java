@@ -4,7 +4,9 @@ package com.firecloud.function.sys.controller;
 import com.firecloud.function.sys.common.ActiverUser;
 import com.firecloud.function.sys.common.ResultObj;
 import com.firecloud.function.sys.common.WebUtils;
+import com.firecloud.function.sys.domain.Devinfo;
 import com.firecloud.function.sys.domain.Loginfo;
+import com.firecloud.function.sys.service.DevinfoService;
 import com.firecloud.function.sys.service.LoginfoService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -16,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("login")
@@ -23,6 +28,9 @@ public class LoginController {
 
     @Autowired
     private LoginfoService loginfoService;
+
+    @Autowired
+    private DevinfoService devinfoService;
 
     /**
      * 判断登录名和用户密码
@@ -32,20 +40,29 @@ public class LoginController {
      */
     @RequestMapping("login")
     public ResultObj login(String loginname, String pwd) {
-
-
         Subject subject = SecurityUtils.getSubject();
-
-
         AuthenticationToken token = new UsernamePasswordToken(loginname, pwd);
-
         try {
             subject.login(token);
-
             ActiverUser activerUser = (ActiverUser) subject.getPrincipal();
-
             //将User放入session中
             WebUtils.getSession().setAttribute("user", activerUser.getUser());
+
+            Map<String, Integer> map = new HashMap<>();
+            List<Devinfo> lists = this.devinfoService.GetDevAlllist(1);
+            Integer bj = lists.size();
+            map.put("bj", bj);
+            List<Devinfo> list2 = this.devinfoService.GetDevAlllist(2);
+            Integer gz = list2.size();
+            map.put("gz", gz);
+            List<Devinfo> list3 = this.devinfoService.GetDevAlllist(3);
+            Integer yc = list3.size();
+            map.put("yc", yc);
+            List<Devinfo> list4 = this.devinfoService.GetDevAlllist(4);
+            Integer hj = list4.size();
+            map.put("hj", hj);
+            //将数据放入首页
+            WebUtils.getSession().setAttribute("map",map);
 
             //记录登录日志
             Loginfo loginfo = new Loginfo();
@@ -59,8 +76,6 @@ public class LoginController {
             e.printStackTrace();
             return ResultObj.LOGIN_ERROR_PASS;
         }
-
-
     }
 
 }

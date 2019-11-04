@@ -50,14 +50,9 @@ public class DeptController {
 
     @RequestMapping("loadAllDept")
     public DataGridView loadAllDept(DeptVo deptVo) {
-
-
         //System.out.println("名称："+deptVo.getTitle()+"地址："+deptVo.getAddress()+"备注："+ deptVo.getRemark());
-
         IPage<Dept> page = new Page<>(deptVo.getPage(), deptVo.getLimit());
-
         QueryWrapper<Dept> queryWrapper = new QueryWrapper<>();
-
         queryWrapper.like(StringUtils.isNoneBlank(deptVo.getTitle()), "title", deptVo.getTitle());
         queryWrapper.like(StringUtils.isNoneBlank(deptVo.getAddress()), "address", deptVo.getAddress());
         queryWrapper.like(StringUtils.isNoneBlank(deptVo.getRemark()), "remark", deptVo.getRemark());
@@ -82,7 +77,6 @@ public class DeptController {
         queryWrapper.orderByDesc("ordernum");
         //数据量查询比较大后期需要解决
         List<Dept> list = this.deptService.list(queryWrapper);
-
         if (list.size() > 0) {
             map.put("value", list.get(0).getOrdernum()+1);
         }else  {
@@ -93,7 +87,6 @@ public class DeptController {
 
     @RequestMapping("addDept")
     public ResultObj addDept(DeptVo deptVo) {
-
         try {
            deptVo.setCreatetime(new Date());
            this.deptService.save(deptVo);
@@ -117,7 +110,6 @@ public class DeptController {
         }
     }
 
-
     /**
      * 判断当前节点是否有子节点
      * @param deptVo
@@ -126,13 +118,9 @@ public class DeptController {
     @RequestMapping("checkDeptHasChildrenNode")
     public Map<String, Object> checkDeptHasChildrenNode(DeptVo deptVo) {
         Map<String,Object> map = new HashMap<>();
-
         QueryWrapper<Dept> queryWrapper = new QueryWrapper<>();
-
         queryWrapper.eq("pid", deptVo.getId());
-
         List<Dept> list = this.deptService.list(queryWrapper);
-
         if (list.size() > 0) {
             map.put("value",true);
         }else {
@@ -141,7 +129,6 @@ public class DeptController {
 
         return map;
     }
-
 
     @RequestMapping("deleteDept")
     public ResultObj deleteDept(DeptVo deptVo) {

@@ -18,42 +18,87 @@ layui.use(['element','jquery'], function() {
         }
     }
 
-
-
     $(document).ready(function() {
+        //获取近一周的统计图
+        $.ajax({
+            url: "/main/week",
+            type: "post",
+            data: {},
+            success : function (data) {
+                //一周报警次数
+                var option = {
+                    tooltip:{
+                        trigger: 'axis'
+                    },
+                    legend:{
+                        data:['一周报警次数']
+                    },
+                    //折线图的大小，和显示y轴和x轴数据
+                    grid: {
+                        left: '2%',right: '2%', bottom: '1%', top: '5%', containLabel: true
+                    },
+                    xAxis:{
+                        type: 'category',
+                        data: data.data.categories
+                    },
+                    yAxis:{
+                        type: 'value'
+                    },
+                    series:[{
+                        name:'报警次数',
+                        type:'line',
+                        data: data.data.datas
+                    }]
+                };
+                //初始化echarts实例
+                var myChartoneweek = echarts.init(document.getElementById('echarts-dwtype'));
 
+                //使用制定的配置项和数据显示图表
+                myChartoneweek.setOption(option);
+
+            }
+        })
+
+        //获取近四个月柱状图
+        $.ajax({
+            url : "/main/month",
+            type: "post",
+            data: {},
+            success : function (data) {
+                console.log(data);
+                // 基于准备好的dom，初始化echarts实例
+                var myChartN4m = echarts.init(document.getElementById('echarts-n4m'));
+                // 指定图表的配置项和数据
+                var option = {
+                    /*title: {
+                        text: 'ECharts 入门示例'
+                    },*/
+                    tooltip: {},
+                    /*legend: { 图标展示
+                        data:['销量']
+                    },*/
+                    //折线图的大小，和显示y轴和x轴数据
+                    grid: {
+                        left: '2%',right: '2%', bottom: '3%', top: '5%', containLabel: true
+                    },
+                    xAxis: {
+                        data: data.data.categories
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '报警次数',
+                        type: 'bar',
+                        data: data.data.data
+                    }]
+                };
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChartN4m.setOption(option);
+            }
+        })
     });
 
-    //一周报警次数
-    var option = {
-        tooltip:{
-            trigger: 'axis'
-        },
-        legend:{
-            data:['访客来源']
-        },
-        //折线图的大小，和显示y轴和x轴数据
-        grid: {
-            left: '2%',right: '2%', bottom: '5%', top: '5%', containLabel: true
-        },
-        xAxis:{
-            type: 'category',
-            data:["Mon","Tues","Wed","Thurs","Fri","Sat","Sun"]
-        },
-        yAxis:{
-            type: 'value'
-        },
-        series:[{
-            name:'报警次数',
-            type:'line',
-            data:[600,310,200,760,300,100,50]
-        }]
-    };
-    //初始化echarts实例
-    var myChartoneweek = echarts.init(document.getElementById('echarts-dwtype'));
 
-    //使用制定的配置项和数据显示图表
-    myChartoneweek.setOption(option);
 
 
     /**
@@ -199,34 +244,7 @@ layui.use(['element','jquery'], function() {
     })
 
 
-    // 基于准备好的dom，初始化echarts实例
-    var myChartN4m = echarts.init(document.getElementById('echarts-n4m'));
 
-    // 指定图表的配置项和数据
-    var option = {
-        /*title: {
-            text: 'ECharts 入门示例'
-        },*/
-        tooltip: {},
-        /*legend: { 图标展示
-            data:['销量']
-        },*/
-        grid: {
-            left: '2%',right: '2%', bottom: '5%', top: '5%', containLabel: true
-        },
-        xAxis: {
-            data: ["2019-6","2019-7","2019-8","2019-9"]
-        },
-        yAxis: {},
-        series: [{
-            name: '报警次数',
-            type: 'bar',
-            data: [500, 620, 400, 1000,]
-        }]
-    };
-
-    // 使用刚指定的配置项和数据显示图表。
-    myChartN4m.setOption(option);
 
     //地图
     var map = new BMap.Map("div-mapinfo");
@@ -247,8 +265,19 @@ layui.use(['element','jquery'], function() {
     function showInfo() {
         map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放,默认禁用
     }
-    //地图点击时间
     map.addEventListener("click", showInfo);
+    var a = $("#mapController");
+
+    a.on("mouseover",function(){
+        //鼠标移入事件
+        //地图点击时间
+
+    });
+
+　　a.on("mouseout",function(){
+      map.disableScrollWheelZoom(); //关闭鼠标滚轮缩放
+      return false;
+    });
 
     //应用地图样式
    /* map.setMapStyleV2({

@@ -23,6 +23,7 @@ public class DataGridView {
         this.data = data;
     }
 
+
     public DataGridView(Object data) {
         this.data = data;
     }
