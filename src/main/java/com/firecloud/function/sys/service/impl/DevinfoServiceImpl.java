@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -25,11 +26,11 @@ public class DevinfoServiceImpl extends ServiceImpl<DevinfoMapper, Devinfo> impl
     public List<Devinfo> GetDevAlllist(Integer statusId) {
         QueryWrapper<Devinfo> queryWrapper = new QueryWrapper<>();
         if (statusId == Constast.NORMARL) {
-            queryWrapper.lambda().ne(Devinfo::getDevStatus, statusId);
+            queryWrapper.lambda().notIn(Devinfo::getDevStatus, Arrays.asList(0,1,5,6,8,12,13,14));
         }else if (statusId == 2){
-            queryWrapper.lambda().in(Devinfo::getDevStatus, 3,7,11,15);
+            queryWrapper.lambda().in(Devinfo::getDevStatus, Arrays.asList(3,7,11,15));
         }else if (statusId == 3){
-            queryWrapper.lambda().in(Devinfo::getDevStatus, 2,9,10);
+            queryWrapper.lambda().in(Devinfo::getDevStatus, Arrays.asList(2,9,10));
         }else {
             queryWrapper.lambda().eq(Devinfo::getDevStatus, 4);
         }
@@ -45,7 +46,7 @@ public class DevinfoServiceImpl extends ServiceImpl<DevinfoMapper, Devinfo> impl
         for (String date : param) {
             if (date != null) {
                 QueryWrapper<Devinfo> queryWrapper = new QueryWrapper<>();
-                queryWrapper.lambda().ne(Devinfo::getDevStatus, 1);
+                queryWrapper.lambda().notIn(Devinfo::getDevStatus, Arrays.asList(0,1,5,6,8,12,13,14));
                 queryWrapper.lambda().ne(Devinfo::getDataDate, date);
                 List<Devinfo> list = this.baseMapper.selectList(queryWrapper);
                 integerList.add(list.size());
@@ -54,13 +55,14 @@ public class DevinfoServiceImpl extends ServiceImpl<DevinfoMapper, Devinfo> impl
         return integerList;
     }
 
+    //查询最近四个月的报警信息
     @Override
     public List<Integer> getMainDataByMonth(List<String> param) {
         List<Integer> resList = new ArrayList<>();
         for (String month : param) {
             if (month != null) {
                 QueryWrapper<Devinfo> queryWrapper = new QueryWrapper<>();
-                queryWrapper.lambda().ne(Devinfo::getDevStatus, 1);
+                queryWrapper.lambda().notIn(Devinfo::getDevStatus, Arrays.asList(0,1,5,6,8,12,13,14));
                 queryWrapper.lambda().like(Devinfo::getDataDate, month);
                 List<Devinfo> list = this.baseMapper.selectList(queryWrapper);
                 resList.add(list.size());

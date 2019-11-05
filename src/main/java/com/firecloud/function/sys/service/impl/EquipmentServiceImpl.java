@@ -63,8 +63,7 @@ public class EquipmentServiceImpl extends ServiceImpl<EquipmentMapper, Equipment
         IPage<Devinfo> page=new Page<>(1, 1);
         QueryWrapper<Devinfo> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("DEV_ID", statusid);
-        queryWrapper.lambda().orderByDesc(Devinfo::getDataDate);
-        queryWrapper.lambda().orderByDesc(Devinfo::getDataTime);
+        queryWrapper.lambda().orderByDesc(Devinfo::getDataDate).orderByDesc(Devinfo::getDataTime);
         List<Devinfo> devinfoList = this.devinfoService.page(page, queryWrapper).getRecords();
 
         if (devinfoList.size() > 0) {

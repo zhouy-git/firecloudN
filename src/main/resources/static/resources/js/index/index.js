@@ -96,6 +96,8 @@ layui.use(['element','jquery'], function() {
                 myChartN4m.setOption(option);
             }
         })
+
+
     });
 
 
@@ -278,33 +280,6 @@ layui.use(['element','jquery'], function() {
       map.disableScrollWheelZoom(); //关闭鼠标滚轮缩放
       return false;
     });
-
-    //应用地图样式
-   /* map.setMapStyleV2({
-        styleId: '9234504bff2646441650cc95fa200efa'
-    });*/
-
-    //定位
-   /* function myFun(result){
-        var cityName = result.name;
-        map.setCenter(cityName);
-        alert("当前定位城市:"+cityName);
-    }
-
-    var geolocation = new BMap.Geolocation();
-    geolocation.getCurrentPosition(function(r){
-        if(this.getStatus() == BMAP_STATUS_SUCCESS){
-            var mk = new BMap.Marker(r.point);
-            map.addOverlay(mk);
-            map.panTo(r.point);
-            alert('您的位置：'+r.point.lng+','+r.point.lat);
-            var myCity = new BMap.LocalCity();
-            myCity.get(myFun);
-        }
-        else {
-            alert('failed'+this.getStatus());
-        }
-    },{enableHighAccuracy: true})*/
 
     var local = new BMap.LocalSearch(map, {
         renderOptions:{map: map}

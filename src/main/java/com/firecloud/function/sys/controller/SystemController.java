@@ -20,7 +20,6 @@ public class SystemController {
      */
     @RequestMapping("index")
     public String index() {
-        //System.out.println("跳转到templates/system/index/index");
         return "system/index/index";
     }
     /**
@@ -50,4 +49,9 @@ public class SystemController {
         return "system/notice/noticeManager";
     }
 
+    @RequestMapping("toBuildInfo")
+    public String toBuildInfo() {
+
+        return "/statistical/buildInfo";
+    }
 }
