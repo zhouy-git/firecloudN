@@ -82,7 +82,26 @@
     </div>
 
     <div class="div3" id="mapController">
-        <div id="div-mapinfo" class="d3-map"></div>
+
+        <div class="layui-tab layui-tab-brief" style="height: 100%; width: 100%;">
+            <ul class="layui-tab-title">
+                <li class="layui-this">地图</li>
+                <li>当日统计</li>
+                <li>当月统计</li>
+
+            </ul>
+            <div class="layui-tab-content" style="padding: 0;">
+                <div class="layui-tab-item layui-show" style="height: 405px; width: 100%; ">
+                    <div id="div-mapinfo" class="xtabchange"></div>
+                </div>
+                <div class="layui-tab-item" style="height: 405px; width: 100%; ">
+                   <div id="echarts-dayTotal" style="height: 405px; width: 1222px;"></div>
+                </div>
+                <div class="layui-tab-item">3</div>
+
+            </div>
+        </div>
+
 
     </div>
 
@@ -294,7 +313,7 @@
                </div>
            </div>
            <div id="echarts-dwtype"  class="center-oneweek">
-            //环形饼图
+
            </div>
        </div>
 
@@ -308,34 +327,7 @@
 
             </div>
             <div id="echarts-n4m" class="center-n4f">
-                <!--<div class="center-wbinfo-left">
 
-                </div>
-                <div class="center-wbinfo-rightcenter-wbinfo-right">
-
-                </div>-->
-                <!--<ul class="center-dw-ul">
-                    <li>
-                        <span class="font-danger-css">已累计收到维保报告</span>
-                        <strong>4</strong>
-                    </li>
-                    <li>
-                        <hr class="layui-bg-orange">
-                    </li>
-                    <li>
-                        100%
-                    </li>
-                    <li>
-                        <span class="layui-badge-dot layui-bg-blue"></span>
-                        <span class="font-danger-css">本月已收到维保报告</span>
-                        <strong>10</strong>
-                    </li>
-                    <li>
-                        <span class="layui-badge-dot layui-bg-red"></span>
-                        <span class="font-danger-css">本月未提交维保报告</span>
-                        <strong>5</strong>
-                    </li>
-                </ul>-->
             </div>
         </div>
 

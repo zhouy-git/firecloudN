@@ -52,6 +52,6 @@ public class SystemController {
     @RequestMapping("toBuildInfo")
     public String toBuildInfo() {
 
-        return "/statistical/buildInfo";
+        return "statistical/buildInfo";
     }
 }
