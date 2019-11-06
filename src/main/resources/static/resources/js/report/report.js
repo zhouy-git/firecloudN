@@ -80,5 +80,28 @@ layui.use(['element','table','form','jquery','layer'],function () {
     });
 
 
+    //调转到指定的选项卡
+    //获取url中id的参数
+    var test = getQueryString("id");
 
+    test = test.replace(".shtml","");
+    //跳转到id为test的页面
+
+    alert('选项卡的testId: '+test);
+    element.tabChange('docDemoTabBrief', test)
+    //…
+
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        var q = window.location.pathname.substr(1).match(reg_rewrite);
+        if (r != null) {
+            return unescape(r[2]);
+        } else if (q != null) {
+            return unescape(q[2]);
+        } else {
+            return null;
+        }
+    }
 });

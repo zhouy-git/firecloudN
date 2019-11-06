@@ -21,4 +21,9 @@ public class GetPageController {
 
         return modelAndView;
     }
+
+    @RequestMapping("dealAlarmReport")
+    public String dealAlarmReport() {
+        return "dealAlarm/report";
+    }
 }

@@ -149,6 +149,7 @@ html body {
     justify-content:center;
     align-items:center;
 }
+
 .m-d1 {
     display: flex;
     align-items:center;
@@ -176,6 +177,7 @@ html body {
     color: white;
     padding: 0;
 }
+
 .m-d1 .lef-name-res .name {
     font-size: 12px;
     margin: 0;
@@ -183,6 +185,7 @@ html body {
     color: white;
     font-weight: 600;
 }
+
 .m-d1 .right-img {
     position: absolute;
     width: 20%;
@@ -190,18 +193,19 @@ html body {
     right: 10px;
     top: 25%;
 }
+
 .right-img img{
     margin: 0 auto;
     width: 90%;
     height: 80%;
 }
+
 .div5 {
     position: absolute;
     width: 31%;
     right: 3px;
     top: 8px;
 }
-
 
 .div-top{
     margin: 0px;
@@ -210,6 +214,7 @@ html body {
     background-color: #EFFAFC;
     position: relative;
 }
+
 .div-top-left {
     height: 100%;
     width: 50%;

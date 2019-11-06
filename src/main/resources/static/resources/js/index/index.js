@@ -1,7 +1,7 @@
 //进度条
-layui.use(['element','jquery'], function() {
+layui.use(['element','jquery', 'layer'], function() {
 
-    var $ = layui.jquery
+    var $ = layui.jquery, layer = layui.layer
 
         , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
 //触发事件
@@ -19,6 +19,7 @@ layui.use(['element','jquery'], function() {
     }
 
     $(document).ready(function() {
+
         //获取近一周的统计图
         $.ajax({
             url: "/main/week",
@@ -65,7 +66,6 @@ layui.use(['element','jquery'], function() {
             type: "post",
             data: {},
             success : function (data) {
-                console.log(data);
                 // 基于准备好的dom，初始化echarts实例
                 var myChartN4m = echarts.init(document.getElementById('echarts-n4m'));
                 // 指定图表的配置项和数据
@@ -96,6 +96,49 @@ layui.use(['element','jquery'], function() {
                 myChartN4m.setOption(option);
             }
         })
+
+        $('#bj_total').click(function () {
+            alert('报警总数');
+        })
+
+        $('#fire').click(function () {
+            layer.open({
+                type: 2 //Page层类型
+                ,area: ['85%', '85%']
+                ,title: '建筑基本信息'
+                ,shade: 0.6 //遮罩透明度
+                ,maxmin: true //允许全屏最小化
+                ,anim: 1 //0-6的动画形式，-1不开启
+                ,skin: 'layui-layer-rim'
+                ,content: 'dealAlarmReport?id=fire'
+            });
+        })
+
+        $('#yc').click(function () {
+            layer.open({
+                type: 2 //Page层类型
+                ,area: ['85%', '85%']
+                ,title: '建筑基本信息'
+                ,shade: 0.6 //遮罩透明度
+                ,maxmin: true //允许全屏最小化
+                ,anim: 1 //0-6的动画形式，-1不开启
+                ,skin: 'layui-layer-rim'
+                ,content: 'dealAlarmReport?id=hideDan'
+            });
+        })
+        $('#gz').click(function () {
+            layer.open({
+                type: 2 //Page层类型
+                ,area: ['85%', '85%']
+                ,title: '故障'
+                ,shade: 0.6 //遮罩透明度
+                ,maxmin: true //允许全屏最小化
+                ,anim: 1 //0-6的动画形式，-1不开启
+                ,skin: 'layui-layer-rim'
+                ,content: 'dealAlarmReport?id=trouble'
+            });
+        })
+
     });
 
     // 基于准备好的dom，初始化echarts实例
@@ -240,6 +283,10 @@ layui.use(['element','jquery'], function() {
 
     // 使用刚指定的配置项和数据显示图表。
     myChartN4m.setOption(option);
+
+
+
+
 
 
     /**

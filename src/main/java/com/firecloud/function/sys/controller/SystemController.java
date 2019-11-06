@@ -54,4 +54,5 @@ public class SystemController {
 
         return "statistical/buildInfo";
     }
+
 }

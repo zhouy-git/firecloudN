@@ -22,8 +22,8 @@
 <body>
     <div class="c1">
         <div class="c1-middle-box">
-            <div class="m-d1" style="background-color: #514CFB;">
-                <div class="lef-name-res">
+            <div class="m-d1" style="background-color: rgb(0, 0, 255);">
+                <div id="bj_total" class="lef-name-res">
                     <p th:text="${session.map['bj']}">
 
                         <span class="name">个</span>
@@ -36,7 +36,8 @@
                     <img th:src="@{/resources/images/index/jb.png}" alt="">
                 </div>
             </div>
-            <div class="m-d1" style="background-color: #FC6D21;">
+
+            <div id="fire" class="m-d1" style="background-color: rgb(187, 0, 0);">
                 <div class="lef-name-res">
                     <p th:text="${session.map['hj']}">
                         <span class="name">个</span>
@@ -48,34 +49,34 @@
                 <div class="right-img">
                     <img th:src="@{/resources/images/index/fire.png}" alt="">
                 </div>
-
             </div>
-            <div class="m-d1" style="background-color: #3096EA;">
-                <div class="lef-name-res">
-                    <p th:text="${session.map['gz']}">
-                        <span class="name">个</span>
-                    </p>
-                    <span class="name">
-                        故障数
-                    </span>
-                </div>
-                <div class="right-img">
-                    <img th:src="@{/resources/images/index/gz.png}" alt="">
-                </div>
-            </div>
-            <div class="m-d1" style="background-color: #4E72DA;">
-                <div class="lef-name-res">
-                    <p th:text="${session.map['yc']}">
-                        <span class="name">个</span>
-                    </p>
-                    <span class="name">
+                <div id="yc" class="m-d1" style="background-color: #4E72DA;">
+                    <div class="lef-name-res">
+                        <p th:text="${session.map['yc']}">
+                            <span class="name">个</span>
+                        </p>
+                        <span class="name">
                         异常数
                     </span>
+                    </div>
+                    <div class="right-img">
+                        <img th:src="@{/resources/images/index/yc.png}" alt="">
+                    </div>
                 </div>
-                <div class="right-img">
-                    <img th:src="@{/resources/images/index/yc.png}" alt="">
+                <div id="gz" class="m-d1" style="background-color: rgb(255, 221, 0);">
+                    <div class="lef-name-res">
+                        <p th:text="${session.map['gz']}">
+                            <span class="name">个</span>
+                        </p>
+                        <span class="name">
+                        故障数
+                    </span>
+                    </div>
+                    <div class="right-img">
+                        <img th:src="@{/resources/images/index/gz.png}" alt="">
+                    </div>
                 </div>
-            </div>
+
         </div>
         <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
         <!--<div id="echarts-main" class="echarts-main"></div>-->
@@ -83,25 +84,22 @@
 
     <div class="div3" id="mapController">
 
-        <div class="layui-tab layui-tab-brief" style="height: 100%; width: 100%;">
+        <div class="layui-tab layui-tab-brief">
             <ul class="layui-tab-title">
                 <li class="layui-this">地图</li>
                 <li>当日统计</li>
                 <li>当月统计</li>
-
             </ul>
             <div class="layui-tab-content" style="padding: 0;">
-                <div class="layui-tab-item layui-show" style="height: 405px; width: 100%; ">
+                <div id="a" class="layui-tab-item layui-show" style="height: 405px; width: 100%;">
                     <div id="div-mapinfo" class="xtabchange"></div>
                 </div>
-                <div class="layui-tab-item" style="height: 405px; width: 100%; ">
-                   <div id="echarts-dayTotal" style="height: 405px; width: 1222px;"></div>
+                <div id="con_b" class="layui-tab-item" style="height: 405px; width: 100%; ">
+                   <div id="echarts-dayTotal" style="height: 100%; width: 100%;"></div>
                 </div>
-                <div class="layui-tab-item">3</div>
-
+                <div id="c" class="layui-tab-item">3</div>
             </div>
         </div>
-
 
     </div>
 
