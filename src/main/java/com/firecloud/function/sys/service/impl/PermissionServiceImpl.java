@@ -1,5 +1,7 @@
 package com.firecloud.function.sys.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.firecloud.function.sys.domain.Permission;
 import com.firecloud.function.sys.mapper.PermissionMapper;
 import com.firecloud.function.sys.service.PermissionService;
@@ -64,5 +66,10 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
     @Cacheable(cacheNames = "permission", key = "#id") //如果存在就不会再存
     public Permission getById(Serializable id) {
         return super.getById(id);
+    }
+
+    @Override
+    public IPage<Permission> page(IPage<Permission> page, Wrapper<Permission> queryWrapper) {
+        return super.page(page, queryWrapper);
     }
 }

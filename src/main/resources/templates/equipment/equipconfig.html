@@ -234,37 +234,12 @@
                 type:1,
                 content:$("#addOrUpdateDiv"),
                 area:['800px','600px'],
-                title:'修改设备',
+                title:'修改角色',
                 success:function(){
                     $("#dataFrm")[0].reset();
                     //装载新的数据
                     form.val("dataFrm",data);
-                    //选中之前的所属部门  nodeId=data.pid;
-                    dtree.dataInit("deptTree", data.deptid);
-                    dtree.selectVal("deptTree");
-
-                    //选中领导的部门
-                    var leaderid = data.mgr;
-                    $.get("/user/loadUserById",{id:leaderid}, function (res) {
-                        var d = res.data;
-                        dtree.dataInit("leaderdeptTree", d.deptid);
-                        dtree.selectVal("leaderdeptTree");
-                        $.get("/user/loadUsersByDeptId",{deptid:d.deptid},function(res){
-                            var users=res.data;
-                            var dom_mgr=$("#mgr");
-                            var html="<option value='0'>请选择直属领导</option>";
-                            $.each(users,function(index,item){
-                                html+="<option value='"+item.id+"'>"+item.name+"</option>";
-                            });
-                            dom_mgr.html(html);
-                            //选中一个
-                            dom_mgr.val(leaderid);
-                            //重新渲染
-                            form.render("select");
-
-                        })
-                    })
-                    url="/user/updateUser";
+                    url="/equipconfig/updateEquipconfig";
                 }
             });
         }

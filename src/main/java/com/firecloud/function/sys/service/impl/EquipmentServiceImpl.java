@@ -13,9 +13,15 @@ import com.firecloud.function.sys.service.DevinfoService;
 import com.firecloud.function.sys.service.EquipmentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -28,6 +34,7 @@ import java.util.List;
  * @since 2019-10-30
  */
 @Service
+@Transactional
 public class EquipmentServiceImpl extends ServiceImpl<EquipmentMapper, Equipment> implements EquipmentService {
 
     @Autowired
@@ -53,24 +60,34 @@ public class EquipmentServiceImpl extends ServiceImpl<EquipmentMapper, Equipment
         return deviName;
     }
 
-
-    /**
-     * 获取发送过来的数据最新状态来更新设备表中的状态
-     */
-    /*private String DevStatusId;
     @Override
-    public String getDevStatus(String statusid) {
-        IPage<Devinfo> page=new Page<>(1, 1);
-        QueryWrapper<Devinfo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("DEV_ID", statusid);
-        queryWrapper.lambda().orderByDesc(Devinfo::getDataDate).orderByDesc(Devinfo::getDataTime);
-        List<Devinfo> devinfoList = this.devinfoService.page(page, queryWrapper).getRecords();
+    @CachePut(cacheNames = "equipment", key = "#result.id")
+    public Equipment saveEquipment(Equipment entity) {
+        Equipment equipment = new Equipment();
+        super.save(equipment);
+        BeanUtils.copyProperties(equipment, entity);
+        return equipment;
+    }
 
-        if (devinfoList.size() > 0) {
-            DevStatusId = devinfoList.get(0).getDevStatus();
-        }else {
-            DevStatusId = String.valueOf(Constast.NORMARL);
-        }
-        return DevStatusId;
-    }*/
+    @Override
+    @CachePut(cacheNames = "equipment", key = "#entity.id")
+    public Equipment updateEquipmentById(Equipment entity) {
+        Equipment equipment = new Equipment();
+        super.updateById(equipment);
+        BeanUtils.copyProperties(equipment, entity);
+        return equipment;
+    }
+
+    @Override
+    @CacheEvict(cacheNames = "eequipment", key = "#id")
+    public boolean removeById(Serializable id) {
+        return super.removeById(id);
+    }
+
+    @Override
+    @Cacheable(cacheNames = "eequipment", key = "#id")
+    public Equipment getById(Serializable id) {
+        return super.getById(id);
+    }
+
 }

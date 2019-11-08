@@ -2,7 +2,7 @@ server:
   port: 8182
   servlet:
     session:
-      timeout: 1d
+      timeout: 1000000m
 
 
 #配置数据源的属性

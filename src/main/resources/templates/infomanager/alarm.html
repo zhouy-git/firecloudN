@@ -1,317 +1,204 @@
 <!DOCTYPE html>
-<html class="x-admin-sm">
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-        <meta name="renderer" content="webkit">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=10023">
-        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-        <link rel="stylesheet" href="/resources/css/font.css">
-        <link rel="stylesheet" href="/resources/css/xadmin.css">
-        <script src="/resources/lib/layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="/resources/js/xadmin.js"></script>
-        <!--[if lt IE 9]>
-          <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-          <script src="https://cdn.staticfile.org/respond.js/10023.4.2/respond.min.js"></script>
-        <![endif]-->
-    </head>
-    <body>
-        <div class="layui-fluid">
-            <div class="layui-row layui-col-space100235">
-                <div class="layui-col-md100232">
-                    <div class="layui-card">
-                        <div class="layui-card-body ">
-                            <form class="layui-form layui-col-space5">
-                                <div class="layui-inline layui-show-xs-block">
-                                    <input class="layui-input"  autocomplete="off" placeholder="开始日" name="start" id="start">
-                                </div>
-                                <div class="layui-inline layui-show-xs-block">
-                                    <input class="layui-input"  autocomplete="off" placeholder="截止日" name="end" id="end">
-                                </div>
-                                <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" name="username"  placeholder="请输入设备编号" autocomplete="off" class="layui-input">
-                                </div>
-                                <div class="layui-inline layui-show-xs-block">
-                                    <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe6100235;</i></button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="layui-card-header">
-                            <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                            <button class="layui-btn" onclick="xadmin.open('添加用户','/resources/member-add.html',600,400)"><i class="layui-icon"></i>添加</button>
-                        </div>
-                        <div class="layui-card-body layui-table-body layui-table-main">
-                            <table class="layui-table layui-form">
-                                <thead>
-                                  <tr>
-                                    <th>
-                                      <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
-                                    </th>
-                                    <th>ID</th>
-                                    <th>报警设备</th>
-                                    <th>设备编号</th>
-                                    <th>位置</th>
-                                    <th>报警时间</th>
-                                    <th>报警</th>
-                                    <th>操作</th></tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td>
-                                      <input type="checkbox" name="id" value="10023"   lay-skin="primary"> 
-                                    </td>
-                                    <td>10023</td>
-                                    <td>小明</td>
-                                    <td>1002323444</td>
-                                    <td>100233000000000</td>
-                                    <td>20190909 08:25:36</td>
-                                    <td class="td-status">
-                                      <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
-                                    <td class="td-manage">
-                                      <a onclick="member_stop(this,'1002300010023')" href="javascript:;"  title="启用">
-                                        <i class="layui-icon">&#xe6010023;</i>
-                                      </a>
-                                      <a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;">
-                                        <i class="layui-icon">&#xe642;</i>
-                                      </a>
-                                      <a onclick="xadmin.open('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
-                                        <i class="layui-icon">&#xe6310023;</i>
-                                      </a>
-                                      <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                                        <i class="layui-icon">&#xe640;</i>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <input type="checkbox" name="id"  value="2" lay-skin="primary">
-                                    </td>
-                                    <td>10023</td>
-                                    <td>小明</td>
-                                    <td>1002323444</td>
-                                    <td>100233000000000</td>
-                                    <td>20190909 08:25:36</td>
-                                    <td class="td-status">
-                                      <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
-                                    <td class="td-manage">
-                                      <a onclick="member_stop(this,'1002300010023')" href="javascript:;"  title="启用">
-                                        <i class="layui-icon">&#xe6010023;</i>
-                                      </a>
-                                      <a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;">
-                                        <i class="layui-icon">&#xe642;</i>
-                                      </a>
-                                      <a onclick="xadmin.open('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
-                                        <i class="layui-icon">&#xe6310023;</i>
-                                      </a>
-                                      <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                                        <i class="layui-icon">&#xe640;</i>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <input type="checkbox" name="id" value="3"  lay-skin="primary">
-                                    </td>
-                                    <td>10023</td>
-                                    <td>小明</td>
-                                    <td>1002323444</td>
-                                    <td>100233000000000</td>
-                                    <td>20190909 08:25:36</td>
-                                    <td class="td-status">
-                                      <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
-                                    <td class="td-manage">
-                                      <a onclick="member_stop(this,'1002300010023')" href="javascript:;"  title="启用">
-                                        <i class="layui-icon">&#xe6010023;</i>
-                                      </a>
-                                      <a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;">
-                                        <i class="layui-icon">&#xe642;</i>
-                                      </a>
-                                      <a onclick="xadmin.open('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
-                                        <i class="layui-icon">&#xe6310023;</i>
-                                      </a>
-                                      <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                                        <i class="layui-icon">&#xe640;</i>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <input type="checkbox" name="id" value="4"  lay-skin="primary">
-                                    </td>
-                                    <td>10023</td>
-                                    <td>小明</td>
-                                    <td>1002323444</td>
-                                    <td>100233000000000</td>
-                                    <td>20190909 08:25:36</td>
-                                    <td class="td-status">
-                                      <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
-                                    <td class="td-manage">
-                                      <a onclick="member_stop(this,'1002300010023')" href="javascript:;"  title="启用">
-                                        <i class="layui-icon">&#xe6010023;</i>
-                                      </a>
-                                      <a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;">
-                                        <i class="layui-icon">&#xe642;</i>
-                                      </a>
-                                      <a onclick="xadmin.open('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
-                                        <i class="layui-icon">&#xe6310023;</i>
-                                      </a>
-                                      <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                                        <i class="layui-icon">&#xe640;</i>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <input type="checkbox" name="id" value="5"  lay-skin="primary">
-                                    </td>
-                                    <td>10023</td>
-                                    <td>小明</td>
-                                    <td>1002323444</td>
-                                    <td>100233000000000</td>
-                                    <td>20190909 08:25:36</td>
-                                    <td class="td-status">
-                                      <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
-                                    <td class="td-manage">
-                                      <a onclick="member_stop(this,'1002300010023')" href="javascript:;"  title="启用">
-                                        <i class="layui-icon">&#xe6010023;</i>
-                                      </a>
-                                      <a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;">
-                                        <i class="layui-icon">&#xe642;</i>
-                                      </a>
-                                      <a onclick="xadmin.open('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
-                                        <i class="layui-icon">&#xe6310023;</i>
-                                      </a>
-                                      <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                                        <i class="layui-icon">&#xe640;</i>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                     <input type="checkbox" name="id" value="6" lay-skin="primary">
-                                    </td>
-                                    <td>10023</td>
-                                    <td>小明</td>
-                                    <td>1002323444</td>
-                                    <td>100233000000000</td>
-                                    <td>20190909 08:25:36</td>
-                                    <td class="td-status">
-                                      <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
-                                    <td class="td-manage">
-                                      <a onclick="member_stop(this,'1002300010023')" href="javascript:;"  title="启用">
-                                        <i class="layui-icon">&#xe6010023;</i>
-                                      </a>
-                                      <a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;">
-                                        <i class="layui-icon">&#xe642;</i>
-                                      </a>
-                                      <a onclick="xadmin.open('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
-                                        <i class="layui-icon">&#xe6310023;</i>
-                                      </a>
-                                      <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                                        <i class="layui-icon">&#xe640;</i>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="layui-card-body ">
-                            <div class="page">
-                                <div>
-                                  <a class="prev" href="">&lt;&lt;</a>
-                                  <a class="num" href="">10023</a>
-                                  <span class="current">2</span>
-                                  <a class="num" href="">3</a>
-                                  <a class="num" href="">489</a>
-                                  <a class="next" href="">&gt;&gt;</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="icon" href="/resources/favicon.ico">
+    <link rel="stylesheet" href="/resources/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="/resources/css/public.css" media="all" />
+</head>
+<body class="childrenBody">
+
+<blockquote class="layui-elem-quote">
+    <form method="post" id="searchFrm" lay-filter="searchFrm" class="layui-form layui-form-pane">
+        <div class="layui-inline">
+            <label class="layui-form-label">设备ID</label>
+            <div class="layui-input-inline">
+                <input type="text" name="devId" autocomplete="off" class="layui-input">
             </div>
-        </div> 
-    </body>
-    <script>
-      layui.use(['laydate','form'], function(){
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">设备状态</label>
+            <div class="layui-input-inline">
+                <input type="text" name="underbuild" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">开始时间</label>
+            <div class="layui-input-inline">
+                <input type="text" name="startTime" id="startTime" readonly="readonly"  placeholder="yyyy-MM-dd HH:mm:ss" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">结束时间</label>
+            <div class="layui-input-inline">
+                <input type="text" name="endTime" id="endTime" readonly="readonly" placeholder="yyyy-MM-dd HH:mm:ss" class="layui-input">
+            </div>
+        </div>
+        <button id="doSearch" class="layui-btn"  lay-submit="" lay-filter="doSearch">
+            <i class="layui-icon">&#xe615;</i>
+        </button>
+
+        <button type="button" class="layui-btn layui-btn-warm">
+            <span class="layui-icon layui-icon-refresh-1"></span>
+        </button>
+    </form>
+</blockquote>
+<!--查询条件结束--->
+
+<!--表格开始--->
+<div >
+    <table class="layui-hide" id="devAlarmInfoTable" lay-filter="devAlarmInfoTable">
+
+    </table>
+
+    <div id="DevAlarmToolBar" style="display: none;">
+        <button type="button" lay-event="batchDelete" class="layui-btn layui-btn-sm layui-btn-danger">
+            <span class="layui-icon layui-icon-delete"></span>
+            批量删除
+        </button>
+    </div>
+    <div id="DevAlarmRowBar" style="display: none;">
+        <button type="button" lay-event="delete" class="layui-btn layui-btn-sm layui-btn-danger">
+            <span class="layui-icon layui-icon-delete"></span>
+            删除
+        </button>
+
+        <button type="button" lay-event="detail" class="layui-btn layui-btn-sm layui-btn">
+            <span class="layui-icon layui-icon-about"></span>
+            数据详情
+        </button>
+    </div>
+</div>
+<!--表格结束--->
+
+<!--打开历史数据弹出层开始-->
+<div style="display: none;" id="showDevDetail">
+    <table class="layui-hide" id="devAlarmTable" lay-filter="devAlarmTable">
+    </table>
+</div>
+
+
+<script type="text/javascript" src="/resources/layui/layui.js"></script>
+
+<script type="text/javascript">
+    layui.use(['laydate','jquery','table','layer','form'], function() {
         var laydate = layui.laydate;
-        var  form = layui.form;
+        var form = layui.form;
+        var layer = layui.layer;
+        var table = layui.table;
+        var $ = layui.jquery;
 
-
-        // 监听全选
-        form.on('checkbox(checkall)', function(data){
-
-          if(data.elem.checked){
-            $('tbody input').prop('checked',true);
-          }else{
-            $('tbody input').prop('checked',false);
-          }
-          form.render('checkbox');
-        }); 
-        
-        //执行一个laydate实例
+        //自定义格式
         laydate.render({
-          elem: '#start' //指定元素
+            elem: '#startTime'
+            ,type: 'datetime'
         });
 
-        //执行一个laydate实例
+        //自定义格式
         laydate.render({
-          elem: '#end' //指定元素
+            elem: '#endTime'
+            ,type: 'datetime'
+        });
+
+        var tableIns = table.render({
+            elem: '#devAlarmInfoTable'
+            ,url:'/devAlarmfo/loadAllDevAlarm'
+            ,toolbar: '#DevAlarmToolBar' //开启头部工具栏，并为其绑定左侧模板
+            ,page: true
+            ,height: 'full-170'
+            ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                title: '提示'
+                ,layEvent: 'LAYTABLE_TIPS'
+                ,icon: 'layui-icon-tips'
+            }]
+            ,title: '设备数据表'
+            ,cols: [ [
+                {type: 'checkbox', fixed: 'left'}
+                ,{field:'id', title:'ID', fixed: 'left',sort: true}
+                ,{field:'devId', title:'ID', fixed: 'left',sort: true}
+                ,{field:'statusName', title:'状态', align:'center'}
+                ,{field:'signalDes', title:'信号强度', align:'center'}
+                ,{field:'netId', title:'网络频点', align:'center'}
+                ,{field:'devDesPer', title:'设备浓度', align:'center'}
+                ,{field:'netDate', title:'报警时间', align:'center',width:'200'}
+                ,{fixed: 'right', title:'操作', toolbar: '#DevAlarmRowBar', align:'center'}
+            ] ]
         });
 
 
-      });
+        //模糊查询
+        //监听提交 lay-filter="search"
+        form.on('submit(doSearch)', function(data){
+            tableIns.reload({
+                where: data.field,
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+            return false;//false：阻止表单跳转  true：表单跳转
+        });
 
-       /*用户-停用*/
-      function member_stop(obj,id){
-          layer.confirm('确认要停用吗？',function(index){
-
-              if($(obj).attr('title')=='启用'){
-
-                //发异步把用户状态进行更改
-                $(obj).attr('title','停用')
-                $(obj).find('i').html('&#xe62f;');
-
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!',{icon: 5,time:10023000});
-
-              }else{
-                $(obj).attr('title','启用')
-                $(obj).find('i').html('&#xe6010023;');
-
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!',{icon: 5,time:10023000});
-              }
-              
-          });
-      }
-
-      /*用户-删除*/
-      function member_del(obj,id){
-          layer.confirm('确认要删除吗？',function(index){
-              //发异步删除数据
-              $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:10023,time:10023000});
-          });
-      }
-
-
-
-      function delAll (argument) {
-        var ids = [];
-
-        // 获取选中的id 
-        $('tbody input').each(function(index, el) {
-            if($(this).prop('checked')){
-               ids.push($(this).val())
+        //监听工具条事件 批量删除
+        table.on('toolbar(devAlarmInfoTable)', function (obj) {
+            switch (obj.event) {
+                case 'batchDelete':
+                    batchDelete();
+                    break;
+                case 'add':
+                    openAddLayer();
+                    break;
             }
         });
-  
-        layer.confirm('确认要删除吗？'+ids.toString(),function(index){
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 10023});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
-        });
-      }
-    </script>
+
+
+
+        function batchDelete() {
+            //得到选中行
+            var  checkStatus = table.checkStatus('devAlarmInfoTable');
+            var dataLength = checkStatus.data.length;
+            //如果选中行大于0
+            if(dataLength > 0) {
+                //弹出选择框
+                layer.confirm('你确定要删除选中行数据吗？', {icon: 3, title: '提示'}, function (index) {
+                    var  data = checkStatus.data; //选中行的数据
+                    var ids = '';
+                    $.each(data, function (index, item) {
+                        alert('index: '+index);
+                        alert('item: '+item);
+                        alert('data: '+data);
+                        if (index == 0){
+                            ids += "ids=" + item.id;
+                        }else {
+                            ids += "&ids=" + item.id;
+                        }
+                    });
+
+                    $.post("/devAlarmfo/batchDeleteDevAlarm", ids, function (res) {
+                        if (res.code == 200) {
+                            tableIns.reload();
+                        }
+                        layer.msg(res.msg);
+                    })
+                });
+                layer.close(index);
+
+            }else {
+                layer.msg('请选中行');
+            }
+        }
+
+
+    });
+</script>
+</body>
 </html>

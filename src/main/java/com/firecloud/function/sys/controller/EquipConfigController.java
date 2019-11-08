@@ -52,11 +52,22 @@ public class EquipConfigController {
     @RequestMapping("addequipconfig")
     public ResultObj addequipconfig(EquipConfigVo equipConfigVo) {
         try {
-            this.equipService.save(equipConfigVo);
+            this.equipService.saveEquipConfig(equipConfigVo);
             return ResultObj.ADD_SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
             return ResultObj.ADD_ERROR;
+        }
+    }
+
+    @RequestMapping("updateEquipconfig")
+    public ResultObj updateEquipconfig(EquipConfigVo equipConfigVo) {
+        try {
+            this.equipService.updateEquipConfigById(equipConfigVo);
+            return ResultObj.UPDATE_SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultObj.UPDATE_ERROR;
         }
     }
 }

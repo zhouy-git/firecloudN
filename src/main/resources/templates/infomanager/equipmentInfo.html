@@ -18,12 +18,6 @@
 
 <blockquote class="layui-elem-quote">
     <form method="post" id="searchFrm" lay-filter="searchFrm" class="layui-form layui-form-pane">
-        <div class="layui-inline">
-            <label class="layui-form-label">设备名称</label>
-            <div class="layui-input-inline">
-                <input type="text" name="devicename" autocomplete="off" class="layui-input">
-            </div>
-        </div>
             <div class="layui-inline">
                 <label class="layui-form-label">设备ID</label>
                 <div class="layui-input-inline">
@@ -92,20 +86,16 @@
                 数据详情
             </button>
         </div>
-
     </div>
 <!--表格结束--->
 
 <!--打开历史数据弹出层开始-->
-
     <div style="display: none;" id="showDevDetail">
         <table class="layui-hide" id="equipmentTable" lay-filter="equipmentTable">
         </table>
     </div>
 
 <!--打开历史数据弹出层结束-->
-
-
 <!-- 添加和修改的弹出层开始 -->
 <div style="display: none;padding: 5px" id="addOrUpdateDiv">
     <form action="" method="post" class="layui-form layui-form-pane" id="dataFrm" lay-filter="dataFrm">
@@ -273,7 +263,6 @@
 
         //监听工具条事件 批量删除
         table.on('toolbar(equipmentInfoTable)', function (obj) {
-
             switch (obj.event) {
                 case 'batchDelete':
                     batchDelete();
@@ -293,6 +282,9 @@
                 case 'detail':
                     showHist(data);
                     break;
+                case '':
+                    openUpdateUserLayer();
+                break
             }
         });
 
@@ -319,37 +311,12 @@
                 type:1,
                 content:$("#addOrUpdateDiv"),
                 area:['800px','600px'],
-                title:'修改设备',
+                title:'修改角色',
                 success:function(){
                     $("#dataFrm")[0].reset();
                     //装载新的数据
                     form.val("dataFrm",data);
-                    //选中之前的所属部门  nodeId=data.pid;
-                    dtree.dataInit("deptTree", data.deptid);
-                    dtree.selectVal("deptTree");
-
-                    //选中领导的部门
-                    var leaderid = data.mgr;
-                    $.get("/user/loadUserById",{id:leaderid}, function (res) {
-                        var d = res.data;
-                        dtree.dataInit("leaderdeptTree", d.deptid);
-                        dtree.selectVal("leaderdeptTree");
-                        $.get("/user/loadUsersByDeptId",{deptid:d.deptid},function(res){
-                            var users=res.data;
-                            var dom_mgr=$("#mgr");
-                            var html="<option value='0'>请选择直属领导</option>";
-                            $.each(users,function(index,item){
-                                html+="<option value='"+item.id+"'>"+item.name+"</option>";
-                            });
-                            dom_mgr.html(html);
-                            //选中一个
-                            dom_mgr.val(leaderid);
-                            //重新渲染
-                            form.render("select");
-
-                        })
-                    })
-                    url="/user/updateUser";
+                    url="/role/updateRole";
                 }
             });
         }

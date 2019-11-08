@@ -14,6 +14,7 @@ import com.firecloud.function.sys.service.DevinfoService;
 import com.firecloud.function.sys.service.EquipConfigService;
 import com.firecloud.function.sys.service.EquipmentService;
 import com.firecloud.function.sys.vo.EquipmentVo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
@@ -33,6 +34,7 @@ import java.util.List;
  * @author zhouy
  * @since 2019-10-30
  */
+@Slf4j
 @RestController
 @RequestMapping("equipmentfo")
 public class EquipmentController {
@@ -60,7 +62,7 @@ public class EquipmentController {
         for (Equipment equipment: equipmentList) {
             Integer statusId = equipment.getDevicestatus();
             EquipConfig equipConfig = this.equipConfig.getById(statusId);
-            if (statusId != null) {
+            if (statusId != 0 && equipConfig !=null) {
                 equipment.setStatusName(equipConfig.getStatusname());
             }
         }
@@ -82,7 +84,7 @@ public class EquipmentController {
             }
             equipmentVo.setStatus(Constast.NORMARL);
             equipmentVo.setNettime(new Date());
-            this.equipmentService.save(equipmentVo);
+            this.equipmentService.saveEquipment(equipmentVo);
             return  ResultObj.ADD_SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,6 +114,7 @@ public class EquipmentController {
     @RequestMapping("deleteEquipment")
     public ResultObj deleteEquipment(String id) {
         try {
+            log.info("deleteEquipment"+id);
             this.equipmentService.removeById(id);
             return ResultObj.DELETE_SUCCESS;
         } catch (Exception e) {
