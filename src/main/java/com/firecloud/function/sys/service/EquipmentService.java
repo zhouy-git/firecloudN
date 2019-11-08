@@ -20,5 +20,5 @@ public interface EquipmentService extends IService<Equipment> {
      */
     String getDnameByDId(Integer id);
 
-    String getDevStatus(String statusid);
+    //String getDevStatus(String statusid);
 }

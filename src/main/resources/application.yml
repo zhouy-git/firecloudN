@@ -48,6 +48,16 @@ spring:
       enabled: true #设置开启热部署
   freemarker:
     cache: false #页面不加载缓存，修改即时生效
+  redis:
+    database: 0
+    host: 39.104.16.168
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms
+    timeout: 5000ms
 
 #配置mybatisplus
 mybatis-plus:
@@ -77,3 +87,4 @@ debug: false
 
 
 api-url: /api
+

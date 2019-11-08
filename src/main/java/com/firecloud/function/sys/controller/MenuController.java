@@ -1,6 +1,9 @@
 package com.firecloud.function.sys.controller;
 
 
+import cn.hutool.json.JSON;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -8,25 +11,36 @@ import com.firecloud.function.sys.common.*;
 import com.firecloud.function.sys.domain.Permission;
 import com.firecloud.function.sys.domain.TreeNode;
 import com.firecloud.function.sys.vo.PermissionVo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.annotation.Resource;
+import java.util.*;
 
 @RestController
 @RequestMapping("menu")
+@Slf4j
 public class MenuController {
 
     @Autowired
     private com.firecloud.function.sys.service.PermissionService permissionService;
 
+    @Resource
+    private RedisTemplate redisTemplate;
+
+
+
     @RequestMapping("loadIndexLeftMenuJson")
-    public DataGridView loadIndexLeftMenuJson(PermissionVo permissionVo) {
+    public DataGridView loadIndexLeftMenuJson() {
+
+        String key = "key_menu" ;
+
         //查询所有菜单
         QueryWrapper<com.firecloud.function.sys.domain.Permission> queryWrapper = new QueryWrapper<>();
         //设置只能查询菜单
@@ -35,18 +49,28 @@ public class MenuController {
         queryWrapper.orderByAsc("ordernum");
         //获取用户的角色
         com.firecloud.function.sys.domain.User user = (com.firecloud.function.sys.domain.User) WebUtils.getSession().getAttribute("user");
-        List<com.firecloud.function.sys.domain.Permission> list;
+        List<Permission> listPermission ;
+        ListOperations<String, Permission> operations = redisTemplate.opsForList();
         //如果是超级管理员
         if(user.getType()==Constast.USER_TYPE_SUPER) {
-            list = permissionService.list(queryWrapper);
+            key = key + "super";
+            if (redisTemplate.hasKey(key)) {
+                listPermission = operations.range(key, 0, -1);
+            }else {
+                listPermission = permissionService.list(queryWrapper);
+                operations.leftPushAll(key,listPermission);
+            }
         }else {
             //根据用户ID+角色+权限去查询
-            list = permissionService.list(queryWrapper);
+            listPermission = permissionService.list(queryWrapper);
         }
+
+
+        log.info("listPermission字符串集合: ", listPermission );
 
         List<TreeNode> treeNodes = new ArrayList<>();
 
-        for(com.firecloud.function.sys.domain.Permission p: list) {
+        for(com.firecloud.function.sys.domain.Permission p: listPermission) {
             Integer id=p.getId();
             Integer pid=p.getPid();
             String title=p.getTitle();
@@ -64,11 +88,21 @@ public class MenuController {
     /**
      * 加载菜单管理左边的菜单树的json
      */
+
     @RequestMapping("loadMenuManagerLeftTreeJson")
     public DataGridView loadMenuManagerLeftTreeJson(PermissionVo permissionVo) {
+        String key = "keyTreeNodeLeft";
+        List<Permission> list;
+        ListOperations<String, Permission> operations = redisTemplate.opsForList();
         QueryWrapper<Permission> queryWrapper=new QueryWrapper<>();
         queryWrapper.eq("type", Constast.TYPE_MENU);
-        List<Permission> list = this.permissionService.list(queryWrapper);
+
+        if (redisTemplate.hasKey(key)) {
+            list = operations.range("key",0 , -1);
+        }else {
+            list = this.permissionService.list(queryWrapper);
+            operations.leftPushAll("key",list);
+        }
         List<TreeNode> treeNodes=new ArrayList<>();
         for (Permission menu : list) {
             Boolean spread=menu.getOpen()==1?true:false;
@@ -91,6 +125,7 @@ public class MenuController {
         this.permissionService.page(page, queryWrapper);
         return new DataGridView(page.getTotal(), page.getRecords());
     }
+
     /**
      * 加载最大的排序码
      * @return
@@ -121,7 +156,7 @@ public class MenuController {
     public ResultObj addMenu(PermissionVo permissionVo) {
         try {
             permissionVo.setType(Constast.TYPE_MENU);//设置添加类型
-            this.permissionService.save(permissionVo);
+            this.permissionService.savePermission(permissionVo);
             return ResultObj.ADD_SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
@@ -138,7 +173,7 @@ public class MenuController {
     @RequestMapping("updateMenu")
     public ResultObj updateMenu(PermissionVo permissionVo) {
         try {
-            this.permissionService.updateById(permissionVo);
+            this.permissionService.updatePermissionById(permissionVo);
             return ResultObj.UPDATE_SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();

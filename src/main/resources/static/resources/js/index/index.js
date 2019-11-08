@@ -95,51 +95,46 @@ layui.use(['element','jquery', 'layer'], function() {
                 // 使用刚指定的配置项和数据显示图表。
                 myChartN4m.setOption(option);
             }
-        })
+        });
 
         $('#bj_total').click(function () {
             alert('报警总数');
-        })
+        });
 
         $('#fire').click(function () {
-            layer.open({
-                type: 2 //Page层类型
-                ,area: ['85%', '85%']
-                ,title: '建筑基本信息'
-                ,shade: 0.6 //遮罩透明度
-                ,maxmin: true //允许全屏最小化
-                ,anim: 1 //0-6的动画形式，-1不开启
-                ,skin: 'layui-layer-rim'
-                ,content: 'dealAlarmReport?id=fire'
-            });
-        })
+            layerOpen('火警','fire');
+            alert($('#fireTotal').text());
+        });
 
         $('#yc').click(function () {
-            layer.open({
-                type: 2 //Page层类型
-                ,area: ['85%', '85%']
-                ,title: '建筑基本信息'
-                ,shade: 0.6 //遮罩透明度
-                ,maxmin: true //允许全屏最小化
-                ,anim: 1 //0-6的动画形式，-1不开启
-                ,skin: 'layui-layer-rim'
-                ,content: 'dealAlarmReport?id=hideDan'
-            });
-        })
+            layerOpen('异常','hideDan');
+            alert($('#ycTotal').text());
+
+        });
         $('#gz').click(function () {
-            layer.open({
-                type: 2 //Page层类型
-                ,area: ['85%', '85%']
-                ,title: '故障'
-                ,shade: 0.6 //遮罩透明度
-                ,maxmin: true //允许全屏最小化
-                ,anim: 1 //0-6的动画形式，-1不开启
-                ,skin: 'layui-layer-rim'
-                ,content: 'dealAlarmReport?id=trouble'
-            });
-        })
+            layerOpen('故障','trouble');
+            alert($('#gzTotal').text());
+        });
 
     });
+
+
+    function layerOpen(title,id) {
+        layer.open({
+            type: 2 //Page层类型
+            ,area: ['90%', '90%']
+            ,title: title
+            ,shade: 0.6 //遮罩透明度
+            ,maxmin: true //允许全屏最小化
+            ,anim: 1 //0-6的动画形式，-1不开启
+            ,skin: 'layui-layer-rim'
+            ,content: 'dealAlarmReport?id='+id
+        });
+    }
+
+
+
+
 
     // 基于准备好的dom，初始化echarts实例
     var myChartN4m = echarts.init(document.getElementById('echarts-dayTotal'));

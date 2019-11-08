@@ -15,17 +15,17 @@ layui.use(['element','table','form','jquery','layer'],function () {
         ,page: true //开启分页
         ,cols: [
             [ //表头
-            {type: 'checkbox', fixed: 'left'}
-            ,{field: 'id', title: 'ID', align:'center',  unresize: true, sort: true}
-            ,{field: 'username', align:'center', title: '单位'}
-            ,{field: 'sex', align:'center',title: '名称'}
-            ,{field: 'city', align:'center', title: '设备ID'}
-            ,{field: 'sign', align:'center', title: '所属建筑'}
-            ,{field: 'experience', align:'center', title: '楼层(区域)'}
-            ,{field: 'score', align:'center', title: '安装位置'}
-            ,{field: 'classify', align:'center', title: '设备状态 告警时间'}
-            ,{field: 'wealth', align:'center', title: '操作'}
-         ]
+                {type: 'checkbox', fixed: 'left'}
+                ,{field: 'id', title: 'ID', align:'center',  unresize: true, sort: true}
+                ,{field: 'username', align:'center', title: '单位'}
+                ,{field: 'sex', align:'center',title: '名称'}
+                ,{field: 'city', align:'center', title: '设备ID'}
+                ,{field: 'sign', align:'center', title: '所属建筑'}
+                ,{field: 'experience', align:'center', title: '楼层(区域)'}
+                ,{field: 'score', align:'center', title: '安装位置'}
+                ,{field: 'classify', align:'center', title: '设备状态 告警时间'}
+                ,{field: 'wealth', align:'center', title: '操作'}
+            ]
         ]
         ,response: {
             statusCode: 200 //重新规定成功的状态码为 200，table 组件默认为 0
@@ -40,14 +40,13 @@ layui.use(['element','table','form','jquery','layer'],function () {
         }
     });
 
-
     //监听开关提交
     form.on('switch(switchTest)', function (data) {
         console.log(data.elem); //得到checkbox原始DOM对象
         console.log(data.elem.checked); //开关是否开启，true或者false
         console.log(data.value); //开关value值，也可以通过data.elem.value得到
         console.log(data.othis); //得到美化后的DOM对象
-      /*  开关是否开启*/
+        /*  开关是否开启*/
         var x=data.elem.checked;
 
         layer.open({
@@ -79,16 +78,14 @@ layui.use(['element','table','form','jquery','layer'],function () {
         return false;
     });
 
-
     //调转到指定的选项卡
     //获取url中id的参数
     var test = getQueryString("id");
-
-    test = test.replace(".shtml","");
+    if (test!=null) {
+        test = test.replace(".shtml","");
+    }
     //跳转到id为test的页面
-
-    alert('选项卡的testId: '+test);
-    element.tabChange('docDemoTabBrief', test)
+    element.tabChange('docDemoTabBrief', test);
     //…
 
     function getQueryString(name) {

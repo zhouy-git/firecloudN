@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : aliYun
+ Source Server         : 阿里MySQL
  Source Server Type    : MySQL
  Source Server Version : 50722
  Source Host           : 39.104.16.168:3306
@@ -11,7 +11,7 @@
  Target Server Version : 50722
  File Encoding         : 65001
 
- Date: 05/11/2019 00:49:30
+ Date: 06/11/2019 18:07:48
 */
 
 SET NAMES utf8mb4;
@@ -23,12 +23,12 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `DEVINFO`;
 CREATE TABLE `DEVINFO`  (
   `DEV_ID` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT '设备编号',
-  `DEV_STATUS` varchar(2) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '设备状态',
-  `DEV_DES_PER` varchar(3) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '设备浓度',
-  `NET_ID` varchar(5) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '网络频点',
-  `SIGNAL_DES` varchar(4) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '信号强度',
-  `DATA_DATE` varchar(8) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '日期',
-  `DATA_TIME` varchar(6) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '时间'
+  `DEV_STATUS` varchar(2) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL COMMENT '设备状态',
+  `DEV_DES_PER` varchar(3) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL COMMENT '设备浓度',
+  `NET_ID` varchar(5) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL COMMENT '网络频点',
+  `SIGNAL_DES` varchar(4) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL COMMENT '信号强度',
+  `DATA_DATE` varchar(8) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL COMMENT '日期',
+  `DATA_TIME` varchar(6) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL COMMENT '时间'
 ) ENGINE = MyISAM CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -123,17 +123,17 @@ INSERT INTO `DEVINFO` VALUES ('860000000000807', '1', '000', '3555', '13', '2019
 DROP TABLE IF EXISTS `bus_customer`;
 CREATE TABLE `bus_customer`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `customername` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `zip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `telephone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `connectionperson` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `bank` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `account` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `fax` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `available` int(11) NULL DEFAULT NULL,
+  `customername` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `zip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `telephone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `connectionperson` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `bank` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `account` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `fax` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `available` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -150,19 +150,19 @@ INSERT INTO `bus_customer` VALUES (3, '快七超市', '430000', '武汉', '027-1
 DROP TABLE IF EXISTS `bus_goods`;
 CREATE TABLE `bus_goods`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `goodsname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `produceplace` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `size` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `goodspackage` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `productcode` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `promitcode` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `price` double NULL DEFAULT NULL,
-  `number` int(11) NULL DEFAULT NULL,
-  `dangernum` int(11) NULL DEFAULT NULL,
-  `goodsimg` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `available` int(11) NULL DEFAULT NULL,
-  `providerid` int(11) NULL DEFAULT NULL,
+  `goodsname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `produceplace` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `size` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `goodspackage` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `productcode` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `promitcode` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  `number` int(11) DEFAULT NULL,
+  `dangernum` int(11) DEFAULT NULL,
+  `goodsimg` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `available` int(11) DEFAULT NULL,
+  `providerid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FK_sq0btr2v2lq8gt8b4gb8tlk0i`(`providerid`) USING BTREE,
   CONSTRAINT `bus_goods_ibfk_1` FOREIGN KEY (`providerid`) REFERENCES `bus_provider` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
@@ -183,14 +183,14 @@ INSERT INTO `bus_goods` VALUES (5, '娃哈哈', '武汉', '300ML', '瓶', '1234'
 DROP TABLE IF EXISTS `bus_inport`;
 CREATE TABLE `bus_inport`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `paytype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `inporttime` datetime(0) NULL DEFAULT NULL,
-  `operateperson` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `number` int(11) NULL DEFAULT NULL,
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `inportprice` double NULL DEFAULT NULL,
-  `providerid` int(11) NULL DEFAULT NULL,
-  `goodsid` int(11) NULL DEFAULT NULL,
+  `paytype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `inporttime` datetime(0) DEFAULT NULL,
+  `operateperson` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `number` int(11) DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `inportprice` double DEFAULT NULL,
+  `providerid` int(11) DEFAULT NULL,
+  `goodsid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FK_1o4bujsyd2kl4iqw48fie224v`(`providerid`) USING BTREE,
   INDEX `FK_ho29poeu4o2dxu4rg1ammeaql`(`goodsid`) USING BTREE,
@@ -218,14 +218,14 @@ INSERT INTO `bus_inport` VALUES (12, '微信', '2018-12-25 16:48:24', '超级管
 DROP TABLE IF EXISTS `bus_outport`;
 CREATE TABLE `bus_outport`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `providerid` int(11) NULL DEFAULT NULL,
-  `paytype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `outputtime` datetime(0) NULL DEFAULT NULL,
-  `operateperson` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `outportprice` double(10, 2) NULL DEFAULT NULL,
-  `number` int(11) NULL DEFAULT NULL,
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `goodsid` int(11) NULL DEFAULT NULL,
+  `providerid` int(11) DEFAULT NULL,
+  `paytype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `outputtime` datetime(0) DEFAULT NULL,
+  `operateperson` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `outportprice` double(10, 2) DEFAULT NULL,
+  `number` int(11) DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `goodsid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -241,17 +241,17 @@ INSERT INTO `bus_outport` VALUES (2, 3, '微信', '2019-08-16 08:26:54', '超级
 DROP TABLE IF EXISTS `bus_provider`;
 CREATE TABLE `bus_provider`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `providername` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `zip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `telephone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `connectionperson` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `bank` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `account` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `fax` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `available` int(11) NULL DEFAULT NULL,
+  `providername` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `zip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `telephone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `connectionperson` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `bank` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `account` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `fax` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `available` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -268,14 +268,14 @@ INSERT INTO `bus_provider` VALUES (3, '娃哈哈集团', '513131', '杭州', '21
 DROP TABLE IF EXISTS `bus_sales`;
 CREATE TABLE `bus_sales`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `customerid` int(11) NULL DEFAULT NULL,
-  `paytype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `salestime` datetime(0) NULL DEFAULT NULL,
-  `operateperson` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `number` int(11) NULL DEFAULT NULL,
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `saleprice` decimal(10, 2) NULL DEFAULT NULL,
-  `goodsid` int(11) NULL DEFAULT NULL,
+  `customerid` int(11) DEFAULT NULL,
+  `paytype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `salestime` datetime(0) DEFAULT NULL,
+  `operateperson` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `number` int(11) DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `saleprice` decimal(10, 2) DEFAULT NULL,
+  `goodsid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -285,14 +285,14 @@ CREATE TABLE `bus_sales`  (
 DROP TABLE IF EXISTS `bus_salesback`;
 CREATE TABLE `bus_salesback`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `customerid` int(11) NULL DEFAULT NULL,
-  `paytype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `salesbacktime` datetime(0) NULL DEFAULT NULL,
-  `salebackprice` double(10, 2) NULL DEFAULT NULL,
-  `operateperson` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `number` int(11) NULL DEFAULT NULL,
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `goodsid` int(11) NULL DEFAULT NULL,
+  `customerid` int(11) DEFAULT NULL,
+  `paytype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `salesbacktime` datetime(0) DEFAULT NULL,
+  `salebackprice` double(10, 2) DEFAULT NULL,
+  `operateperson` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `number` int(11) DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `goodsid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -302,10 +302,10 @@ CREATE TABLE `bus_salesback`  (
 DROP TABLE IF EXISTS `equip_config`;
 CREATE TABLE `equip_config`  (
   `sid` int(32) NOT NULL,
-  `statusname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `equistatus` int(3) NULL DEFAULT NULL,
-  `netstatus` int(3) NULL DEFAULT NULL,
-  `equiptype` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `statusname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `equistatus` int(3) DEFAULT NULL,
+  `netstatus` int(3) DEFAULT NULL,
+  `equiptype` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`sid`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
@@ -327,16 +327,16 @@ INSERT INTO `equip_config` VALUES (10, '电池电量低', 1, 1, NULL);
 DROP TABLE IF EXISTS `equipment`;
 CREATE TABLE `equipment`  (
   `id` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '设备ID',
-  `devicename` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '名称',
-  `status` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '状态',
-  `devicemodel` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '建筑模型',
-  `underbuild` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '所属建筑',
-  `floorarea` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '楼层区域',
-  `installlocation` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '安装位置',
-  `networkstate` int(2) NULL DEFAULT NULL COMMENT '联网状态',
-  `devicestatus` int(2) NULL DEFAULT NULL COMMENT '设备状态',
-  `nettime` datetime(0) NULL DEFAULT NULL COMMENT '入网时间',
-  `dnameid` int(2) NULL DEFAULT NULL COMMENT '设备名称的id',
+  `devicename` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '名称',
+  `status` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '状态',
+  `devicemodel` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '建筑模型',
+  `underbuild` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '所属建筑',
+  `floorarea` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '楼层区域',
+  `installlocation` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '安装位置',
+  `networkstate` int(2) DEFAULT NULL COMMENT '联网状态',
+  `devicestatus` int(2) DEFAULT NULL COMMENT '设备状态',
+  `nettime` datetime(0) DEFAULT NULL COMMENT '入网时间',
+  `dnameid` int(2) DEFAULT NULL COMMENT '设备名称的id',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `id`(`id`) USING BTREE,
   INDEX `unique_id`(`id`) USING BTREE
@@ -371,14 +371,14 @@ INSERT INTO `equipment` VALUES ('869029035531866', '烟感', NULL, 'AF-1', '万�
 DROP TABLE IF EXISTS `sys_dept`;
 CREATE TABLE `sys_dept`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pid` int(11) NULL DEFAULT NULL,
-  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `open` int(11) NULL DEFAULT NULL,
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `available` int(11) NULL DEFAULT NULL COMMENT '状态【0不可用1可用】',
-  `ordernum` int(11) NULL DEFAULT NULL COMMENT '排序码【为了调事显示顺序】',
-  `createtime` datetime(0) NULL DEFAULT NULL,
+  `pid` int(11) DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `open` int(11) DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `available` int(11) DEFAULT NULL COMMENT '状态【0不可用1可用】',
+  `ordernum` int(11) DEFAULT NULL COMMENT '排序码【为了调事显示顺序】',
+  `createtime` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -404,11 +404,11 @@ INSERT INTO `sys_dept` VALUES (19, 4, '联网二部', 1, '11111', '河北', 1, 1
 DROP TABLE IF EXISTS `sys_loginfo`;
 CREATE TABLE `sys_loginfo`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `loginname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `loginip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `logintime` datetime(0) NULL DEFAULT NULL,
+  `loginname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `loginip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `logintime` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 561 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 667 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_loginfo
@@ -971,6 +971,102 @@ INSERT INTO `sys_loginfo` VALUES (557, '超级管理员-system', '0:0:0:0:0:0:0:
 INSERT INTO `sys_loginfo` VALUES (558, '超级管理员-system', '218.92.211.174', '2019-11-04 11:33:59');
 INSERT INTO `sys_loginfo` VALUES (559, '超级管理员-system', '106.111.178.250', '2019-11-04 15:22:05');
 INSERT INTO `sys_loginfo` VALUES (560, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-04 16:46:11');
+INSERT INTO `sys_loginfo` VALUES (561, '超级管理员-system', '106.111.178.250', '2019-11-05 02:00:45');
+INSERT INTO `sys_loginfo` VALUES (562, '超级管理员-system', '218.92.211.174', '2019-11-05 02:21:52');
+INSERT INTO `sys_loginfo` VALUES (563, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 02:24:13');
+INSERT INTO `sys_loginfo` VALUES (564, '超级管理员-system', '218.92.211.174', '2019-11-05 02:25:01');
+INSERT INTO `sys_loginfo` VALUES (565, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 02:28:49');
+INSERT INTO `sys_loginfo` VALUES (566, '超级管理员-system', '218.92.211.174', '2019-11-05 02:29:13');
+INSERT INTO `sys_loginfo` VALUES (567, '超级管理员-system', '218.92.211.174', '2019-11-05 02:36:02');
+INSERT INTO `sys_loginfo` VALUES (568, '超级管理员-system', '106.111.178.250', '2019-11-05 02:37:04');
+INSERT INTO `sys_loginfo` VALUES (569, '超级管理员-system', '106.111.178.250', '2019-11-05 08:50:58');
+INSERT INTO `sys_loginfo` VALUES (570, '超级管理员-system', '106.111.178.250', '2019-11-05 09:52:44');
+INSERT INTO `sys_loginfo` VALUES (571, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 10:56:36');
+INSERT INTO `sys_loginfo` VALUES (572, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 11:30:46');
+INSERT INTO `sys_loginfo` VALUES (573, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 11:56:42');
+INSERT INTO `sys_loginfo` VALUES (574, '超级管理员-system', '117.87.33.110', '2019-11-05 12:31:42');
+INSERT INTO `sys_loginfo` VALUES (575, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 12:37:06');
+INSERT INTO `sys_loginfo` VALUES (586, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 13:23:51');
+INSERT INTO `sys_loginfo` VALUES (587, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 13:25:01');
+INSERT INTO `sys_loginfo` VALUES (588, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 13:26:15');
+INSERT INTO `sys_loginfo` VALUES (589, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 13:27:23');
+INSERT INTO `sys_loginfo` VALUES (590, '超级管理员-system', '49.69.112.35', '2019-11-05 13:39:18');
+INSERT INTO `sys_loginfo` VALUES (591, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 13:43:34');
+INSERT INTO `sys_loginfo` VALUES (592, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 13:50:32');
+INSERT INTO `sys_loginfo` VALUES (593, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 14:20:01');
+INSERT INTO `sys_loginfo` VALUES (594, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 14:28:23');
+INSERT INTO `sys_loginfo` VALUES (595, '超级管理员-system', '218.92.211.174', '2019-11-05 14:43:54');
+INSERT INTO `sys_loginfo` VALUES (596, '超级管理员-system', '218.92.211.174', '2019-11-05 15:21:13');
+INSERT INTO `sys_loginfo` VALUES (597, '超级管理员-system', '106.111.178.250', '2019-11-05 15:29:14');
+INSERT INTO `sys_loginfo` VALUES (598, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 15:30:06');
+INSERT INTO `sys_loginfo` VALUES (599, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 15:31:20');
+INSERT INTO `sys_loginfo` VALUES (600, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 15:32:16');
+INSERT INTO `sys_loginfo` VALUES (601, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 15:36:28');
+INSERT INTO `sys_loginfo` VALUES (602, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 15:41:30');
+INSERT INTO `sys_loginfo` VALUES (603, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 15:43:25');
+INSERT INTO `sys_loginfo` VALUES (604, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 15:49:36');
+INSERT INTO `sys_loginfo` VALUES (605, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 15:54:52');
+INSERT INTO `sys_loginfo` VALUES (606, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:02:06');
+INSERT INTO `sys_loginfo` VALUES (607, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:07:35');
+INSERT INTO `sys_loginfo` VALUES (608, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:10:09');
+INSERT INTO `sys_loginfo` VALUES (609, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:10:55');
+INSERT INTO `sys_loginfo` VALUES (610, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:12:12');
+INSERT INTO `sys_loginfo` VALUES (611, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:14:51');
+INSERT INTO `sys_loginfo` VALUES (612, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:18:33');
+INSERT INTO `sys_loginfo` VALUES (613, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:19:52');
+INSERT INTO `sys_loginfo` VALUES (614, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:21:59');
+INSERT INTO `sys_loginfo` VALUES (615, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:24:20');
+INSERT INTO `sys_loginfo` VALUES (616, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:24:54');
+INSERT INTO `sys_loginfo` VALUES (617, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:27:39');
+INSERT INTO `sys_loginfo` VALUES (618, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:36:41');
+INSERT INTO `sys_loginfo` VALUES (619, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:37:40');
+INSERT INTO `sys_loginfo` VALUES (620, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:40:14');
+INSERT INTO `sys_loginfo` VALUES (621, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:41:54');
+INSERT INTO `sys_loginfo` VALUES (622, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:43:00');
+INSERT INTO `sys_loginfo` VALUES (623, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:44:10');
+INSERT INTO `sys_loginfo` VALUES (624, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:48:21');
+INSERT INTO `sys_loginfo` VALUES (625, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:52:39');
+INSERT INTO `sys_loginfo` VALUES (626, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:55:09');
+INSERT INTO `sys_loginfo` VALUES (627, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 16:58:41');
+INSERT INTO `sys_loginfo` VALUES (628, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 17:00:15');
+INSERT INTO `sys_loginfo` VALUES (629, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-05 17:04:55');
+INSERT INTO `sys_loginfo` VALUES (630, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 00:40:12');
+INSERT INTO `sys_loginfo` VALUES (631, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 00:51:10');
+INSERT INTO `sys_loginfo` VALUES (632, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 00:52:08');
+INSERT INTO `sys_loginfo` VALUES (633, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 00:54:59');
+INSERT INTO `sys_loginfo` VALUES (634, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 01:01:24');
+INSERT INTO `sys_loginfo` VALUES (635, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 01:51:20');
+INSERT INTO `sys_loginfo` VALUES (636, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 01:52:36');
+INSERT INTO `sys_loginfo` VALUES (637, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 01:53:10');
+INSERT INTO `sys_loginfo` VALUES (638, '超级管理员-system', '117.136.46.120', '2019-11-06 02:04:49');
+INSERT INTO `sys_loginfo` VALUES (639, '超级管理员-system', '117.136.46.120', '2019-11-06 03:10:17');
+INSERT INTO `sys_loginfo` VALUES (640, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 03:30:21');
+INSERT INTO `sys_loginfo` VALUES (641, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 03:41:28');
+INSERT INTO `sys_loginfo` VALUES (642, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 04:29:25');
+INSERT INTO `sys_loginfo` VALUES (643, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 04:30:07');
+INSERT INTO `sys_loginfo` VALUES (644, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 04:34:28');
+INSERT INTO `sys_loginfo` VALUES (645, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 06:57:06');
+INSERT INTO `sys_loginfo` VALUES (646, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 07:06:54');
+INSERT INTO `sys_loginfo` VALUES (647, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 07:08:39');
+INSERT INTO `sys_loginfo` VALUES (648, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 07:11:47');
+INSERT INTO `sys_loginfo` VALUES (649, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 07:14:27');
+INSERT INTO `sys_loginfo` VALUES (650, '超级管理员-system', '218.92.211.174', '2019-11-06 07:23:53');
+INSERT INTO `sys_loginfo` VALUES (651, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 07:24:04');
+INSERT INTO `sys_loginfo` VALUES (652, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 07:29:21');
+INSERT INTO `sys_loginfo` VALUES (653, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 07:55:37');
+INSERT INTO `sys_loginfo` VALUES (654, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 07:57:10');
+INSERT INTO `sys_loginfo` VALUES (655, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 08:01:44');
+INSERT INTO `sys_loginfo` VALUES (656, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 08:02:47');
+INSERT INTO `sys_loginfo` VALUES (657, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 08:09:06');
+INSERT INTO `sys_loginfo` VALUES (658, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 08:12:21');
+INSERT INTO `sys_loginfo` VALUES (659, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 09:31:10');
+INSERT INTO `sys_loginfo` VALUES (660, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 09:32:32');
+INSERT INTO `sys_loginfo` VALUES (661, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 09:34:00');
+INSERT INTO `sys_loginfo` VALUES (662, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 09:37:58');
+INSERT INTO `sys_loginfo` VALUES (663, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 09:40:00');
+INSERT INTO `sys_loginfo` VALUES (664, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 09:45:00');
+INSERT INTO `sys_loginfo` VALUES (665, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 09:49:07');
+INSERT INTO `sys_loginfo` VALUES (666, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 09:58:23');
 
 -- ----------------------------
 -- Table structure for sys_notice
@@ -978,10 +1074,10 @@ INSERT INTO `sys_loginfo` VALUES (560, '超级管理员-system', '0:0:0:0:0:0:0:
 DROP TABLE IF EXISTS `sys_notice`;
 CREATE TABLE `sys_notice`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-  `createtime` datetime(0) NULL DEFAULT NULL,
-  `opername` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `content` text CHARACTER SET utf8 COLLATE utf8_general_ci,
+  `createtime` datetime(0) DEFAULT NULL,
+  `opername` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -999,16 +1095,16 @@ INSERT INTO `sys_notice` VALUES (12, 'cs20191021', '测试内容20191021', '2019
 DROP TABLE IF EXISTS `sys_permission`;
 CREATE TABLE `sys_permission`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pid` int(11) NULL DEFAULT NULL,
-  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '权限类型[menu/permission]',
-  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `percode` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '权限编码[只有type= permission才有  user:view]',
-  `icon` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `href` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `target` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `open` int(11) NULL DEFAULT NULL,
-  `ordernum` int(11) NULL DEFAULT NULL,
-  `available` int(11) NULL DEFAULT NULL COMMENT '状态【0不可用1可用】',
+  `pid` int(11) DEFAULT NULL,
+  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '权限类型[menu/permission]',
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `percode` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '权限编码[只有type= permission才有  user:view]',
+  `icon` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `href` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `target` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `open` int(11) DEFAULT NULL,
+  `ordernum` int(11) DEFAULT NULL,
+  `available` int(11) DEFAULT NULL COMMENT '状态【0不可用1可用】',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1020 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -1063,7 +1159,7 @@ INSERT INTO `sys_permission` VALUES (1006, 1001, 'menu', '系统人员', NULL, '
 INSERT INTO `sys_permission` VALUES (1007, 1001, 'menu', '历史数据', NULL, '&#xe63c;', '/api/getPage?pageName=equipment/facilityInfo', '', 0, 87, 1);
 INSERT INTO `sys_permission` VALUES (1008, 1001, 'menu', '维保信息', NULL, '&#xe642;', '/api/getPage?pageName=infomanager/tenance', '', 0, 88, 1);
 INSERT INTO `sys_permission` VALUES (1010, 1005, 'menu', '单位情况', NULL, '&#xe67b;', '/api/getPage?pageName=statistical/dwinfo', '', 0, 90, 1);
-INSERT INTO `sys_permission` VALUES (1011, 1005, 'menu', '建筑信息', NULL, '&#xe665;', '/api/getPage?pageName=statistical/buildinfo', '', 0, 91, 1);
+INSERT INTO `sys_permission` VALUES (1011, 1005, 'menu', '建筑信息', NULL, '&#xe665;', '/sys/toBuildInfo', '', 0, 91, 1);
 INSERT INTO `sys_permission` VALUES (1012, 1005, 'menu', '消防设施', NULL, '&#xe656;', '/api/getPage?pageName=statistical/xfss', '', 0, 92, 1);
 INSERT INTO `sys_permission` VALUES (1013, 1005, 'menu', '设备在线', NULL, '&#xe628;', '/api/getPage?pageName=statistical/online', '', 0, 93, 1);
 INSERT INTO `sys_permission` VALUES (1014, 1005, 'menu', '统计图', NULL, '&#xe60d;', '/api/getPage?pageName=statistical/totalAll', '', 0, 94, 1);
@@ -1076,10 +1172,10 @@ INSERT INTO `sys_permission` VALUES (1019, 1001, 'menu', '设备状态表', NULL
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `available` int(11) NULL DEFAULT NULL,
-  `createtime` datetime(0) NULL DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `available` int(11) DEFAULT NULL,
+  `createtime` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -1168,20 +1264,20 @@ INSERT INTO `sys_role_user` VALUES (7, 6);
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `loginname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `sex` int(11) NULL DEFAULT NULL,
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `pwd` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `deptid` int(11) NULL DEFAULT NULL,
-  `hiredate` datetime(0) NULL DEFAULT NULL,
-  `mgr` int(11) NULL DEFAULT NULL,
-  `available` int(11) NULL DEFAULT 1,
-  `ordernum` int(11) NULL DEFAULT NULL,
-  `type` int(255) NULL DEFAULT NULL COMMENT '用户类型[0超级管理员1，管理员，2普通用户]',
-  `imgpath` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '头像地址',
-  `salt` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `loginname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `sex` int(11) DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `pwd` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `deptid` int(11) DEFAULT NULL,
+  `hiredate` datetime(0) DEFAULT NULL,
+  `mgr` int(11) DEFAULT NULL,
+  `available` int(11) DEFAULT 1,
+  `ordernum` int(11) DEFAULT NULL,
+  `type` int(255) DEFAULT NULL COMMENT '用户类型[0超级管理员1，管理员，2普通用户]',
+  `imgpath` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '头像地址',
+  `salt` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FK_3rrcpvho2w1mx1sfiuuyir1h`(`deptid`) USING BTREE,
   CONSTRAINT `sys_user_ibfk_1` FOREIGN KEY (`deptid`) REFERENCES `sys_dept` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT

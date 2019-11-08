@@ -57,7 +57,7 @@ public class EquipmentServiceImpl extends ServiceImpl<EquipmentMapper, Equipment
     /**
      * 获取发送过来的数据最新状态来更新设备表中的状态
      */
-    private String DevStatusId;
+    /*private String DevStatusId;
     @Override
     public String getDevStatus(String statusid) {
         IPage<Devinfo> page=new Page<>(1, 1);
@@ -72,5 +72,5 @@ public class EquipmentServiceImpl extends ServiceImpl<EquipmentMapper, Equipment
             DevStatusId = String.valueOf(Constast.NORMARL);
         }
         return DevStatusId;
-    }
+    }*/
 }

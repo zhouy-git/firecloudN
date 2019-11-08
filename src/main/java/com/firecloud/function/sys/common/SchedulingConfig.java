@@ -22,15 +22,15 @@ import java.util.Map;
  */
 @Component
 public class SchedulingConfig {
-    @Autowired
+    /*@Autowired
     private EquipmentService equipmentService;
 
     @Autowired
-    private DevinfoService devinfoService;
+    private DevinfoService devinfoService;*/
     /**
      * 更新设备表中的状态字段
      */
-    @Scheduled(cron = "0 0/60 * * * ?")
+    /*@Scheduled(cron = "0 0/60 * * * ?")
     public void updateEquipmentDevStatus(){
         List<Equipment> equipmentList = this.equipmentService.list();
         for (Equipment equipment : equipmentList) {
@@ -45,7 +45,7 @@ public class SchedulingConfig {
                 this.equipmentService.updateById(equipment);
             }
         }
-    }
+    }*/
 
     /*@Scheduled(cron = "0 0/1 * * * ?")
     public void getTest() {

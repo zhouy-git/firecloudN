@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @MapperScan(basePackages = {"com.firecloud.function.sys.mapper"})
-@EnableCaching
+@EnableCaching  //开启redis的缓存注解
 @EnableScheduling //开启定时器
 public class FireCloudFunction {
     public static void main(String[] args) {
