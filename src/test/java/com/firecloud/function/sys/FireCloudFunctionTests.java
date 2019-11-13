@@ -3,6 +3,8 @@ package com.firecloud.function.sys;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.firecloud.function.sys.common.Constast;
 import com.firecloud.function.sys.domain.Permission;
+import com.firecloud.function.sys.mapper.DevAlermMapper;
+import com.firecloud.function.sys.service.DevAlermService;
 import com.firecloud.function.sys.service.PermissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -49,6 +51,14 @@ public class FireCloudFunctionTests {
         }
 
         //System.out.println("connect is OK============>"+new Jedis("39.104.16.168",6379).ping());
+    }
+
+    @Autowired
+    private DevAlermService devAlermService;
+
+    @Test
+    public void testMybatisPlus() {
+
     }
 
 }

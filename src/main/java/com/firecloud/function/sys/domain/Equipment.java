@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,10 +27,15 @@ public class Equipment implements Serializable {
     private static final long serialVersionUID=1L;
 
     /**
+     * 主键id
+     */
+    @TableId(value = "id", type = IdType.AUTO)
+    private String id;
+
+    /**
      * 设备ID
      */
-    @TableId(type = IdType.INPUT)
-    private String id;
+    private String devid;
 
     /**
      * 名称
@@ -78,6 +84,8 @@ public class Equipment implements Serializable {
      * 设备名称id，根据下拉选对应的id
      */
     private Integer dnameid;
+
+
 
     /**
      * 设备状态名称

@@ -61,21 +61,27 @@ public class EquipmentServiceImpl extends ServiceImpl<EquipmentMapper, Equipment
     }
 
     @Override
-    @CachePut(cacheNames = "equipment", key = "#result.id")
+    @CachePut(cacheNames = "equipment", key = "#entity.devid")
     public Equipment saveEquipment(Equipment entity) {
         Equipment equipment = new Equipment();
-        super.save(equipment);
+        super.save(entity);
         BeanUtils.copyProperties(equipment, entity);
         return equipment;
     }
 
     @Override
-    @CachePut(cacheNames = "equipment", key = "#entity.id")
+    @CachePut(cacheNames = "equipment", key = "#entity.devid")
     public Equipment updateEquipmentById(Equipment entity) {
         Equipment equipment = new Equipment();
-        super.updateById(equipment);
+        super.updateById(entity);
         BeanUtils.copyProperties(equipment, entity);
         return equipment;
+    }
+
+    @Override
+    @Cacheable(cacheNames = "eequipment", key = "#devid")
+    public Equipment getEquipmentByDevId(String devid) {
+        return this.getBaseMapper().getEquipmentByDevId(devid);
     }
 
     @Override

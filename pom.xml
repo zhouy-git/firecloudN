@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.zhouy</groupId>
     <artifactId>firecloud</artifactId>
-    <version>1.10.31</version>
+    <version>1.11.12</version>
     <name>firecloud</name>
     <description>消防云</description>
 
@@ -24,6 +24,7 @@
         <hutool.version>4.6.6</hutool.version>
         <lang3.version>3.9</lang3.version>
         <pinyin4j.version>2.5.1</pinyin4j.version>
+        <websockets.version>5.1.1</websockets.version>
     </properties>
 
     <dependencies>
@@ -131,6 +132,14 @@
             <artifactId>pinyin4j</artifactId>
             <version>${pinyin4j.version}</version>
         </dependency>
+
+
+        <!--websocket-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
         <!--redis-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -153,6 +162,8 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
         </dependency>
+
+
 
     </dependencies>
 

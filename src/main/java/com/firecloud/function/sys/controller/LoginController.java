@@ -6,6 +6,7 @@ import com.firecloud.function.sys.common.ResultObj;
 import com.firecloud.function.sys.common.WebUtils;
 import com.firecloud.function.sys.domain.Devinfo;
 import com.firecloud.function.sys.domain.Loginfo;
+import com.firecloud.function.sys.service.DevAlermService;
 import com.firecloud.function.sys.service.DevinfoService;
 import com.firecloud.function.sys.service.LoginfoService;
 import org.apache.shiro.SecurityUtils;
@@ -30,7 +31,7 @@ public class LoginController {
     private LoginfoService loginfoService;
 
     @Autowired
-    private DevinfoService devinfoService;
+    private DevAlermService devAlermService;
 
     /**
      * 判断登录名和用户密码
@@ -49,17 +50,13 @@ public class LoginController {
             WebUtils.getSession().setAttribute("user", activerUser.getUser());
 
             Map<String, Integer> map = new HashMap<>();
-            List<Devinfo> lists = this.devinfoService.GetDevAlllist(1);
-            Integer bj = lists.size();
+            Integer bj = this.devAlermService.getAlermCount("");
             map.put("bj", bj);
-            List<Devinfo> list2 = this.devinfoService.GetDevAlllist(2);
-            Integer gz = list2.size();
+            Integer gz = this.devAlermService.getAlermCount("gz");
             map.put("gz", gz);
-            List<Devinfo> list3 = this.devinfoService.GetDevAlllist(3);
-            Integer yc = list3.size();
+            Integer yc = this.devAlermService.getAlermCount("yc");
             map.put("yc", yc);
-            List<Devinfo> list4 = this.devinfoService.GetDevAlllist(4);
-            Integer hj = list4.size();
+            Integer hj = this.devAlermService.getAlermCount("fire");
             map.put("hj", hj);
             //将数据放入首页
             WebUtils.getSession().setAttribute("map",map);

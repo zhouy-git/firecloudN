@@ -23,7 +23,7 @@ import java.util.List;
 @Service
 public class DevinfoServiceImpl extends ServiceImpl<DevinfoMapper, Devinfo> implements DevinfoService {
 
-    public List<Devinfo> GetDevAlllist(Integer statusId) {
+ /*   public List<Devinfo> GetDevAlllist(Integer statusId) {
         QueryWrapper<Devinfo> queryWrapper = new QueryWrapper<>();
         if (statusId == Constast.NORMARL) {
             queryWrapper.lambda().notIn(Devinfo::getDevStatus, Arrays.asList(0,1,5,6,8,12,13,14));
@@ -38,7 +38,7 @@ public class DevinfoServiceImpl extends ServiceImpl<DevinfoMapper, Devinfo> impl
         return list;
     }
 
-
+*/
 
     @Override
     public List<Integer> getIndexEcharDataByWM(List<String> param) {

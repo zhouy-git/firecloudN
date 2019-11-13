@@ -21,7 +21,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">设备ID</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="id" autocomplete="off" class="layui-input">
+                    <input type="text" name="devid" autocomplete="off" class="layui-input">
                 </div>
             </div>
 
@@ -100,9 +100,9 @@
 <div style="display: none;padding: 5px" id="addOrUpdateDiv">
     <form action="" method="post" class="layui-form layui-form-pane" id="dataFrm" lay-filter="dataFrm">
         <div class="layui-form-item">
-            <label class="layui-form-label">设备id</label>
+            <label class="layui-form-label">设备ID</label>
             <div class="layui-input-block" style="width: 50%;">
-                <input type="text" name="id" class="layui-input" autocomplete="off" placeholder="请输入设备ID" lay-verify="required">
+                <input type="text" name="devid" class="layui-input" autocomplete="off" placeholder="请输入设备ID" lay-verify="required">
             </div>
         </div>
         <div class="layui-form-item">
@@ -120,18 +120,7 @@
                 </div>
             </div>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">设备状态</label>
-            <div class="layui-input-inline">
-                <select name="devicestatus" lay-verify="required">
-                    <option value="0">离线</option>
-                    <option value="1">正常</option>
-                    <option value="2">故障</option>
-                    <option value="3">水位过高</option>
-                    <option value="4">报警</option>
-                </select>
-            </div>
-        </div>
+
         <div class="layui-form-item">
             <label class="layui-form-label">设备型号</label>
             <div class="layui-input-block" style="width: 50%;">
@@ -216,7 +205,7 @@
             ,title: '设备数据表'
             ,cols: [ [
                 {type: 'checkbox', fixed: 'left'}
-                ,{field:'id', title:'设备ID', fixed: 'left',sort: true,width:'160'}
+                ,{field:'devid', title:'设备ID', fixed: 'left',sort: true,width:'160'}
                 ,{field:'devicename', title:'设备名称', align:'center',width:'207'}
                /* ,{field:'status', title:'状态', align:'center'}*/
                 ,{field:'devicemodel', title:'设备型号', align:'center',width:'170'}

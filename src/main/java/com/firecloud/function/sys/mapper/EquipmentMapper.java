@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2019-10-30
  */
 public interface EquipmentMapper extends BaseMapper<Equipment> {
-
+    Equipment getEquipmentByDevId(String devid);
 }

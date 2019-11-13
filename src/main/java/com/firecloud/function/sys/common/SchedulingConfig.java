@@ -1,36 +1,26 @@
 package com.firecloud.function.sys.common;
-
-
-import com.firecloud.function.sys.domain.Devinfo;
-import com.firecloud.function.sys.domain.Equipment;
+import com.firecloud.function.sys.service.DevAlermService;
 import com.firecloud.function.sys.service.DevinfoService;
-import com.firecloud.function.sys.service.EquipmentService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
 /**
  * 定时计划任务类
  */
+@Slf4j
 @Component
 public class SchedulingConfig {
-    /*@Autowired
-    private EquipmentService equipmentService;
-
     @Autowired
-    private DevinfoService devinfoService;*/
+    private DevinfoService devinfoService;
+    @Autowired
+    private DevAlermService devAlermService;
     /**
      * 更新设备表中的状态字段
      */
-    /*@Scheduled(cron = "0 0/60 * * * ?")
+   /* @Scheduled(cron = "0 0/60 * * * ?")
     public void updateEquipmentDevStatus(){
         List<Equipment> equipmentList = this.equipmentService.list();
         for (Equipment equipment : equipmentList) {
@@ -44,30 +34,21 @@ public class SchedulingConfig {
                 equipment.setDevicestatus(eqstatusid);
                 this.equipmentService.updateById(equipment);
             }
+             log.info("向页面发送数据"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         }
     }*/
-
-    /*@Scheduled(cron = "0 0/1 * * * ?")
-    public void getTest() {
+    //@Scheduled(cron = "*/3 * * * * ?")
+    public  void getTest() {
         Map<String, Integer> map = new HashMap<>();
-        List<Devinfo> lists = this.devinfoService.GetDevAlllist(1);
-        Integer bj = lists.size();
+        Integer bj = this.devAlermService.getAlermCount("");
         map.put("bj", bj);
-        System.out.println("报警数："+lists.size());
-        List<Devinfo> list2 = this.devinfoService.GetDevAlllist(2);
-        Integer gz = list2.size();
+        Integer gz = this.devAlermService.getAlermCount("gz");
         map.put("gz", gz);
-        System.out.println("故障数："+list2.size());
-        List<Devinfo> list3 = this.devinfoService.GetDevAlllist(3);
-        Integer yc = list3.size();
+        Integer yc = this.devAlermService.getAlermCount("yc");
         map.put("yc", yc);
-        System.out.println("异常数："+list3.size());
-        List<Devinfo> list4 = this.devinfoService.GetDevAlllist(4);
-        Integer hj = lists.size();
+        Integer hj = this.devAlermService.getAlermCount("fire");
         map.put("hj", hj);
-        System.out.println("火警数："+list4.size());
-        WebUtils.getSession().setAttribute("map",map);
 
-        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + "将数据放入session中");
-    }*/
+        WebSocketServer.sendInfo("1234",map.toString().replace("=",":"));
+    }
 }

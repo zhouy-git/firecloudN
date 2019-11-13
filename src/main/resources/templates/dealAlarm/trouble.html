@@ -75,34 +75,6 @@
     </div>
 </div>
 
-<div class="div2-report-center">
-    <div class="center-header">
-        <!-- <a href="#">
-             <div class="left">
-                 <p>处理</p>
-             </div>
-         </a>-->
-        <div class="right">
-            <div class="right-switch">
-                <form class="layui-form" action="">
-                    <div class="layui-input-block">
-                        <input type="checkbox" name="zzz" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
-                        <span class="layui-font-css">智能合并</span>
-                    </div>
-                </form>
-            </div>
-            <div class="fire-right-select">
-                <select name="city" lay-verify="">
-                    <option value="001">全部告警</option>
-                    <option value="010">重点关注</option>
-                </select>
-            </div>
-            <div class="right-input">
-                <input type="text" class="layui-input">
-            </div>
-        </div>
-    </div>
-</div>
 
 <!--表格数据开始-->
 <table class="layui-hide" id="testFire" lay-filter="testFire"></table>
@@ -115,7 +87,7 @@
         <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">处理</button>
         <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
     </div>
-</script>
+    </script>
 <!--头部工具栏结束-->
 
 <!--数据行工具栏开始-->
@@ -141,30 +113,31 @@
 
         table.render({
             elem: '#testFire'
-            ,url:'/resources/json/fireInfo.json'
+            ,url:'/alertPro/getTroubleAllInfo'
             //,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
-            //,height: 'full-150'
-            /* ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
-                 title: '提示'
-                 ,layEvent: 'LAYTABLE_TIPS'
-                 ,icon: 'layui-icon-tips'
-             }]*/
             ,title: '用户数据表'
             ,cols: [
                 [
-                {checkbox: 'true'}
-                ,{field:'id', title: 'ID', sort: true}
-                ,{field:'username', title: '故障设备'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
-                ,{field:'sex', title: '故障位置',align: 'center'}
-                ,{field:'city', title: '故障设备id', align: 'center'}
-                ,{field:'sign', title: '故障时间', align: 'center'}
-                ,{field:'classify', title: '故障内容', align: 'center'} //单元格内容水平居中
-                ,{field:'lock', title:'是否锁定', templet: '#checkboxTpl', unresize: true,align: 'center'}
-                ,{field:'wealth', title: '是否处理',  align: 'center'}
-                ,{field:'wealth', title: '故障发生时间',  align: 'center'}
-                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
-            ]
+                    {checkbox: 'true'}
+                    ,{field:'id', title: '序号', sort: true}
+                    ,{field:'devId', title: '设备ID'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                    ,{field:'devName', title: '设备名称',align: 'center'}
+                    ,{field:'devStatus', title: '设备状态', align: 'center'}
+                    ,{field:'unitType', title: '设备型号', align: 'center'}
+                    ,{field:'location', title: '安装位置', align: 'center'} //单元格内容水平居中
+                    ,{field:'underbuilding', title: '所属建筑',align: 'center'} //单元格内容水平居中
+                    ,{field:'floorarea', title:'楼层区域',align: 'center'}
+                    ,{field:'alarmtime', title: '报警时间',  align: 'center',width:200}
+                    //,{field:'alarmcontent', title: '报警内容',  align: 'center'}
+                    ,{field:'isdeal', title: '是否已处理',  align: 'center',templet:function(d){
+                        return d.sex==1?'<span class="layui-btn-normal layui-btn-xs">已处理</span>':'<span class="layui-btn-danger layui-btn-xs">未处理</span>';
+                    }}
+                    //,{field:'dealpeople', title: '处理人',  align: 'center'}
+                    //,{field:'dealtime', title: '处理时间',  align: 'center'}
+                    //,{field:'alreamType', title: '报警类型',  align: 'center'}
+                    //,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+                ]
             ]
             ,page: true
         });

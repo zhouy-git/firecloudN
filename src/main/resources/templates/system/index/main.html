@@ -24,8 +24,7 @@
         <div class="c1-middle-box">
             <div class="m-d1" style="background-color: rgb(0, 0, 255);">
                 <div id="bj_total" class="lef-name-res">
-                    <p th:text="${session.map['bj']}">
-
+                    <p id="bjTotal" th:text="${session.map['bj']}">
                         <span class="name">个</span>
                     </p>
                     <span class="name">
@@ -63,7 +62,7 @@
                         <img th:src="@{/resources/images/index/yc.png}" alt="">
                     </div>
                 </div>
-                <div id="gz" class="m-d1" style="background-color: rgb(255, 221, 0);">
+                <div id="gz" class="m-d1" style="background-color: #FFFF00;">
                     <div class="lef-name-res">
                         <p id="gzTotal" th:text="${session.map['gz']}">
                             <span class="name">个</span>

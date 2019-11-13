@@ -53,4 +53,8 @@ public class Constast {
      */
     public static final Integer NORMARL = 1;
 
+    /**
+     * 火警
+     */
+    public static final Integer FIRE = 4;
 }

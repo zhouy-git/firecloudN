@@ -48,7 +48,7 @@ public class EquipmentController {
     public DataGridView loadAllEquipment(EquipmentVo equipmentVo) {
         Page<Equipment> page = new Page<>(equipmentVo.getPage(), equipmentVo.getLimit());
         QueryWrapper<Equipment> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().like(StringUtils.isNoneBlank(equipmentVo.getId()), Equipment::getId, equipmentVo.getId());
+        queryWrapper.lambda().like(StringUtils.isNoneBlank(equipmentVo.getDevid()), Equipment::getDevid, equipmentVo.getDevid());
         queryWrapper.lambda().like(StringUtils.isNoneBlank(equipmentVo.getDevicename()), Equipment::getDevicename, equipmentVo.getDevicename());
         queryWrapper.lambda().like(StringUtils.isNoneBlank(equipmentVo.getUnderbuild()), Equipment::getUnderbuild, equipmentVo.getUnderbuild());
         queryWrapper.lambda().like(StringUtils.isNoneBlank(equipmentVo.getFloorarea()), Equipment::getFloorarea, equipmentVo.getFloorarea());
@@ -62,7 +62,7 @@ public class EquipmentController {
         for (Equipment equipment: equipmentList) {
             Integer statusId = equipment.getDevicestatus();
             EquipConfig equipConfig = this.equipConfig.getById(statusId);
-            if (statusId != 0 && equipConfig !=null) {
+            if (equipConfig !=null) {
                 equipment.setStatusName(equipConfig.getStatusname());
             }
         }
@@ -78,8 +78,8 @@ public class EquipmentController {
     public ResultObj addEquipment(EquipmentVo equipmentVo) {
         try {
             Integer dnameid = equipmentVo.getDnameid();
-            if (dnameid != null) {
-                String dname = this.equipmentService.getDnameByDId(dnameid);
+            String dname = this.equipmentService.getDnameByDId(dnameid);
+            if (dname != null) {
                 equipmentVo.setDevicename(dname);
             }
             equipmentVo.setStatus(Constast.NORMARL);

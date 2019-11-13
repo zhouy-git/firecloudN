@@ -112,30 +112,31 @@
 
         table.render({
             elem: '#testFire'
-            ,url:'/resources/json/fireInfo.json'
+            ,url:'/alertPro/getFireAllInfo'
             //,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             ,title: '用户数据表'
             ,cols: [
                 [
                 {checkbox: 'true'}
-                ,{field:'id', title: 'ID', sort: true}
-                ,{field:'devId', title: '设备id'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                ,{field:'id', title: '序号', sort: true}
+                ,{field:'devId', title: '设备ID',width: 185} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
                 ,{field:'devName', title: '设备名称',align: 'center'}
                 ,{field:'devStatus', title: '设备状态', align: 'center'}
                 ,{field:'unitType', title: '设备型号', align: 'center'}
                 ,{field:'location', title: '安装位置', align: 'center'} //单元格内容水平居中
                 ,{field:'underbuilding', title: '所属建筑',align: 'center'} //单元格内容水平居中
                 ,{field:'floorarea', title:'楼层区域',align: 'center'}
-                ,{field:'installarea', title: '安装位置',  align: 'center'}
-                ,{field:'alarmtime', title: '报警时间',  align: 'center'}
-                ,{field:'alarmcontent', title: '报警内容',  align: 'center'}
-                ,{field:'isdeal', title: '是否已处理',  align: 'center'}
-                ,{field:'dealpeople', title: '处理人',  align: 'center'}
-                ,{field:'dealtime', title: '处理时间',  align: 'center'}
-                ,{field:'alreamType', title: '报警类型',  align: 'center'}
-                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
-            ]
+                ,{field:'alarmtime', title: '报警时间',  align: 'center',width:170}
+                //,{field:'alarmcontent', title: '报警内容',  align: 'center'}
+                ,{field:'isdeal', title: '是否已处理',  align: 'center',templet:function(d){
+                        return d.sex==1?'<span class="layui-btn-normal layui-btn-xs">已处理</span>':'<span class="layui-btn-danger layui-btn-xs">未处理</span>';
+                    }}
+                //,{field:'dealpeople', title: '处理人',  align: 'center'}
+                //,{field:'dealtime', title: '处理时间',  align: 'center'}
+                //,{field:'alreamType', title: '报警类型',  align: 'center'}
+                //,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+                ]
             ]
             ,page: true
         });

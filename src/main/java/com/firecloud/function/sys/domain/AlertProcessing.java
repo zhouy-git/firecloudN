@@ -71,12 +71,6 @@ public class AlertProcessing implements Serializable {
     private String floorarea;
 
     /**
-     * 安装位置
-     */
-    @TableField("INSTALLAREA")
-    private String installarea;
-
-    /**
      * 报警时间
      */
     @TableField("ALARMTIME")

@@ -98,25 +98,31 @@ layui.use(['element','jquery', 'layer'], function() {
         });
 
         $('#bj_total').click(function () {
-            alert('报警总数');
+
         });
 
         $('#fire').click(function () {
+            clearInterval(dangIfo);
             layerOpen('火警','fire');
-            alert($('#fireTotal').text());
+
         });
 
         $('#yc').click(function () {
+            clearInterval(ycInfo);
             layerOpen('异常','hideDan');
-            alert($('#ycTotal').text());
+
 
         });
         $('#gz').click(function () {
+            clearInterval(gzInfo);
             layerOpen('故障','trouble');
-            alert($('#gzTotal').text());
         });
 
-    });
+        var dangIfo;
+        var ycInfo;
+        var gzInfo;
+
+
 
 
     function layerOpen(title,id) {
@@ -132,23 +138,88 @@ layui.use(['element','jquery', 'layer'], function() {
         });
     }
 
+    var websocket = null;
 
+    //判断当前浏览器是否支持WebSocket
+    if('WebSocket' in window){
+        websocket = new WebSocket("ws://39.104.16.168:8182/websocket/1234");
+    }
+    else{
+        alert('Not support websocket')
+    }
 
+    //连接发生错误的回调方法
+    websocket.onerror = function(){
+        console.log('Socket错误！！！');
+    };
 
+    //连接成功建立的回调方法
+    websocket.onopen = function(event){
+        send();
+        console.log("建立连接成功：")
+    }
 
+    //接收到消息的回调方法
+    websocket.onmessage = function(data){
+        var res = data.data;
+        var json = eval('(' + res + ')');
+        var bjTotal = $('#bjTotal').text();
+        if (bjTotal==''|| bjTotal==null || bjTotal != json.bj) {$("#bjTotal").text(json.bj);}
+        var hjVal = $("#fireTotal").text();
+        if (hjVal == '' || hjVal==null) {$("#fireTotal").text(json.hj);}
+        if (hjVal < json.hj) { $("#fireTotal").text(json.hj);dangIfo = setInterval(function () {
+                var div=$("#fire");div.animate({height:'80%',opacity:'0.2'},"fast");div.animate({width:'25%',opacity:'0.9'},"fast");
+            },1000);
+        }
+        var yc = $('#ycTotal').text();
+        if (yc == '' || yc == null) {
+            $('#ycTotal').text(json.yc);
+        }
+        if (yc < json.yc) {
+            $('#ycTotal').text(json.yc);
+            ycInfo = setInterval(function () {
+                var div=$("#yc");
+                div.animate({height:'80%',opacity:'0.2'},"fast");
+                div.animate({width:'25%',opacity:'0.9'},"fast");
+            },1000);
+        }
+        var gz = $('#gzTotal').text();
+        if (gz == '' || gz == null) {
+            $('#gzTotal').text(json.gz);
+        }
+        if (gz < json.gz) {
+            $('#gzTotal').text(json.gz);
+            gzInfo = setInterval(function () {
+                var div=$("#gz");
+                div.animate({height:'80%',opacity:'0.2'},"fast");
+                div.animate({width:'25%',opacity:'0.9'},"fast");
+            },1000);
+        }
+    }
+    //连接关闭的回调方法
+    websocket.onclose = function(){
+        console.log('Socket连接关闭')
+    }
+    //关闭连接
+    function closeWebSocket(){
+        websocket.close();
+    }
+    //发送消息
+    function send(){
+        var message = $('#fireTotal').text();
+        websocket.send(message);
+    }
+    });
     // 基于准备好的dom，初始化echarts实例
     var myChartN4m = echarts.init(document.getElementById('echarts-dayTotal'));
     // 指定图表的配置项和数据
     var option = {
-
         backgroundColor: '#FFF0F5',
-
         title: {
             text: '折线图',
             subtext: '模拟数据',
             x: 'center'
         },
-
         legend: {
             // orient 设置布局方式，默认水平布局，可选值：'horizontal'（水平） ¦ 'vertical'（垂直）
             orient: 'horizontal',
@@ -158,7 +229,6 @@ layui.use(['element','jquery', 'layer'], function() {
             y: 'top',
             data: ['预期','实际','假设']
         },
-
         //  图表距边框的距离,可选值：'百分比'¦ {number}（单位px）
         grid: {
             top: '16%',   // 等价于 y: '16%'
@@ -167,19 +237,16 @@ layui.use(['element','jquery', 'layer'], function() {
             bottom: '3%',
             containLabel: true
         },
-
         // 提示框
         tooltip: {
             trigger: 'axis'
         },
-
         //工具框，可以选择
         toolbox: {
             feature: {
                 saveAsImage: {} //下载工具
             }
         },
-
         xAxis: {
             name: '周几',
             type: 'category',
@@ -275,13 +342,8 @@ layui.use(['element','jquery', 'layer'], function() {
 
         color: ['#00EE00', '#FF9F7F','#FFD700']
     };
-
     // 使用刚指定的配置项和数据显示图表。
     myChartN4m.setOption(option);
-
-
-
-
 
 
     /**

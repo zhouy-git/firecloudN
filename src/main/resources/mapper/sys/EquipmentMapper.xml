@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.firecloud.function.sys.mapper.EquipmentMapper">
+
+
+
+    <select id="getEquipmentByDevId" parameterType="java.lang.String" resultType="com.firecloud.function.sys.domain.Equipment">
+        select devid,devicename, devicemodel,installlocation,underbuild,floorarea from equipment where devid = #{devid}
+    </select>
+</mapper>

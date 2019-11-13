@@ -11,7 +11,7 @@
  Target Server Version : 50722
  File Encoding         : 65001
 
- Date: 06/11/2019 18:07:48
+ Date: 12/11/2019 18:13:02
 */
 
 SET NAMES utf8mb4;
@@ -116,6 +116,51 @@ INSERT INTO `DEVINFO` VALUES ('860000000000804', '1', '000', '3534', '15', '2019
 INSERT INTO `DEVINFO` VALUES ('860000000000805', '4', '000', '3555', '13', '20191101', '113429');
 INSERT INTO `DEVINFO` VALUES ('860000000000806', '1', '000', '3556', '13', '20191101', '113434');
 INSERT INTO `DEVINFO` VALUES ('860000000000807', '1', '000', '3555', '13', '20191101', '113441');
+INSERT INTO `DEVINFO` VALUES ('ZH1100010011', '7', '000', '5555', '19', '20191107', '170804');
+INSERT INTO `DEVINFO` VALUES ('ZH1100010011', '5', '000', '5555', '19', '20191107', '170725');
+
+-- ----------------------------
+-- Table structure for alert_processing
+-- ----------------------------
+DROP TABLE IF EXISTS `alert_processing`;
+CREATE TABLE `alert_processing`  (
+  `ID` int(22) NOT NULL AUTO_INCREMENT,
+  `DEV_ID` varchar(22) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '设备id',
+  `DEV_NAME` varchar(22) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '设备名称',
+  `DEV_STATUS` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '设备状态',
+  `UNIT_TYPE` varchar(22) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '设备型号',
+  `LOCATION` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '安装位置',
+  `UNDERBUILDING` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '所属建筑',
+  `FLOORAREA` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '楼层区域',
+  `ALARMTIME` datetime(0) DEFAULT NULL COMMENT '报警时间',
+  `ALARMCONTENT` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '报警内容',
+  `ISDEAL` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '是否处理 0:未处理 1：已经处理',
+  `DEALPEOPLE` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '处理人',
+  `DEALTIME` datetime(0) DEFAULT NULL COMMENT '处理时间',
+  `ALREAM_TYPE` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '报警类型',
+  `DEAFULT` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`ID`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of alert_processing
+-- ----------------------------
+INSERT INTO `alert_processing` VALUES (1, '1111', NULL, '11', NULL, NULL, NULL, NULL, '2019-11-09 00:20:44', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `alert_processing` VALUES (2, '1111', NULL, '2', NULL, NULL, NULL, NULL, '2019-11-10 16:23:21', NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `alert_processing` VALUES (3, '1111', NULL, '2', NULL, NULL, NULL, NULL, '2019-11-10 16:25:20', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `alert_processing` VALUES (4, '1111', NULL, '3', NULL, NULL, NULL, NULL, '2019-11-10 16:26:16', NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `alert_processing` VALUES (10, 'ZHZ100022233', NULL, '4', NULL, NULL, NULL, NULL, '2019-11-12 11:26:40', NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `alert_processing` VALUES (11, '860000000000809', '烟感', '4', 'AS-21', '5008', '金鹰C', 'F5', '2019-11-12 12:35:24', NULL, '0', NULL, NULL, 'fire', NULL);
+INSERT INTO `alert_processing` VALUES (27, '860000000000803', '燃气报警器', '4', 'R-21', '6003', '万达大楼', 'F6', '2019-11-12 12:51:47', NULL, '0', NULL, NULL, 'fire', NULL);
+INSERT INTO `alert_processing` VALUES (30, '860000000000803', '燃气报警器', '11', 'R-21', '6003', '万达大楼', 'F6', NULL, NULL, '0', NULL, NULL, 'gz', NULL);
+INSERT INTO `alert_processing` VALUES (32, '869029035531865', NULL, '3', NULL, NULL, NULL, NULL, '2019-11-12 16:49:59', NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `alert_processing` VALUES (33, '869029035531865', NULL, '5', NULL, NULL, NULL, NULL, '2019-11-12 17:00:20', NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `alert_processing` VALUES (34, '860000000000867', NULL, '4', NULL, NULL, NULL, NULL, '2019-11-12 17:14:23', NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `alert_processing` VALUES (35, '860000000000867', NULL, '3', NULL, NULL, NULL, NULL, '2019-11-12 17:31:15', NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `alert_processing` VALUES (36, '860000000000867', NULL, NULL, NULL, NULL, NULL, NULL, '2019-11-12 17:38:15', NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `alert_processing` VALUES (37, '860000000000867', NULL, '2', NULL, NULL, NULL, NULL, '2019-11-12 17:49:19', NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `alert_processing` VALUES (38, '860000000000867', NULL, '2', NULL, NULL, NULL, NULL, '2019-11-12 17:57:12', NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `alert_processing` VALUES (39, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for bus_customer
@@ -297,6 +342,43 @@ CREATE TABLE `bus_salesback`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for dev_alerm
+-- ----------------------------
+DROP TABLE IF EXISTS `dev_alerm`;
+CREATE TABLE `dev_alerm`  (
+  `id` int(100) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `dev_id` varchar(22) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '设备id',
+  `dev_status` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '设备状态',
+  `signal_des` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '信号强度',
+  `net_id` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '网络频点',
+  `dev_des_per` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '设备浓度',
+  `net_date` datetime(0) DEFAULT NULL COMMENT '报警时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 115 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of dev_alerm
+-- ----------------------------
+INSERT INTO `dev_alerm` VALUES (1, 'ZH1100010011', '5', '000', '5555', '19', '2019-11-07 16:42:22');
+INSERT INTO `dev_alerm` VALUES (2, 'ZH1100010011', '2', '000', '5555', '19', '2019-11-07 17:00:27');
+INSERT INTO `dev_alerm` VALUES (3, 'ZH1100010011', '2', '000', '5555', '19', '2019-11-07 17:05:42');
+INSERT INTO `dev_alerm` VALUES (4, 'ZH1100010011', '7', '000', '5555', '19', '2019-11-07 17:08:04');
+INSERT INTO `dev_alerm` VALUES (6, '1111', '2', NULL, NULL, NULL, '2019-11-10 16:25:20');
+INSERT INTO `dev_alerm` VALUES (7, '1111', '3', NULL, NULL, NULL, '2019-11-10 16:26:16');
+INSERT INTO `dev_alerm` VALUES (8, 'ZHZ100022233', '4', '000', '5555', '15', '2019-11-12 11:26:40');
+INSERT INTO `dev_alerm` VALUES (9, '860000000000809', '4', '000', '5555', '15', '2019-11-12 12:35:24');
+INSERT INTO `dev_alerm` VALUES (10, '860000000000803', '4', '000', NULL, NULL, '2019-11-12 12:51:47');
+INSERT INTO `dev_alerm` VALUES (11, '860000000000803', '11', NULL, NULL, NULL, '2019-11-12 16:59:36');
+INSERT INTO `dev_alerm` VALUES (12, '860000000000803', '11', NULL, NULL, NULL, '2019-11-12 16:38:08');
+INSERT INTO `dev_alerm` VALUES (13, '869029035531865', '3', '111', '2222', '111', '2019-11-12 16:49:59');
+INSERT INTO `dev_alerm` VALUES (14, '869029035531865', '5', '1111', '1222', '333', '2019-11-12 17:00:20');
+INSERT INTO `dev_alerm` VALUES (15, '860000000000867', '4', NULL, NULL, NULL, '2019-11-12 17:14:23');
+INSERT INTO `dev_alerm` VALUES (111, '860000000000867', '3', '111', '1234', '212', '2019-11-12 17:31:15');
+INSERT INTO `dev_alerm` VALUES (112, '860000000000867', '2', NULL, NULL, NULL, '2019-11-12 17:38:15');
+INSERT INTO `dev_alerm` VALUES (113, '860000000000867', '2', '112', '221', '211', '2019-11-12 17:57:12');
+INSERT INTO `dev_alerm` VALUES (114, '860000000000867', '4', '113', '212', '233', '2019-11-12 17:58:05');
+
+-- ----------------------------
 -- Table structure for equip_config
 -- ----------------------------
 DROP TABLE IF EXISTS `equip_config`;
@@ -319,17 +401,23 @@ INSERT INTO `equip_config` VALUES (3, '传感器故障', NULL, NULL, NULL);
 INSERT INTO `equip_config` VALUES (4, '报警', 1, 1, NULL);
 INSERT INTO `equip_config` VALUES (5, '低报', NULL, NULL, NULL);
 INSERT INTO `equip_config` VALUES (6, '低报', NULL, NULL, NULL);
+INSERT INTO `equip_config` VALUES (7, '通信故障', NULL, NULL, NULL);
+INSERT INTO `equip_config` VALUES (8, '超量程', NULL, NULL, NULL);
+INSERT INTO `equip_config` VALUES (9, '离线', NULL, NULL, NULL);
 INSERT INTO `equip_config` VALUES (10, '电池电量低', 1, 1, NULL);
+INSERT INTO `equip_config` VALUES (11, '控制器主电源故障', NULL, NULL, NULL);
+INSERT INTO `equip_config` VALUES (12, '控制器备电源故障', NULL, NULL, NULL);
+INSERT INTO `equip_config` VALUES (13, '控制器无此节点', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for equipment
 -- ----------------------------
 DROP TABLE IF EXISTS `equipment`;
 CREATE TABLE `equipment`  (
-  `id` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '设备ID',
+  `devid` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '设备ID',
   `devicename` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '名称',
   `status` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '状态',
-  `devicemodel` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '建筑模型',
+  `devicemodel` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '设备类型',
   `underbuild` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '所属建筑',
   `floorarea` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '楼层区域',
   `installlocation` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '安装位置',
@@ -337,33 +425,36 @@ CREATE TABLE `equipment`  (
   `devicestatus` int(2) DEFAULT NULL COMMENT '设备状态',
   `nettime` datetime(0) DEFAULT NULL COMMENT '入网时间',
   `dnameid` int(2) DEFAULT NULL COMMENT '设备名称的id',
+  `id` int(15) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `id`(`id`) USING BTREE,
-  INDEX `unique_id`(`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+  UNIQUE INDEX `id`(`devid`) USING BTREE,
+  INDEX `unique_id`(`devid`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of equipment
 -- ----------------------------
-INSERT INTO `equipment` VALUES ('860000000000800', '烟感', NULL, 'AS-34', '万达大楼D', 'F3', '3002', 1, 1, '2019-11-01 03:05:21', NULL);
-INSERT INTO `equipment` VALUES ('860000000000801', '烟感', NULL, 'AS-54', '中医院住院部', 'C区', '300', 1, 1, '2019-11-01 03:07:05', NULL);
-INSERT INTO `equipment` VALUES ('860000000000802', '水压表', NULL, 'S-34', '中医院住院部', 'C区', '2001', 1, 1, '2019-11-01 03:11:43', NULL);
-INSERT INTO `equipment` VALUES ('860000000000803', '燃气报警器', NULL, 'R-21', '万达大楼', 'F6', '6003', 1, 1, '2019-11-01 03:13:32', NULL);
-INSERT INTO `equipment` VALUES ('860000000000804', '燃气报警器', NULL, 'R-21', '万达大楼', 'F8', '8011', 1, 1, '2019-11-01 03:14:16', NULL);
-INSERT INTO `equipment` VALUES ('860000000000805', '水压表', NULL, 'S-21', '万达大楼D', 'F3', '3002', 1, 4, '2019-11-01 03:15:20', NULL);
-INSERT INTO `equipment` VALUES ('860000000000806', '烟感', NULL, 'AS-21', '万达大楼', 'F9', '9002', 1, 1, '2019-11-01 03:24:39', NULL);
-INSERT INTO `equipment` VALUES ('860000000000807', '烟感', NULL, 'AS-21', '万达大楼D', 'F5', '5100', 1, 1, '2019-11-01 03:25:29', NULL);
-INSERT INTO `equipment` VALUES ('860000000000808', '烟感', NULL, 'AS-21', '万达大楼', 'F3', '3022', 1, 1, '2019-11-01 03:26:29', NULL);
-INSERT INTO `equipment` VALUES ('860000000000809', '烟感', NULL, 'AS-21', '金鹰C', 'F5', '5008', 1, 1, '2019-11-01 03:27:16', NULL);
-INSERT INTO `equipment` VALUES ('860000000000811', '烟感', NULL, 'AS-52', '中医院住院部', 'C区', '3004', 1, 1, '2019-11-01 03:10:15', NULL);
-INSERT INTO `equipment` VALUES ('860000000000812', '烟感', NULL, 'AS-52', '中医院住院部', 'C区', '2004', 1, 10, '2019-11-01 03:08:58', NULL);
-INSERT INTO `equipment` VALUES ('860000000000866', '水压表', NULL, 'S-51', '万达大楼', 'F2', '203', 1, 1, '2019-10-31 16:48:25', NULL);
-INSERT INTO `equipment` VALUES ('860000000000867', '烟感', NULL, 'AS-3', '金鹰D', 'F6', '6012', 1, 1, '2019-11-01 03:01:27', NULL);
-INSERT INTO `equipment` VALUES ('860000000000868', '水压表', NULL, 'S-51', '金鹰D', 'F7', '7023', 1, 1, '2019-11-01 03:03:09', NULL);
-INSERT INTO `equipment` VALUES ('860000000000869', '水压表', NULL, 'S-51', '金鹰C', 'F2', '201', 1, 1, '2019-11-01 03:03:59', NULL);
-INSERT INTO `equipment` VALUES ('869029035531863', '烟感', NULL, 'GBSTY-UCZ09332', '辉煌国际', 'F-5', '5楼办公区', 1, 1, '2019-10-31 12:55:21', NULL);
-INSERT INTO `equipment` VALUES ('869029035531865', '烟感', NULL, 'AF-1', '万达大楼', 'F5', '1002', 1, 1, '2019-10-31 16:45:34', NULL);
-INSERT INTO `equipment` VALUES ('869029035531866', '烟感', NULL, 'AF-1', '万达大楼', 'F5', '1004', 1, 1, '2019-10-31 16:46:29', NULL);
+INSERT INTO `equipment` VALUES ('860000000000800', '烟感', NULL, 'AS-34', '万达大楼D', 'F3', '3002', 1, 1, '2019-11-01 03:05:21', NULL, 1);
+INSERT INTO `equipment` VALUES ('860000000000801', '烟感', NULL, 'AS-54', '中医院住院部', 'C区', '300', 1, 1, '2019-11-01 03:07:05', NULL, 2);
+INSERT INTO `equipment` VALUES ('860000000000802', '水压表', NULL, 'S-34', '中医院住院部', 'C区', '2001', 1, 1, '2019-11-01 03:11:43', NULL, 3);
+INSERT INTO `equipment` VALUES ('860000000000803', '燃气报警器', NULL, 'R-21', '万达大楼', 'F6', '6003', 1, 1, '2019-11-01 03:13:32', NULL, 4);
+INSERT INTO `equipment` VALUES ('860000000000804', '燃气报警器', NULL, 'R-21', '万达大楼', 'F8', '8011', 1, 1, '2019-11-01 03:14:16', NULL, 5);
+INSERT INTO `equipment` VALUES ('860000000000805', '水压表', NULL, 'S-21', '万达大楼D', 'F3', '3002', 1, 4, '2019-11-01 03:15:20', NULL, 6);
+INSERT INTO `equipment` VALUES ('860000000000806', '烟感', NULL, 'AS-21', '万达大楼', 'F9', '9002', 1, 1, '2019-11-01 03:24:39', NULL, 7);
+INSERT INTO `equipment` VALUES ('860000000000807', '烟感', NULL, 'AS-21', '万达大楼D', 'F5', '5100', 1, 1, '2019-11-01 03:25:29', NULL, 8);
+INSERT INTO `equipment` VALUES ('860000000000808', '烟感', NULL, 'AS-21', '万达大楼', 'F3', '3022', 1, 1, '2019-11-01 03:26:29', NULL, 9);
+INSERT INTO `equipment` VALUES ('860000000000809', '烟感', NULL, 'AS-21', '金鹰C', 'F5', '5008', 1, 1, '2019-11-01 03:27:16', NULL, 10);
+INSERT INTO `equipment` VALUES ('860000000000811', '烟感', NULL, 'AS-52', '中医院住院部', 'C区', '3004', 1, 1, '2019-11-01 03:10:15', NULL, 11);
+INSERT INTO `equipment` VALUES ('860000000000812', '烟感', NULL, 'AS-52', '中医院住院部', 'C区', '2004', 1, 10, '2019-11-01 03:08:58', NULL, 12);
+INSERT INTO `equipment` VALUES ('860000000000866', '水压表', NULL, 'S-51', '万达大楼', 'F2', '203', 1, 1, '2019-10-31 16:48:25', NULL, 13);
+INSERT INTO `equipment` VALUES ('860000000000867', '烟感', NULL, 'AS-3', '金鹰D', 'F6', '6012', 1, 1, '2019-11-01 03:01:27', NULL, 14);
+INSERT INTO `equipment` VALUES ('860000000000868', '水压表', NULL, 'S-51', '金鹰D', 'F7', '7023', 1, 1, '2019-11-01 03:03:09', NULL, 15);
+INSERT INTO `equipment` VALUES ('860000000000869', '水压表', NULL, 'S-51', '金鹰C', 'F2', '201', 1, 1, '2019-11-01 03:03:59', NULL, 16);
+INSERT INTO `equipment` VALUES ('869029035531863', '烟感', NULL, 'GBSTY-UCZ09332', '辉煌国际', 'F-5', '5楼办公区', 1, 1, '2019-10-31 12:55:21', NULL, 17);
+INSERT INTO `equipment` VALUES ('869029035531865', '烟感', NULL, 'AF-1', '万达大楼', 'F5', '1002', 1, 1, '2019-10-31 16:45:34', NULL, 18);
+INSERT INTO `equipment` VALUES ('869029035531866', '烟感', NULL, 'AF-1', '万达大楼', 'F5', '1004', 1, 1, '2019-10-31 16:46:29', NULL, 19);
+INSERT INTO `equipment` VALUES ('ZH1100010011', '测试', '0', 'AS-01', '测试地址', 'A1', '5502', 1, 7, '2019-11-07 17:08:04', 1111, 20);
+INSERT INTO `equipment` VALUES ('aaaaa', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 23);
 
 -- ----------------------------
 -- Table structure for sys_dept
@@ -408,7 +499,7 @@ CREATE TABLE `sys_loginfo`  (
   `loginip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `logintime` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 667 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 894 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_loginfo
@@ -1067,6 +1158,233 @@ INSERT INTO `sys_loginfo` VALUES (663, '超级管理员-system', '0:0:0:0:0:0:0:
 INSERT INTO `sys_loginfo` VALUES (664, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 09:45:00');
 INSERT INTO `sys_loginfo` VALUES (665, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 09:49:07');
 INSERT INTO `sys_loginfo` VALUES (666, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-06 09:58:23');
+INSERT INTO `sys_loginfo` VALUES (667, '超级管理员-system', '106.111.178.250', '2019-11-07 01:09:45');
+INSERT INTO `sys_loginfo` VALUES (668, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 01:43:57');
+INSERT INTO `sys_loginfo` VALUES (669, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 01:53:40');
+INSERT INTO `sys_loginfo` VALUES (670, '超级管理员-system', '218.92.211.174', '2019-11-07 02:13:41');
+INSERT INTO `sys_loginfo` VALUES (671, '超级管理员-system', '218.92.211.174', '2019-11-07 03:03:51');
+INSERT INTO `sys_loginfo` VALUES (672, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 11:55:19');
+INSERT INTO `sys_loginfo` VALUES (673, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 11:57:22');
+INSERT INTO `sys_loginfo` VALUES (674, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 12:14:53');
+INSERT INTO `sys_loginfo` VALUES (675, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 12:21:54');
+INSERT INTO `sys_loginfo` VALUES (676, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 12:23:25');
+INSERT INTO `sys_loginfo` VALUES (677, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 12:26:53');
+INSERT INTO `sys_loginfo` VALUES (678, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 12:32:06');
+INSERT INTO `sys_loginfo` VALUES (679, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 12:34:15');
+INSERT INTO `sys_loginfo` VALUES (680, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 12:37:09');
+INSERT INTO `sys_loginfo` VALUES (681, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 15:32:00');
+INSERT INTO `sys_loginfo` VALUES (682, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 15:41:20');
+INSERT INTO `sys_loginfo` VALUES (683, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 16:10:12');
+INSERT INTO `sys_loginfo` VALUES (684, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 16:14:32');
+INSERT INTO `sys_loginfo` VALUES (685, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 16:53:29');
+INSERT INTO `sys_loginfo` VALUES (686, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 17:10:10');
+INSERT INTO `sys_loginfo` VALUES (687, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 17:14:39');
+INSERT INTO `sys_loginfo` VALUES (688, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 17:17:28');
+INSERT INTO `sys_loginfo` VALUES (689, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 17:29:32');
+INSERT INTO `sys_loginfo` VALUES (690, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-07 17:32:08');
+INSERT INTO `sys_loginfo` VALUES (691, '超级管理员-system', '106.111.178.250', '2019-11-07 17:52:27');
+INSERT INTO `sys_loginfo` VALUES (692, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 02:49:28');
+INSERT INTO `sys_loginfo` VALUES (693, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 03:23:23');
+INSERT INTO `sys_loginfo` VALUES (694, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 04:40:34');
+INSERT INTO `sys_loginfo` VALUES (695, '超级管理员-system', '106.111.178.250', '2019-11-08 07:21:22');
+INSERT INTO `sys_loginfo` VALUES (696, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 10:41:16');
+INSERT INTO `sys_loginfo` VALUES (697, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 10:49:54');
+INSERT INTO `sys_loginfo` VALUES (698, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 11:13:31');
+INSERT INTO `sys_loginfo` VALUES (699, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 11:28:34');
+INSERT INTO `sys_loginfo` VALUES (700, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 11:30:31');
+INSERT INTO `sys_loginfo` VALUES (701, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 11:38:11');
+INSERT INTO `sys_loginfo` VALUES (702, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 11:43:07');
+INSERT INTO `sys_loginfo` VALUES (703, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 11:59:42');
+INSERT INTO `sys_loginfo` VALUES (704, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 12:00:57');
+INSERT INTO `sys_loginfo` VALUES (705, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 12:04:12');
+INSERT INTO `sys_loginfo` VALUES (706, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 12:07:41');
+INSERT INTO `sys_loginfo` VALUES (707, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 12:11:40');
+INSERT INTO `sys_loginfo` VALUES (708, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 12:12:02');
+INSERT INTO `sys_loginfo` VALUES (709, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 12:14:59');
+INSERT INTO `sys_loginfo` VALUES (710, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 12:32:20');
+INSERT INTO `sys_loginfo` VALUES (711, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 12:52:52');
+INSERT INTO `sys_loginfo` VALUES (712, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 13:03:53');
+INSERT INTO `sys_loginfo` VALUES (713, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 13:10:55');
+INSERT INTO `sys_loginfo` VALUES (714, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 13:21:48');
+INSERT INTO `sys_loginfo` VALUES (715, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 13:23:35');
+INSERT INTO `sys_loginfo` VALUES (716, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 13:24:29');
+INSERT INTO `sys_loginfo` VALUES (717, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 13:31:03');
+INSERT INTO `sys_loginfo` VALUES (718, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 13:33:08');
+INSERT INTO `sys_loginfo` VALUES (719, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 13:34:39');
+INSERT INTO `sys_loginfo` VALUES (720, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 13:38:29');
+INSERT INTO `sys_loginfo` VALUES (721, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 13:39:27');
+INSERT INTO `sys_loginfo` VALUES (722, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 13:40:56');
+INSERT INTO `sys_loginfo` VALUES (723, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 13:45:56');
+INSERT INTO `sys_loginfo` VALUES (724, '超级管理员-system', '218.92.211.174', '2019-11-08 13:49:17');
+INSERT INTO `sys_loginfo` VALUES (725, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 13:49:27');
+INSERT INTO `sys_loginfo` VALUES (726, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 13:55:20');
+INSERT INTO `sys_loginfo` VALUES (727, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 14:02:59');
+INSERT INTO `sys_loginfo` VALUES (728, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 14:21:05');
+INSERT INTO `sys_loginfo` VALUES (729, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 14:44:55');
+INSERT INTO `sys_loginfo` VALUES (730, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 14:45:51');
+INSERT INTO `sys_loginfo` VALUES (731, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 14:47:42');
+INSERT INTO `sys_loginfo` VALUES (732, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 15:02:24');
+INSERT INTO `sys_loginfo` VALUES (733, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-08 15:05:24');
+INSERT INTO `sys_loginfo` VALUES (734, '超级管理员-system', '106.111.178.250', '2019-11-09 07:41:35');
+INSERT INTO `sys_loginfo` VALUES (735, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-10 08:16:08');
+INSERT INTO `sys_loginfo` VALUES (736, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-10 09:17:57');
+INSERT INTO `sys_loginfo` VALUES (737, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 00:40:59');
+INSERT INTO `sys_loginfo` VALUES (738, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 00:48:38');
+INSERT INTO `sys_loginfo` VALUES (739, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 00:54:09');
+INSERT INTO `sys_loginfo` VALUES (740, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 00:54:59');
+INSERT INTO `sys_loginfo` VALUES (741, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 00:56:55');
+INSERT INTO `sys_loginfo` VALUES (742, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 00:59:19');
+INSERT INTO `sys_loginfo` VALUES (743, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 01:02:03');
+INSERT INTO `sys_loginfo` VALUES (744, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 02:01:25');
+INSERT INTO `sys_loginfo` VALUES (745, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 02:02:32');
+INSERT INTO `sys_loginfo` VALUES (746, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 02:27:24');
+INSERT INTO `sys_loginfo` VALUES (747, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 02:40:37');
+INSERT INTO `sys_loginfo` VALUES (748, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 02:51:27');
+INSERT INTO `sys_loginfo` VALUES (749, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 02:54:41');
+INSERT INTO `sys_loginfo` VALUES (750, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 03:42:38');
+INSERT INTO `sys_loginfo` VALUES (751, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 03:59:25');
+INSERT INTO `sys_loginfo` VALUES (752, '超级管理员-system', '117.136.66.242', '2019-11-11 07:23:58');
+INSERT INTO `sys_loginfo` VALUES (753, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 09:02:37');
+INSERT INTO `sys_loginfo` VALUES (754, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 09:05:14');
+INSERT INTO `sys_loginfo` VALUES (755, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 09:09:02');
+INSERT INTO `sys_loginfo` VALUES (756, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 09:23:44');
+INSERT INTO `sys_loginfo` VALUES (757, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 09:26:24');
+INSERT INTO `sys_loginfo` VALUES (758, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 09:28:53');
+INSERT INTO `sys_loginfo` VALUES (759, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 09:30:08');
+INSERT INTO `sys_loginfo` VALUES (760, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 09:46:40');
+INSERT INTO `sys_loginfo` VALUES (761, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 10:02:02');
+INSERT INTO `sys_loginfo` VALUES (762, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 10:02:48');
+INSERT INTO `sys_loginfo` VALUES (763, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 10:12:20');
+INSERT INTO `sys_loginfo` VALUES (764, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 10:16:25');
+INSERT INTO `sys_loginfo` VALUES (765, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 10:18:44');
+INSERT INTO `sys_loginfo` VALUES (766, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 10:20:33');
+INSERT INTO `sys_loginfo` VALUES (767, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 10:22:50');
+INSERT INTO `sys_loginfo` VALUES (768, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 10:31:35');
+INSERT INTO `sys_loginfo` VALUES (769, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 10:34:27');
+INSERT INTO `sys_loginfo` VALUES (770, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 10:39:43');
+INSERT INTO `sys_loginfo` VALUES (771, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 10:40:47');
+INSERT INTO `sys_loginfo` VALUES (772, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 10:43:14');
+INSERT INTO `sys_loginfo` VALUES (773, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 10:45:17');
+INSERT INTO `sys_loginfo` VALUES (774, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 10:49:28');
+INSERT INTO `sys_loginfo` VALUES (775, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 10:50:28');
+INSERT INTO `sys_loginfo` VALUES (776, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 10:53:00');
+INSERT INTO `sys_loginfo` VALUES (777, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 10:53:56');
+INSERT INTO `sys_loginfo` VALUES (778, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 10:54:32');
+INSERT INTO `sys_loginfo` VALUES (779, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 10:57:22');
+INSERT INTO `sys_loginfo` VALUES (780, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 11:03:58');
+INSERT INTO `sys_loginfo` VALUES (781, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 11:05:10');
+INSERT INTO `sys_loginfo` VALUES (782, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 11:08:19');
+INSERT INTO `sys_loginfo` VALUES (783, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 11:09:34');
+INSERT INTO `sys_loginfo` VALUES (784, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 11:13:30');
+INSERT INTO `sys_loginfo` VALUES (785, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 11:26:11');
+INSERT INTO `sys_loginfo` VALUES (786, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 11:31:55');
+INSERT INTO `sys_loginfo` VALUES (787, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 11:42:38');
+INSERT INTO `sys_loginfo` VALUES (788, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 11:51:13');
+INSERT INTO `sys_loginfo` VALUES (789, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 11:55:15');
+INSERT INTO `sys_loginfo` VALUES (790, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 11:59:44');
+INSERT INTO `sys_loginfo` VALUES (791, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 12:04:55');
+INSERT INTO `sys_loginfo` VALUES (792, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 12:17:31');
+INSERT INTO `sys_loginfo` VALUES (793, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 12:19:43');
+INSERT INTO `sys_loginfo` VALUES (794, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 12:23:59');
+INSERT INTO `sys_loginfo` VALUES (795, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 12:28:24');
+INSERT INTO `sys_loginfo` VALUES (796, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 12:46:15');
+INSERT INTO `sys_loginfo` VALUES (797, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 12:53:55');
+INSERT INTO `sys_loginfo` VALUES (798, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 12:57:42');
+INSERT INTO `sys_loginfo` VALUES (799, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 13:02:44');
+INSERT INTO `sys_loginfo` VALUES (800, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 13:03:09');
+INSERT INTO `sys_loginfo` VALUES (801, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 13:08:14');
+INSERT INTO `sys_loginfo` VALUES (802, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 13:20:22');
+INSERT INTO `sys_loginfo` VALUES (803, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 13:26:14');
+INSERT INTO `sys_loginfo` VALUES (804, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 13:31:03');
+INSERT INTO `sys_loginfo` VALUES (805, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 13:31:36');
+INSERT INTO `sys_loginfo` VALUES (806, '超级管理员-system', '127.0.0.1', '2019-11-11 13:42:15');
+INSERT INTO `sys_loginfo` VALUES (807, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 13:43:04');
+INSERT INTO `sys_loginfo` VALUES (808, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 13:47:20');
+INSERT INTO `sys_loginfo` VALUES (809, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 13:50:11');
+INSERT INTO `sys_loginfo` VALUES (810, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 13:53:36');
+INSERT INTO `sys_loginfo` VALUES (811, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 13:55:20');
+INSERT INTO `sys_loginfo` VALUES (812, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-11 13:58:59');
+INSERT INTO `sys_loginfo` VALUES (813, '超级管理员-system', '218.92.211.174', '2019-11-11 14:07:31');
+INSERT INTO `sys_loginfo` VALUES (814, '超级管理员-system', '218.92.211.174', '2019-11-11 14:08:59');
+INSERT INTO `sys_loginfo` VALUES (815, '超级管理员-system', '218.92.211.174', '2019-11-12 01:53:26');
+INSERT INTO `sys_loginfo` VALUES (816, '超级管理员-system', '218.92.211.174', '2019-11-12 02:31:42');
+INSERT INTO `sys_loginfo` VALUES (817, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 02:43:20');
+INSERT INTO `sys_loginfo` VALUES (818, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 03:22:51');
+INSERT INTO `sys_loginfo` VALUES (819, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 03:24:55');
+INSERT INTO `sys_loginfo` VALUES (820, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 03:51:43');
+INSERT INTO `sys_loginfo` VALUES (821, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 03:52:55');
+INSERT INTO `sys_loginfo` VALUES (822, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 04:49:17');
+INSERT INTO `sys_loginfo` VALUES (823, '超级管理员-system', '218.92.211.174', '2019-11-12 05:05:04');
+INSERT INTO `sys_loginfo` VALUES (824, '超级管理员-system', '218.92.211.174', '2019-11-12 05:06:57');
+INSERT INTO `sys_loginfo` VALUES (825, '超级管理员-system', '218.92.211.174', '2019-11-12 05:07:17');
+INSERT INTO `sys_loginfo` VALUES (826, '超级管理员-system', '218.92.211.174', '2019-11-12 05:13:45');
+INSERT INTO `sys_loginfo` VALUES (827, '超级管理员-system', '218.92.211.174', '2019-11-12 05:14:22');
+INSERT INTO `sys_loginfo` VALUES (828, '超级管理员-system', '218.92.211.174', '2019-11-12 05:19:25');
+INSERT INTO `sys_loginfo` VALUES (829, '超级管理员-system', '218.92.211.174', '2019-11-12 05:20:44');
+INSERT INTO `sys_loginfo` VALUES (830, '超级管理员-system', '218.92.211.174', '2019-11-12 05:26:07');
+INSERT INTO `sys_loginfo` VALUES (831, '超级管理员-system', '218.92.211.174', '2019-11-12 05:27:37');
+INSERT INTO `sys_loginfo` VALUES (832, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 05:33:54');
+INSERT INTO `sys_loginfo` VALUES (833, '超级管理员-system', '218.92.211.174', '2019-11-12 05:34:41');
+INSERT INTO `sys_loginfo` VALUES (834, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 05:36:08');
+INSERT INTO `sys_loginfo` VALUES (835, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 05:38:22');
+INSERT INTO `sys_loginfo` VALUES (836, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 05:40:08');
+INSERT INTO `sys_loginfo` VALUES (837, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 05:41:37');
+INSERT INTO `sys_loginfo` VALUES (838, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 05:45:15');
+INSERT INTO `sys_loginfo` VALUES (839, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 05:53:33');
+INSERT INTO `sys_loginfo` VALUES (840, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 05:58:03');
+INSERT INTO `sys_loginfo` VALUES (841, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 06:02:37');
+INSERT INTO `sys_loginfo` VALUES (842, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 06:09:43');
+INSERT INTO `sys_loginfo` VALUES (843, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 06:18:04');
+INSERT INTO `sys_loginfo` VALUES (844, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 06:24:55');
+INSERT INTO `sys_loginfo` VALUES (845, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 06:29:59');
+INSERT INTO `sys_loginfo` VALUES (846, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 06:33:46');
+INSERT INTO `sys_loginfo` VALUES (847, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 06:35:11');
+INSERT INTO `sys_loginfo` VALUES (848, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 06:36:55');
+INSERT INTO `sys_loginfo` VALUES (849, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 06:38:11');
+INSERT INTO `sys_loginfo` VALUES (850, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 06:41:53');
+INSERT INTO `sys_loginfo` VALUES (851, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 06:50:35');
+INSERT INTO `sys_loginfo` VALUES (852, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 06:52:32');
+INSERT INTO `sys_loginfo` VALUES (853, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 06:55:17');
+INSERT INTO `sys_loginfo` VALUES (854, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 07:13:04');
+INSERT INTO `sys_loginfo` VALUES (855, '超级管理员-system', '218.92.211.174', '2019-11-12 07:19:53');
+INSERT INTO `sys_loginfo` VALUES (856, '超级管理员-system', '218.92.211.174', '2019-11-12 07:36:49');
+INSERT INTO `sys_loginfo` VALUES (857, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 07:37:01');
+INSERT INTO `sys_loginfo` VALUES (858, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 07:39:47');
+INSERT INTO `sys_loginfo` VALUES (859, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 07:42:49');
+INSERT INTO `sys_loginfo` VALUES (860, '超级管理员-system', '218.92.211.174', '2019-11-12 07:43:45');
+INSERT INTO `sys_loginfo` VALUES (861, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 07:44:21');
+INSERT INTO `sys_loginfo` VALUES (862, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 07:45:29');
+INSERT INTO `sys_loginfo` VALUES (863, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 07:51:37');
+INSERT INTO `sys_loginfo` VALUES (864, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 07:54:00');
+INSERT INTO `sys_loginfo` VALUES (865, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 07:58:39');
+INSERT INTO `sys_loginfo` VALUES (866, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 07:59:25');
+INSERT INTO `sys_loginfo` VALUES (867, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 08:01:46');
+INSERT INTO `sys_loginfo` VALUES (868, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 08:02:49');
+INSERT INTO `sys_loginfo` VALUES (869, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 08:06:08');
+INSERT INTO `sys_loginfo` VALUES (870, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 08:11:32');
+INSERT INTO `sys_loginfo` VALUES (871, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 08:12:24');
+INSERT INTO `sys_loginfo` VALUES (872, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 08:14:35');
+INSERT INTO `sys_loginfo` VALUES (873, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 08:15:30');
+INSERT INTO `sys_loginfo` VALUES (874, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 08:16:13');
+INSERT INTO `sys_loginfo` VALUES (875, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 08:18:16');
+INSERT INTO `sys_loginfo` VALUES (876, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 08:23:43');
+INSERT INTO `sys_loginfo` VALUES (877, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 08:24:09');
+INSERT INTO `sys_loginfo` VALUES (878, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 08:26:30');
+INSERT INTO `sys_loginfo` VALUES (879, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 08:30:21');
+INSERT INTO `sys_loginfo` VALUES (880, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 08:32:52');
+INSERT INTO `sys_loginfo` VALUES (881, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 08:36:52');
+INSERT INTO `sys_loginfo` VALUES (882, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 08:49:11');
+INSERT INTO `sys_loginfo` VALUES (883, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 08:58:16');
+INSERT INTO `sys_loginfo` VALUES (884, '超级管理员-system', '218.92.211.174', '2019-11-12 09:07:55');
+INSERT INTO `sys_loginfo` VALUES (885, '超级管理员-system', '218.92.211.174', '2019-11-12 09:07:55');
+INSERT INTO `sys_loginfo` VALUES (886, '超级管理员-system', '218.92.211.174', '2019-11-12 09:12:14');
+INSERT INTO `sys_loginfo` VALUES (887, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 09:28:33');
+INSERT INTO `sys_loginfo` VALUES (888, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 09:30:32');
+INSERT INTO `sys_loginfo` VALUES (889, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 09:37:50');
+INSERT INTO `sys_loginfo` VALUES (890, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 09:48:56');
+INSERT INTO `sys_loginfo` VALUES (891, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 09:53:51');
+INSERT INTO `sys_loginfo` VALUES (892, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 09:56:36');
+INSERT INTO `sys_loginfo` VALUES (893, '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-12 10:01:48');
 
 -- ----------------------------
 -- Table structure for sys_notice
@@ -1106,7 +1424,7 @@ CREATE TABLE `sys_permission`  (
   `ordernum` int(11) DEFAULT NULL,
   `available` int(11) DEFAULT NULL COMMENT '状态【0不可用1可用】',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1020 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1022 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_permission
@@ -1165,6 +1483,7 @@ INSERT INTO `sys_permission` VALUES (1013, 1005, 'menu', '设备在线', NULL, '
 INSERT INTO `sys_permission` VALUES (1014, 1005, 'menu', '统计图', NULL, '&#xe60d;', '/api/getPage?pageName=statistical/totalAll', '', 0, 94, 1);
 INSERT INTO `sys_permission` VALUES (1018, 1001, 'menu', '设备信息', NULL, '&#xe665;', '/api/getPage?pageName=infomanager/equipmentInfo', '', 1, 95, 1);
 INSERT INTO `sys_permission` VALUES (1019, 1001, 'menu', '设备状态表', NULL, '&#xe62d;', '/api/getPage?pageName=equipment/equipconfig', '', 1, 96, 1);
+INSERT INTO `sys_permission` VALUES (1021, 1001, 'menu', '报警信息2', NULL, '&#xe655', '/api/getPage?pageName=infomanager/alarm', '', 0, 97, 1);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -1294,5 +1613,28 @@ INSERT INTO `sys_user` VALUES (5, '孙七', 'sq', '武汉', 1, '程序员', '47b
 INSERT INTO `sys_user` VALUES (6, '刘八', 'lb', '深圳', 1, '程序员', 'bcee2b05b4b591106829aec69a094806', 4, '2018-08-06 11:21:12', 3, 1, 6, 1, '../resources/images/defaultusertitle.jpg', 'E6CCF54A09894D998225878BBD139B20');
 INSERT INTO `sys_user` VALUES (11, '小小明', 'xiaoxiaoming', '测试1030', 1, '测试测试', '31cb29894e3e375ed94183c4ee1fd758', 4, '2019-10-30 08:57:35', NULL, 1, 7, 1, NULL, '90BD250277DB4DF384D6B13E9B030374');
 INSERT INTO `sys_user` VALUES (12, '嘻嘻嘻', 'xixixi', '是是是', 1, '是是是', '6658d0b361b441e6a05430755f905e65', 4, '2019-10-31 07:24:18', NULL, 1, 8, 1, NULL, 'C68613FE1BA849B4BCDCB0A5047A61BD');
+
+-- ----------------------------
+-- Triggers structure for table DEVINFO
+-- ----------------------------
+DROP TRIGGER IF EXISTS `Update_Equip_Status`;
+delimiter ;;
+CREATE DEFINER = `root`@`%` TRIGGER `Update_Equip_Status` AFTER INSERT ON `DEVINFO` FOR EACH ROW begin
+    UPDATE equipment set devicestatus=new.DEV_STATUS,nettime=now() where id=new.DEV_ID;
+end
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table dev_alerm
+-- ----------------------------
+DROP TRIGGER IF EXISTS `insert_InsdevAlerm_trigger`;
+delimiter ;;
+CREATE DEFINER = `root`@`%` TRIGGER `insert_InsdevAlerm_trigger` AFTER INSERT ON `dev_alerm` FOR EACH ROW BEGIN
+INSERT INTO firecloud.alert_processing (DEV_ID, DEV_STATUS,ISDEAL, ALARMTIME)
+VALUES (new.dev_id, new.dev_status, '0',new.net_date);
+END
+;;
+delimiter ;
 
 SET FOREIGN_KEY_CHECKS = 1;
