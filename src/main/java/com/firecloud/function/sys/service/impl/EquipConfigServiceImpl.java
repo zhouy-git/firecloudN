@@ -39,6 +39,12 @@ public class EquipConfigServiceImpl extends ServiceImpl<EquipConfigMapper, Equip
     }
 
     @Override
+    public EquipConfig getEquipConfigByDevId(String DevId) {
+
+        return this.getBaseMapper().getEquipConfigByDevId(DevId);
+    }
+
+    @Override
     @CachePut(cacheNames = "equipConfig", key = "#entity.sid")
     public EquipConfig updateEquipConfigById(EquipConfig entity) {
         EquipConfig equipConfig = new EquipConfig();

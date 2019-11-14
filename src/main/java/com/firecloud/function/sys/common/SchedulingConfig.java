@@ -48,10 +48,9 @@ public class SchedulingConfig {
         }
     }*/
     private String key = "resMap";
+    Map<String, Integer> map = new HashMap<>();
     @Scheduled(cron = "*/3 * * * * ?")
     public  void getTest() {
-        Map<String, Integer> map = new HashMap<>();
-        Map<String, Integer> redisMap;
         Integer bj = this.devAlermService.getAlermCount("");
         map.put("bj", bj);
         Integer gz = this.devAlermService.getAlermCount("gz");
@@ -62,7 +61,7 @@ public class SchedulingConfig {
         map.put("hj", hj);
         if (redisTemplate.hasKey(key)){
            HashOperations<String,String,Integer> ops =  redisTemplate.opsForHash();
-            redisMap = ops.entries(key);
+            Map<String, Integer> redisMap = ops.entries(key);
             if (map.get("hj") > redisMap.get("hj") || map.get("gz") > redisMap.get("gz")
                     || map.get("yc") > redisMap.get("yc")) {
                 WebSocketServer.sendInfo("1234",map.toString().replace("=",":"));
@@ -71,6 +70,7 @@ public class SchedulingConfig {
             }
         }else {
             redisTemplate.opsForHash().putAll(key,map);
+
         }
     }
 }

@@ -14,7 +14,10 @@ import java.io.Serializable;
  * @since 2019-10-31
  */
 public interface EquipConfigService extends IService<EquipConfig> {
-    EquipConfig getEquipConfigById(Serializable id);
+    EquipConfig getEquipConfigByDevId(String DevId);
+
     EquipConfig updateEquipConfigById(EquipConfig entity);
     EquipConfig saveEquipConfig(EquipConfig entity);
+
+    EquipConfig getEquipConfigById(Serializable id);
 }

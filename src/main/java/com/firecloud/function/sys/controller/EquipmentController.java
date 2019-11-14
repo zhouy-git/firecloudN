@@ -13,6 +13,7 @@ import com.firecloud.function.sys.domain.Equipment;
 import com.firecloud.function.sys.service.DevinfoService;
 import com.firecloud.function.sys.service.EquipConfigService;
 import com.firecloud.function.sys.service.EquipmentService;
+import com.firecloud.function.sys.vo.DevinfoVo;
 import com.firecloud.function.sys.vo.EquipmentVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -99,19 +100,27 @@ public class EquipmentController {
     }
     /**
      * 根据设备id查询相关数据
-     * @param id
+     * @param devId
      * @return
      */
     @RequestMapping("initDevByEqId")
-    public DataGridView initDevByEqId(String id) {
-       EquipmentVo equipmentVo = new EquipmentVo();
-       IPage<Devinfo> page = new Page<>(equipmentVo.getPage(),equipmentVo.getLimit());
+    public DataGridView initDevByEqId(String devId) {
+       DevinfoVo devinfoVo = new DevinfoVo();
+       IPage<Devinfo> page = new Page<>(devinfoVo.getPage(),devinfoVo.getLimit());
        QueryWrapper<Devinfo> queryWrapper = new QueryWrapper<>();
-       queryWrapper.lambda().eq(Devinfo::getDevId,id);
+       queryWrapper.lambda().eq(Devinfo::getDevId,devId);
        queryWrapper.lambda().orderByDesc(Devinfo::getDataDate);
 
        this.devinfoService.page(page, queryWrapper);
-       return new DataGridView(page.getTotal(), page.getRecords());
+        List<Devinfo> listDevIno = page.getRecords();
+        for (Devinfo devinfo : listDevIno) {
+            String sid = devinfo.getDevStatus();
+            EquipConfig equipConfig = this.equipConfig.getEquipConfigByDevId(sid);
+            if (equipConfig != null) {
+                devinfo.setDevstatusname(equipConfig.getStatusname());
+            }
+        }
+       return new DataGridView(page.getTotal(), listDevIno);
     }
     /**
      * 删除设备

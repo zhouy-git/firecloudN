@@ -19,4 +19,5 @@ public interface DevinfoService extends IService<Devinfo> {
     List<Integer> getIndexEcharDataByWM(List<String> param);
 
     List<Integer> getMainDataByMonth(List<String> param);
+
 }

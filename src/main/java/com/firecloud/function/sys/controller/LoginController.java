@@ -49,7 +49,7 @@ public class LoginController {
             //将User放入session中
             WebUtils.getSession().setAttribute("user", activerUser.getUser());
 
-            Map<String, Integer> map = new HashMap<>();
+           /* Map<String, Integer> map = new HashMap<>();
             Integer bj = this.devAlermService.getAlermCount("");
             map.put("bj", bj);
             Integer gz = this.devAlermService.getAlermCount("gz");
@@ -60,7 +60,7 @@ public class LoginController {
             map.put("hj", hj);
             //将数据放入首页
             WebUtils.getSession().setAttribute("map",map);
-
+*/
             //记录登录日志
             Loginfo loginfo = new Loginfo();
             loginfo.setLoginname(activerUser.getUser().getName() +"-"+ activerUser.getUser().getLoginname());

@@ -123,13 +123,13 @@
             }]
             ,title: '设备数据表'
             ,cols: [ [
-                {type: 'checkbox', fixed: 'left'}
-                ,{field:'id', title:'ID', fixed: 'left',sort: true}
-                ,{field:'devId', title:'ID', fixed: 'left',sort: true}
-                ,{field:'statusName', title:'状态', align:'center'}
-                ,{field:'signalDes', title:'信号强度', align:'center'}
-                ,{field:'netId', title:'网络频点', align:'center'}
-                ,{field:'devDesPer', title:'设备浓度', align:'center'}
+                {type: 'checkbox', fixed: 'left',width:'80'}
+                ,{field:'id', title:'ID', fixed: 'left',sort: true,width:'200'}
+                ,{field:'devId', title:'ID', fixed: 'left',sort: true,width:'120'}
+                ,{field:'statusName', title:'状态', align:'center',width:'80'}
+                ,{field:'signalDes', title:'信号强度', align:'center',width:'80'}
+                ,{field:'netId', title:'网络频点', align:'center',width:'80'}
+                ,{field:'devDesPer', title:'设备浓度', align:'center',width:'80'}
                 ,{field:'netDate', title:'报警时间', align:'center',width:'200'}
                 ,{fixed: 'right', title:'操作', toolbar: '#DevAlarmRowBar', align:'center'}
             ] ]

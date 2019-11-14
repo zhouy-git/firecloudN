@@ -118,14 +118,14 @@
                 [
                     {checkbox: 'true'}
                     ,{field:'id', title: '序号', sort: true}
-                    ,{field:'devId', title: '设备ID'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                    ,{field:'devId', title: '设备ID',width: 185} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
                     ,{field:'devName', title: '设备名称',align: 'center'}
-                    ,{field:'devStatus', title: '设备状态', align: 'center'}
+                    ,{field:'statusName', title: '设备状态', align: 'center'}
                     ,{field:'unitType', title: '设备型号', align: 'center'}
                     ,{field:'location', title: '安装位置', align: 'center'} //单元格内容水平居中
                     ,{field:'underbuilding', title: '所属建筑',align: 'center'} //单元格内容水平居中
                     ,{field:'floorarea', title:'楼层区域',align: 'center'}
-                    ,{field:'alarmtime', title: '报警时间',  align: 'center',width:200}
+                    ,{field:'alarmtime', title: '报警时间',  align: 'center',width:170}
                     //,{field:'alarmcontent', title: '报警内容',  align: 'center'}
                     ,{field:'isdeal', title: '是否已处理',  align: 'center',templet:function(d){
                         return d.sex==1?'<span class="layui-btn-normal layui-btn-xs">已处理</span>':'<span class="layui-btn-danger layui-btn-xs">未处理</span>';

@@ -15,7 +15,7 @@
                 在线设备统计
             </blockquote>
             <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-            <div id="main" style="width: 50%;height:300px;"></div>
+            <div id="main" style="width: 100%;height:300px;"></div>
             <blockquote class="layui-elem-quote">
                 设备在线数据表
             </blockquote>
@@ -26,70 +26,43 @@
         var myChart = echarts.init(document.getElementById('main'));
         // 指定图表的配置项和数据
         option = {
-            backgroundColor: '#2c343c',
+            backgroundColor: '#DBDBDB',
 
-            title: {
-                text: '设备在线统计',
-                left: 'center',
-                top: 20,
-                textStyle: {
-                    color: '#ccc'
-                }
-            },
-
+            color: ['#3398DB'],
             tooltip : {
-                trigger: 'item',
-                formatter: "{a} <br/>{b} : {c} ({d}%)"
-            },
-
-            visualMap: {
-                show: false,
-                min: 80,
-                max: 600,
-                inRange: {
-                    colorLightness: [0, 1]
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
                 }
             },
-            series : [
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis : [
                 {
-                    name:'设备',
-                    type:'pie',
-                    radius : '55%',
-                    center: ['50%', '50%'],
-                    data:[
-                        {value:335, name:'在线设备'},
-                        {value:310, name:'未在线设备'},
-                        {value:274, name:'设备总计'},
-                        {value:235, name:'故障设备'},
-                        {value:400, name:'维修修设备'}
-                    ].sort(function (a, b) { return a.value - b.value}),
-                    roseType: 'angle',
-                    label: {
-                        normal: {
-                            textStyle: {
-                                color: 'rgba(255, 255, 255, 0.3)'
-                            }
-                        }
-                    },
-                    labelLine: {
-                        normal: {
-                            lineStyle: {
-                                color: 'rgba(255, 255, 255, 0.3)'
-                            },
-                            smooth: 0.2,
-                            length: 10,
-                            length2: 20
-                        }
-                    },
-                    itemStyle: {
-                        normal: {
-                            color: '#c23531',
-                            shadowBlur: 200,
-                            shadowColor: 'rgba(0, 0, 0, 0.5)'
-                        }
+                    type : 'category',
+                    data : ['总设备数', '在线设备数', '离线设备数', '故障设备数'],
+                    axisTick: {
+                        alignWithLabel: true
                     }
                 }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    type:'bar',
+                    barWidth: '60%',
+                    data:[10, 12, 15, 33]
+                }
             ]
+
         };
 
 

@@ -21,10 +21,11 @@
 </head>
 <body>
     <div class="c1">
+        <p th:text="${#request.getAttribute('map')}" type="hidden">
         <div class="c1-middle-box">
             <div class="m-d1" style="background-color: rgb(0, 0, 255);">
                 <div id="bj_total" class="lef-name-res">
-                    <p id="bjTotal" th:text="${session.map['bj']}">
+                    <p id="bjTotal" th:text="${bj}">
                         <span class="name">个</span>
                     </p>
                     <span class="name">
@@ -38,7 +39,7 @@
 
             <div id="fire" class="m-d1" style="background-color: rgb(187, 0, 0);">
                 <div class="lef-name-res">
-                    <p id="fireTotal" th:text="${session.map['hj']}">
+                    <p id="fireTotal" th:text="${hj}">
                         <span class="name">个</span>
                     </p>
                     <span class="name">
@@ -51,7 +52,7 @@
             </div>
                 <div id="yc" class="m-d1" style="background-color: #4E72DA;">
                     <div class="lef-name-res">
-                        <p id="ycTotal" th:text="${session.map['yc']}">
+                        <p id="ycTotal" th:text="${yc}">
                             <span class="name">个</span>
                         </p>
                         <span class="name">
@@ -62,9 +63,9 @@
                         <img th:src="@{/resources/images/index/yc.png}" alt="">
                     </div>
                 </div>
-                <div id="gz" class="m-d1" style="background-color: #FFFF00;">
+                <div id="gz" class="m-d1" style="background-color: #FFB800">
                     <div class="lef-name-res">
-                        <p id="gzTotal" th:text="${session.map['gz']}">
+                        <p id="gzTotal" th:text="${gz}">
                             <span class="name">个</span>
                         </p>
                         <span class="name">
@@ -173,6 +174,7 @@
     </div>
 
     <div class="div4">
+
         <div class="div4-pc">
             <!--<div class="top-pic">
                 <div class="top-pic-left">

@@ -20,6 +20,19 @@ layui.use(['element','jquery', 'layer'], function() {
 
     $(document).ready(function() {
 
+        //首页报警数据
+        $.ajax({
+            url: "/main/mainMapRes",
+            type: "post",
+            data: {},
+            success : function (data) {
+                $("#bjTotal").text(data.bj);
+                $("#fireTotal").text(data.hj);
+                $('#ycTotal').text(data.yc);
+                $('#gzTotal').text(data.gz);
+            }
+        });
+
         //获取近一周的统计图
         $.ajax({
             url: "/main/week",

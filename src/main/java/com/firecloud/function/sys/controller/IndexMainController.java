@@ -4,13 +4,15 @@ import com.firecloud.function.sys.common.DataGridView;
 import com.firecloud.function.sys.common.WebUtils;
 import com.firecloud.function.sys.service.DevAlermService;
 import com.firecloud.function.sys.service.DevinfoService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.*;
 
-
+@Slf4j
 @RestController
 @RequestMapping("main")
 public class IndexMainController {
@@ -37,7 +39,6 @@ public class IndexMainController {
         return new DataGridView(map);
     }
 
-
     @RequestMapping("month")
     public DataGridView getmonth() {
         Map<String, Object> map = new HashMap<>();
@@ -48,10 +49,21 @@ public class IndexMainController {
         map.put("data", datas);
         return new DataGridView(map);
     }
-    @RequestMapping("mainMap")
-    public String mainMap(ModelMap modelMap) {
 
-      return "system/index/main";
+    @RequestMapping("mainMapRes")
+    public Map mainMapRes() {
+        Map<String, Integer> map = new HashMap<>();
+        Integer bj = this.devAlermService.getAlermCount("");
+        map.put("bj", bj);
+        Integer gz = this.devAlermService.getAlermCount("gz");
+        map.put("gz", gz);
+        Integer yc = this.devAlermService.getAlermCount("yc");
+        map.put("yc", yc);
+        Integer hj = this.devAlermService.getAlermCount("fire");
+        map.put("hj", hj);
+        //将数据放入首页
+        WebUtils.getSession().setAttribute("map",map);
+      return map;
     }
 
 }

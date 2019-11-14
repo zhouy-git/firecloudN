@@ -29,7 +29,7 @@ spring:
         url-pattern: /druid/*
   #thymeleaf的配置
   thymeleaf:
-    cache: true
+    cache: false
     enabled: true
     mode: LEGACYHTML5
     #      web-stat-filter:
@@ -57,7 +57,7 @@ spring:
         max-idle: 8
         min-idle: 0
         max-wait: -1ms
-    timeout: 5000ms
+    timeout: 5000s
 
 #配置mybatisplus
 mybatis-plus:
