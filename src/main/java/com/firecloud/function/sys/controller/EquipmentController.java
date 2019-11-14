@@ -19,10 +19,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
@@ -44,29 +47,31 @@ public class EquipmentController {
     private DevinfoService devinfoService;
     @Autowired
     private EquipConfigService equipConfig;
+
     @RequestMapping("loadAllEquipment")
     public DataGridView loadAllEquipment(EquipmentVo equipmentVo) {
-        Page<Equipment> page = new Page<>(equipmentVo.getPage(), equipmentVo.getLimit());
-        QueryWrapper<Equipment> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().like(StringUtils.isNoneBlank(equipmentVo.getDevid()), Equipment::getDevid, equipmentVo.getDevid());
-        queryWrapper.lambda().like(StringUtils.isNoneBlank(equipmentVo.getDevicename()), Equipment::getDevicename, equipmentVo.getDevicename());
-        queryWrapper.lambda().like(StringUtils.isNoneBlank(equipmentVo.getUnderbuild()), Equipment::getUnderbuild, equipmentVo.getUnderbuild());
-        queryWrapper.lambda().like(StringUtils.isNoneBlank(equipmentVo.getFloorarea()), Equipment::getFloorarea, equipmentVo.getFloorarea());
-        //大于创建时间
-        queryWrapper.ge(equipmentVo.getNettime()!=null, "nettime", equipmentVo.getNettime()!=null);
-        //小于创建时间
-        queryWrapper.le(equipmentVo.getNettime()!=null, "nettime", equipmentVo.getNettime()!=null);
-        queryWrapper.orderByDesc("nettime");
-        this.equipmentService.page(page, queryWrapper);
-        List<Equipment> equipmentList = page.getRecords();
-        for (Equipment equipment: equipmentList) {
-            Integer statusId = equipment.getDevicestatus();
-            EquipConfig equipConfig = this.equipConfig.getById(statusId);
-            if (equipConfig !=null) {
-                equipment.setStatusName(equipConfig.getStatusname());
+        List<Equipment> equipmentList;
+            Page<Equipment> page = new Page<>(equipmentVo.getPage(), equipmentVo.getLimit());
+            QueryWrapper<Equipment> queryWrapper = new QueryWrapper<>();
+            queryWrapper.lambda().like(StringUtils.isNoneBlank(equipmentVo.getDevid()), Equipment::getDevid, equipmentVo.getDevid());
+            queryWrapper.lambda().like(StringUtils.isNoneBlank(equipmentVo.getDevicename()), Equipment::getDevicename, equipmentVo.getDevicename());
+            queryWrapper.lambda().like(StringUtils.isNoneBlank(equipmentVo.getUnderbuild()), Equipment::getUnderbuild, equipmentVo.getUnderbuild());
+            queryWrapper.lambda().like(StringUtils.isNoneBlank(equipmentVo.getFloorarea()), Equipment::getFloorarea, equipmentVo.getFloorarea());
+            //大于创建时间
+            queryWrapper.ge(equipmentVo.getNettime()!=null, "nettime", equipmentVo.getNettime()!=null);
+            //小于创建时间
+            queryWrapper.le(equipmentVo.getNettime()!=null, "nettime", equipmentVo.getNettime()!=null);
+            queryWrapper.orderByDesc("nettime");
+            this.equipmentService.page(page, queryWrapper);
+            equipmentList = page.getRecords();
+            for (Equipment equipment: equipmentList) {
+                Integer statusId = equipment.getDevicestatus();
+                EquipConfig equipConfig = this.equipConfig.getById(statusId);
+                if (equipConfig !=null) {
+                    equipment.setStatusName(equipConfig.getStatusname());
+                }
             }
-        }
-        return new DataGridView(page.getTotal(), equipmentList);
+             return new DataGridView(page.getTotal(), equipmentList);
     }
 
     /**
@@ -85,6 +90,7 @@ public class EquipmentController {
             equipmentVo.setStatus(Constast.NORMARL);
             equipmentVo.setNettime(new Date());
             this.equipmentService.saveEquipment(equipmentVo);
+
             return  ResultObj.ADD_SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
@@ -103,6 +109,7 @@ public class EquipmentController {
        QueryWrapper<Devinfo> queryWrapper = new QueryWrapper<>();
        queryWrapper.lambda().eq(Devinfo::getDevId,id);
        queryWrapper.lambda().orderByDesc(Devinfo::getDataDate);
+
        this.devinfoService.page(page, queryWrapper);
        return new DataGridView(page.getTotal(), page.getRecords());
     }

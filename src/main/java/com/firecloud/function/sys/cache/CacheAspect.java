@@ -20,9 +20,9 @@ import java.util.Map;
 @EnableAspectJAutoProxy
 public class CacheAspect {
 
-    /**
+   /* *//**
      * 日志出处
-     */
+     *//*
     private Log log = LogFactory.getLog(CacheAspect.class);
 
     // 声明一个缓存容器
@@ -36,11 +36,11 @@ public class CacheAspect {
 
     private static final String CACHE_DEPT_PROFIX = "dept:";
 
-    /**
+    *//**
      * 部门添加切入
      *
      * @throws Throwable
-     */
+     *//*
     @Around(value = POINTCUT_DEPT_ADD)
     public Object cacheDeptAdd(ProceedingJoinPoint joinPoint) throws Throwable {
         // 取出第一个参数
@@ -52,11 +52,11 @@ public class CacheAspect {
         return res;
     }
 
-    /**
+    *//**
      * 查询切入
      *
      * @throws Throwable
-     */
+     *//*
     @Around(value = POINTCUT_DEPT_GET)
     public Object cacheDeptGet(ProceedingJoinPoint joinPoint) throws Throwable {
         // 取出第一个参数
@@ -74,11 +74,11 @@ public class CacheAspect {
         }
     }
 
-    /**
+    *//**
      * 更新切入
      *
      * @throws Throwable
-     */
+     *//*
     @Around(value = POINTCUT_DEPT_UPDATE)
     public Object cacheDeptUpdate(ProceedingJoinPoint joinPoint) throws Throwable {
         // 取出第一个参数
@@ -96,11 +96,11 @@ public class CacheAspect {
         return isSuccess;
     }
 
-    /**
+    *//**
      * 删除切入
      *
      * @throws Throwable
-     */
+     *//*
     @Around(value = POINTCUT_DEPT_DELETE)
     public Object cacheDeptDelete(ProceedingJoinPoint joinPoint) throws Throwable {
         // 取出第一个参数
@@ -122,11 +122,11 @@ public class CacheAspect {
 
     private static final String CACHE_USER_PROFIX = "user:";
 
-    /**
+    *//**
      * 用户添加切入
      *
      * @throws Throwable
-     */
+     *//*
     @Around(value = POINTCUT_USER_ADD)
     public Object cacheUserAdd(ProceedingJoinPoint joinPoint) throws Throwable {
         // 取出第一个参数
@@ -138,11 +138,11 @@ public class CacheAspect {
         return res;
     }
 
-    /**
+    *//**
      * 查询切入
      *
      * @throws Throwable
-     */
+     *//*
     @Around(value = POINTCUT_USER_GET)
     public Object cacheUserGet(ProceedingJoinPoint joinPoint) throws Throwable {
         // 取出第一个参数
@@ -160,11 +160,11 @@ public class CacheAspect {
         }
     }
 
-    /**
+    *//**
      * 更新切入
      *
      * @throws Throwable
-     */
+     *//*
     @Around(value = POINTCUT_USER_UPDATE)
     public Object cacheUserUpdate(ProceedingJoinPoint joinPoint) throws Throwable {
         // 取出第一个参数
@@ -182,11 +182,11 @@ public class CacheAspect {
         return isSuccess;
     }
 
-    /**
+    *//**
      * 删除切入
      *
      * @throws Throwable
-     */
+     *//*
     @Around(value = POINTCUT_USER_DELETE)
     public Object cacheUserDelete(ProceedingJoinPoint joinPoint) throws Throwable {
         // 取出第一个参数
@@ -199,5 +199,5 @@ public class CacheAspect {
         }
         return isSuccess;
     }
-
+*/
 }

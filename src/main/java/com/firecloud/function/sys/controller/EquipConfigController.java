@@ -12,9 +12,14 @@ import com.firecloud.function.sys.service.EquipConfigService;
 import com.firecloud.function.sys.vo.EquipConfigVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -27,25 +32,32 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("equipconfig")
 public class EquipConfigController {
-
-
     @Autowired
     private EquipConfigService equipService;
-
+    @Resource
+    private RedisTemplate redisTemplate;
+    private String key = "AllEquiConfig";
     @RequestMapping("loadAllequipconfig")
     public DataGridView loadAllequipconfig(EquipConfigVo equipConfigVo) {
-
-        IPage<EquipConfig> page = new Page<>(equipConfigVo.getPage(), equipConfigVo.getLimit());
+        ListOperations<String,EquipConfig> operations = redisTemplate.opsForList();
         QueryWrapper<EquipConfig> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().like(equipConfigVo.getSid()!=null, EquipConfig::getSid, equipConfigVo.getSid());
-        queryWrapper.lambda().like(StringUtils.isNoneBlank(equipConfigVo.getStatusname()), EquipConfig::getStatusname, equipConfigVo.getStatusname());
-        
-        queryWrapper.orderByAsc("sid");
-
-        this.equipService.page(page, queryWrapper);
-
-        return new DataGridView(page.getTotal(), page.getRecords());
-
+        if (equipConfigVo.getSid() != null || equipConfigVo.getStatusname() != null) {
+            IPage<EquipConfig> page = new Page<>(equipConfigVo.getPage(), equipConfigVo.getLimit());
+            queryWrapper.lambda().like(equipConfigVo.getSid()!=null, EquipConfig::getSid, equipConfigVo.getSid());
+            queryWrapper.lambda().like(StringUtils.isNoneBlank(equipConfigVo.getStatusname()), EquipConfig::getStatusname, equipConfigVo.getStatusname());
+            queryWrapper.orderByAsc("sid");
+            this.equipService.page(page, queryWrapper);
+            return new DataGridView(page.getTotal(), page.getRecords());
+        }else {
+            List<EquipConfig> equipConfigList;
+            if (redisTemplate.hasKey(key)) {
+                equipConfigList = operations.range(key, 0, -1);
+            }else {
+                equipConfigList = this.equipService.list();
+                operations.leftPushAll(key, equipConfigList);
+            }
+            return new DataGridView(equipConfigList);
+        }
     }
 
 
@@ -53,6 +65,7 @@ public class EquipConfigController {
     public ResultObj addequipconfig(EquipConfigVo equipConfigVo) {
         try {
             this.equipService.saveEquipConfig(equipConfigVo);
+            redisTemplate.delete(key);
             return ResultObj.ADD_SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,6 +77,7 @@ public class EquipConfigController {
     public ResultObj updateEquipconfig(EquipConfigVo equipConfigVo) {
         try {
             this.equipService.updateEquipConfigById(equipConfigVo);
+            redisTemplate.delete(key);
             return ResultObj.UPDATE_SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();

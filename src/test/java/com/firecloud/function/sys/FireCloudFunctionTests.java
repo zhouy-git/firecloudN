@@ -18,6 +18,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import redis.clients.jedis.Jedis;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 
@@ -26,7 +27,7 @@ import java.util.List;
 @Slf4j
 public class FireCloudFunctionTests {
 
-   @Autowired
+   @Resource
    private RedisTemplate redisTemplate;
 
    @Autowired
@@ -38,6 +39,7 @@ public class FireCloudFunctionTests {
         String key = "key_menu" ;
 
         ListOperations<String, Permission> operations = redisTemplate.opsForList();
+
         if (redisTemplate.hasKey(key)) {
             List<Permission> permissionList = operations.range(key, 0, -1);
             for (Permission p : permissionList) {

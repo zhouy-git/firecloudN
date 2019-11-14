@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2019-11-07
  */
 public interface DevAlermService extends IService<DevAlerm> {
-
+    Integer getAlermCount(String type);
 }

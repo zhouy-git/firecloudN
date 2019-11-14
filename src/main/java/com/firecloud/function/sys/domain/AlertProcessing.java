@@ -109,4 +109,7 @@ public class AlertProcessing implements Serializable {
 
     @TableField("DEAFULT")
     private String deafult;
+
+    @TableField(exist = false)
+    private String statusName;
 }

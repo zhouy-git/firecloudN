@@ -27,9 +27,6 @@ public class UserRealm extends AuthorizingRealm {
         return this.getClass().getSimpleName();
     }
 
-
-
-
     /**
      * 认证
      * @param token

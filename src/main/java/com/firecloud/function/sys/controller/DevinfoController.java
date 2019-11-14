@@ -16,10 +16,12 @@ import com.firecloud.function.sys.vo.LoginfoVo;
 import com.firecloud.function.sys.vo.DevinfoVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,11 +46,9 @@ public class DevinfoController {
 
     @RequestMapping("loadAllDevinfo")
     public DataGridView loadAllDevinfo(DevinfoVo devinfoVo) {
-
         IPage<Devinfo> page = new Page<>(devinfoVo.getPage(), devinfoVo.getLimit());
         QueryWrapper<Devinfo> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().like(StringUtils.isNoneBlank(devinfoVo.getDevId()), Devinfo::getDevId, devinfoVo.getDevId());
-
         queryWrapper.lambda().like(StringUtils.isNoneBlank(devinfoVo.getDevStatus()), Devinfo::getDevStatus, devinfoVo.getDevStatus());
         //大于创建时间
         queryWrapper.lambda().ge(devinfoVo.getDataDate()!=null, Devinfo::getDataDate, devinfoVo.getDataDate());
@@ -56,9 +56,7 @@ public class DevinfoController {
         queryWrapper.lambda().le(devinfoVo.getDataDate()!=null, Devinfo::getDataDate, devinfoVo.getDataDate());
         queryWrapper.orderByDesc("DATA_DATE");
         this.noticeService.page(page, queryWrapper);
-
         List<Devinfo> devinfoList = page.getRecords();
-
         for (Devinfo devinfo : devinfoList) {
             Integer id = Integer.parseInt(devinfo.getDevStatus()) ;
             EquipConfig equipConfig = this.equipConfigService.getById(id);
@@ -66,7 +64,6 @@ public class DevinfoController {
                 devinfo.setDevstatusname(equipConfig.getStatusname());
             }
         }
-
         return new DataGridView(page.getTotal(), devinfoList);
     }
 

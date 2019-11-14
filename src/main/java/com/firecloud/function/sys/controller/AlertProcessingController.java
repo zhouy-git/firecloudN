@@ -6,18 +6,18 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.firecloud.function.sys.common.Constast;
 import com.firecloud.function.sys.common.DataGridView;
-import com.firecloud.function.sys.common.WebSocketServer;
 import com.firecloud.function.sys.domain.AlertProcessing;
+import com.firecloud.function.sys.domain.EquipConfig;
 import com.firecloud.function.sys.domain.Equipment;
 import com.firecloud.function.sys.service.AlertProcessingService;
+import com.firecloud.function.sys.service.EquipConfigService;
 import com.firecloud.function.sys.service.EquipmentService;
 import com.firecloud.function.sys.vo.AlertProcessingVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.IOException;
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -37,6 +37,10 @@ public class AlertProcessingController {
     @Autowired
     private EquipmentService equipmentService;
 
+    @Autowired
+    private EquipConfigService equipConfigService;
+
+
     @RequestMapping("getFireAllInfo")
     public DataGridView getFireAllInfo(AlertProcessingVo alertProcessingVo) {
         IPage<AlertProcessing> page = new Page<>(alertProcessingVo.getPage(), alertProcessingVo.getLimit());
@@ -46,9 +50,11 @@ public class AlertProcessingController {
         this.alertProService.page(page, queryWrapper);
         List<AlertProcessing> lists = page.getRecords();
         for (AlertProcessing list : lists) {
-            if (list.getDevName() == null && list.getFloorarea()==null){
+            if (list.getDevName() == null || list.getStatusName()==null){
+                String statusId = list.getDevStatus();
                 String DEVID =list.getDevId();
                 Equipment equipment = this.equipmentService.getEquipmentByDevId(DEVID);
+                EquipConfig equipConfig = this.equipConfigService.getById(statusId);
                 if (equipment != null) {
                     list.setDevName(equipment.getDevicename());
                     list.setUnitType(equipment.getDevicemodel());
@@ -56,6 +62,7 @@ public class AlertProcessingController {
                     list.setUnderbuilding(equipment.getUnderbuild());
                     list.setFloorarea(equipment.getFloorarea());
                     list.setAlreamType("火警");
+                    list.setStatusName(equipConfig.getStatusname());
                     this.alertProService.updateById(list);
                 }
             }
@@ -72,16 +79,21 @@ public class AlertProcessingController {
         this.alertProService.page(page, queryWrapper);
         List<AlertProcessing> lists = page.getRecords();
         for (AlertProcessing list : lists) {
-            String DEVID =list.getDevId();
-            Equipment equipment = this.equipmentService.getEquipmentByDevId(DEVID);
-            if (equipment != null) {
-                list.setDevName(equipment.getDevicename());
-                list.setUnitType(equipment.getDevicemodel());
-                list.setLocation(equipment.getInstalllocation());
-                list.setUnderbuilding(equipment.getUnderbuild());
-                list.setFloorarea(equipment.getFloorarea());
-                list.setAlreamType("故障");
-                this.alertProService.updateById(list);
+            if (list.getDevName() == null || list.getStatusName()==null){
+                String statusId = list.getDevStatus();
+                String DEVID =list.getDevId();
+                Equipment equipment = this.equipmentService.getEquipmentByDevId(DEVID);
+                EquipConfig equipConfig = this.equipConfigService.getById(statusId);
+                if (equipment != null) {
+                    list.setDevName(equipment.getDevicename());
+                    list.setUnitType(equipment.getDevicemodel());
+                    list.setLocation(equipment.getInstalllocation());
+                    list.setUnderbuilding(equipment.getUnderbuild());
+                    list.setFloorarea(equipment.getFloorarea());
+                    list.setAlreamType("火警");
+                    list.setStatusName(equipConfig.getStatusname());
+                    this.alertProService.updateById(list);
+                }
             }
         }
         return new DataGridView(page.getTotal(), page.getRecords());
@@ -96,16 +108,21 @@ public class AlertProcessingController {
         this.alertProService.page(page, queryWrapper);
         List<AlertProcessing> lists = page.getRecords();
         for (AlertProcessing list : lists) {
-            String DEVID =list.getDevId();
-            Equipment equipment = this.equipmentService.getEquipmentByDevId(DEVID);
-            if (equipment != null) {
-                list.setDevName(equipment.getDevicename());
-                list.setUnitType(equipment.getDevicemodel());
-                list.setLocation(equipment.getInstalllocation());
-                list.setUnderbuilding(equipment.getUnderbuild());
-                list.setFloorarea(equipment.getFloorarea());
-                list.setAlreamType("异常");
-                this.alertProService.updateById(list);
+            if (list.getDevName() == null || list.getStatusName()==null){
+                String statusId = list.getDevStatus();
+                String DEVID =list.getDevId();
+                Equipment equipment = this.equipmentService.getEquipmentByDevId(DEVID);
+                EquipConfig equipConfig = this.equipConfigService.getById(statusId);
+                if (equipment != null) {
+                    list.setDevName(equipment.getDevicename());
+                    list.setUnitType(equipment.getDevicemodel());
+                    list.setLocation(equipment.getInstalllocation());
+                    list.setUnderbuilding(equipment.getUnderbuild());
+                    list.setFloorarea(equipment.getFloorarea());
+                    list.setAlreamType("火警");
+                    list.setStatusName(equipConfig.getStatusname());
+                    this.alertProService.updateById(list);
+                }
             }
         }
         return new DataGridView(page.getTotal(), page.getRecords());

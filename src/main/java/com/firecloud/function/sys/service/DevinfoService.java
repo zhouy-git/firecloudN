@@ -14,7 +14,6 @@ import java.util.List;
  * @since 2019-10-23
  */
 public interface DevinfoService extends IService<Devinfo> {
-    List<Devinfo> GetDevAlllist(Integer id);
 
 
     List<Integer> getIndexEcharDataByWM(List<String> param);

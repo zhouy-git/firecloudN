@@ -22,7 +22,6 @@ public class WebUtils {
         ServletRequestAttributes requestAttributes =
                 (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
-        System.out.println(request);
         return request;
     }
     /**

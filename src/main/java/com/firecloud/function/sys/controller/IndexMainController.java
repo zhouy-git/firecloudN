@@ -2,6 +2,7 @@ package com.firecloud.function.sys.controller;
 
 import com.firecloud.function.sys.common.DataGridView;
 import com.firecloud.function.sys.common.WebUtils;
+import com.firecloud.function.sys.service.DevAlermService;
 import com.firecloud.function.sys.service.DevinfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
@@ -16,6 +17,9 @@ public class IndexMainController {
 
     @Autowired
     private DevinfoService devinfoService;
+
+    @Autowired
+    private DevAlermService devAlermService;
 
     @RequestMapping("week")
     public DataGridView getResWeek() {
@@ -44,11 +48,10 @@ public class IndexMainController {
         map.put("data", datas);
         return new DataGridView(map);
     }
+    @RequestMapping("mainMap")
+    public String mainMap(ModelMap modelMap) {
 
-    public String main(ModelMap map) {
-
-
-        return null;
+      return "system/index/main";
     }
 
 }

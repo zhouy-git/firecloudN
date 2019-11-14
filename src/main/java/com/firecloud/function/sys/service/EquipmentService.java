@@ -23,4 +23,6 @@ public interface EquipmentService extends IService<Equipment> {
     Equipment saveEquipment(Equipment entity);
 
     Equipment updateEquipmentById(Equipment entity);
+
+    Equipment getEquipmentByDevId(String devid);
 }
