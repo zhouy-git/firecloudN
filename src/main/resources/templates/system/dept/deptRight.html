@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+        xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="utf-8">
     <title>部门管理--右边菜单</title>
@@ -61,17 +62,17 @@
     </table>
 
     <div id="deptToolBar" style="display: none;">
-        <button type="button" lay-event="addDept" class="layui-btn layui-btn-sm">
+        <button type="button" lay-event="addDept" shiro:hasPermission="menu:create" shi class="layui-btn layui-btn-sm">
             <span class="layui-icon layui-icon-add-1"></span>
             添加部门
         </button>
     </div>
     <div id="deptRowBar" style="display: none;">
-        <button type="button" lay-event="delete" class="layui-btn layui-btn-sm layui-btn-danger">
+        <button type="button" lay-event="delete" shiro:hasPermission="menu:delete"  class="layui-btn layui-btn-sm layui-btn-danger">
             <span class="layui-icon layui-icon-delete"></span>
             删除
         </button>
-        <button type="button" lay-event="update" class="layui-btn layui-btn-sm layui-btn-green">
+        <button type="button" lay-event="update" shiro:hasPermission="menu:update" class="layui-btn layui-btn-sm layui-btn-green">
             <span class="layui-icon layui-icon-edit"></span>
             更新
         </button>

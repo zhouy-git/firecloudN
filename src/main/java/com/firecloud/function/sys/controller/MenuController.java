@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.firecloud.function.sys.common.*;
 import com.firecloud.function.sys.domain.Permission;
 import com.firecloud.function.sys.domain.TreeNode;
+import com.firecloud.function.sys.service.RoleService;
 import com.firecloud.function.sys.vo.PermissionVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -25,8 +26,10 @@ public class MenuController {
 
     @Autowired
     private com.firecloud.function.sys.service.PermissionService permissionService;
+
+
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RoleService roleService;
 
     @RequestMapping("loadIndexLeftMenuJson")
     public DataGridView loadIndexLeftMenuJson() {
@@ -38,14 +41,30 @@ public class MenuController {
         queryWrapper.orderByAsc("ordernum");
         //获取用户的角色
         com.firecloud.function.sys.domain.User user = (com.firecloud.function.sys.domain.User) WebUtils.getSession().getAttribute("user");
-        List<Permission> listPermission ;
+        List<Permission> listPermission = null ;
 
         //如果是超级管理员
         if(user.getType()==Constast.USER_TYPE_SUPER) {
                 listPermission = permissionService.list(queryWrapper);
         }else {
             //根据用户ID+角色+权限去查询
-            listPermission = permissionService.list(queryWrapper);
+            //listPermission = permissionService.list(queryWrapper);
+            Integer userId = user.getId();
+            //根据id查询角色
+            List<Integer> currentUserRoleIds = roleService.queryUserRoleIdsByUid(userId);
+
+            Set<Integer> pids = new HashSet<>();
+            //根据角色id查询权限
+            for (Integer rid : currentUserRoleIds) {
+                List<Integer> permissionIds = roleService.queryRolePermissionsIdByRid(rid);
+                pids.addAll(permissionIds);
+            }
+
+            //根据角色id查询权限
+            if (pids.size() > 0) {
+                queryWrapper.in("id", pids);
+                listPermission = permissionService.list(queryWrapper);
+            }
         }
 
         List<TreeNode> treeNodes = new ArrayList<>();
@@ -68,7 +87,7 @@ public class MenuController {
      * 加载菜单管理左边的菜单树的json
      */
     @RequestMapping("loadMenuManagerLeftTreeJson")
-    public DataGridView loadMenuManagerLeftTreeJson(PermissionVo permissionVo) {
+    public DataGridView loadMenuManagerLeftTreeJson() {
 
         List<Permission> list;
         QueryWrapper<Permission> queryWrapper=new QueryWrapper<>();
@@ -78,7 +97,7 @@ public class MenuController {
 
         List<TreeNode> treeNodes=new ArrayList<>();
         for (Permission menu : list) {
-            Boolean spread = menu.getOpen()==1 ? true:false;
+            Boolean spread = (menu.getOpen()==null || menu.getOpen()==1 )? true:false;
             treeNodes.add(new TreeNode(menu.getId(), menu.getPid(), menu.getTitle(), spread));
         }
         return new DataGridView(treeNodes);
@@ -148,7 +167,7 @@ public class MenuController {
     public ResultObj updateMenu(PermissionVo permissionVo) {
         try {
             this.permissionService.updatePermissionById(permissionVo);
-            redisTemplate.delete("checkMenuHasChildrenNode");
+           // redisTemplate.delete("checkMenuHasChildrenNode");
             return ResultObj.UPDATE_SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
@@ -161,20 +180,14 @@ public class MenuController {
      */
     @RequestMapping("checkMenuHasChildrenNode")
     public Map<String,Object> checkMenuHasChildrenNode(PermissionVo permissionVo){
-        String key = "checkMenuHasChildrenNode";
-        ListOperations<String,Permission> permissionList = redisTemplate.opsForList();
+        //String key = "checkMenuHasChildrenNode";
+
         Map<String, Object> map=new HashMap<>();
         QueryWrapper<Permission> queryWrapper=new QueryWrapper<>();
         queryWrapper.eq("pid", permissionVo.getId());
         queryWrapper.eq("type",Constast.TYPE_MENU);
         List<Permission> list;
-
-        if (redisTemplate.hasKey(key)) {
-            list = permissionList.range(key, 0, -1);
-        }else {
-            list = this.permissionService.list(queryWrapper);
-            permissionList.leftPushAll(key, list);
-        }
+        list = this.permissionService.list(queryWrapper);
         if(list.size()>0) {
             map.put("value", true);
         }else {
@@ -192,7 +205,7 @@ public class MenuController {
     public ResultObj deleteMenu(PermissionVo permissionVo) {
         try {
             this.permissionService.removeById(permissionVo.getId());
-            redisTemplate.delete("checkMenuHasChildrenNode");
+            //redisTemplate.delete("checkMenuHasChildrenNode");
             return ResultObj.DELETE_SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();

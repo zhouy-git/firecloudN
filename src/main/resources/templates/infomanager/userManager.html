@@ -155,7 +155,7 @@
 
 <!--用户分配角色弹出层开始-->
     <div style="display: none;" id="selectUserRoleDiv">
-        <table class="layui-hide" id="roletable" lay-filter="roleTable"></table>
+        <table class="layui-hide" id="roleTable" lay-filter="roleTable"></table>
     </div>
 <!--用户分配角色弹出层结束-->
 
@@ -182,21 +182,20 @@
             ,cols: [ [
                 {field:'id', title:'ID',align:'center',width:'80'}
                 ,{field:'name', title:'用户姓名',align:'center',width:'100'}
-                ,{field:'loginname', title:'登陆名称',align:'center',width:'100'}
+                ,{field:'loginname', title:'登陆名称',align:'center',width:'140'}
                 ,{field:'sex', title:'性别',align:'center',width:'80',templet:function(d){
                         return d.sex==1?'<font color=blue>男</font>':'<font color=red>女</font>';
                     }}
-                ,{field:'deptname', title:'部门名称',align:'center',width:'120'}
+                ,{field:'deptname', title:'部门名称',align:'center',width:'140'}
                 ,{field:'leadername', title:'直属领导',align:'center',width:'100'}
-                ,{field:'address', title:'用户地址',align:'center',width:'150'}
+                ,{field:'address', title:'用户地址',align:'center',width:'200'}
                 ,{field:'remark', title:'用户备注',align:'center',width:'150'}
                 ,{field:'hiredate', title:'入职时间',align:'center',width:'180'}
                 ,{field:'available', title:'是否可用',align:'center',width:'100',templet:function(d){
                         return d.available==1?'<font color=blue>可用</font>':'<font color=red>不可用</font>';
                     }}
-                ,{field:'ordernum', title:'排序码',align:'center',width:'100'}
-                ,{field:'imgpath', title:'用户头像',align:'center',width:'200'}
-                ,{fixed: 'right', title:'操作', toolbar: '#userRowBar',align:'center',width:'420'}
+                /*,{field:'imgpath', title:'用户头像',align:'center',width:'200'}*/
+                ,{fixed: 'right', title:'操作', toolbar: '#userRowBar',align:'center',width:'480'}
             ] ]
             ,done: function(res, curr, count){ //处理删除某一页最后一条数据的BUG
                 if(res.data.length==0&&curr!=1){
@@ -288,8 +287,6 @@
                     //选中之前的所属部门  nodeId=data.pid;
                     dtree.dataInit("deptTree", data.deptid);
                     dtree.selectVal("deptTree");
-
-
                     //选中领导的部门
                     var leaderid = data.mgr;
                     $.get("/user/loadUserById",{id:leaderid}, function (res) {
@@ -308,7 +305,6 @@
                             dom_mgr.val(leaderid);
                             //重新渲染
                             form.render("select");
-
                         })
                     })
                     url="/user/updateUser";
@@ -429,22 +425,23 @@
                 content:$("#selectUserRoleDiv"),
                 area:['700px','600px'],
                 title:'分配【'+data.name+'】的角色',
-                btn: ['<span class=layui-icon>&#xe605;确认分配</span>', '<span class=layui-icon>&#x1006;关闭窗口</span>'],
+                btn: ['<span class=layui-icon>&#xe605;确认分配</span>',
+                    '<span class=layui-icon>&#x1006;关闭窗口</span>'],
                 yes: function(index, layero){
                     var checkStatus = table.checkStatus('roleTable');
                     var params = 'uid='+data.id;
 
                     $.each(checkStatus.data, function (index, item) {
-                        params += '&ids=' + itm.id;
+                        params += '&ids=' + item.id;
                     });
-                    alert(params);
+
                     $.post("/user/saveUserRole", params, function (res) {
                         layer.msg(res.msg);
+                        layer.close(mainIndex);
                     })
-
                 },
                 btn2: function(index, layero){
-                    //return false 开启该代码可禁止点击该按钮关闭
+
                 },
                 btnAlign: 'c', //居中
                 success:function(){
@@ -457,11 +454,9 @@
 
         //页面初始化角色列表
         function initRoleTable(data) {
-
          roleTableIns = table.render({
                 elem: '#roleTable'
-                ,url:'/equipmentfo/initRoleByUserId'
-
+                ,url:'/user/initRoleByUserId'
                 ,where: {
                     id: data.id
                 }
@@ -470,9 +465,6 @@
                     ,{field:'id', title:'ID',align:'center'}
                     ,{field:'name', title:'角色名称',align:'center'}
                     ,{field:'remark', title:'角色备注',align:'center'}
-                   /* ,{field:'available', title:'是否可用',align:'center',templet:function(d){
-                            return d.available==1?'<font color=blue>可用</font>':'<font color=red>不可用</font>';
-                        }}*/
                 ] ]
             });
         }

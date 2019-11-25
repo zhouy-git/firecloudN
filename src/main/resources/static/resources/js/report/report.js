@@ -78,15 +78,7 @@ layui.use(['element','table','form','jquery','layer'],function () {
         return false;
     });
 
-    //调转到指定的选项卡
-    //获取url中id的参数
-    var test = getQueryString("id");
-    if (test!=null) {
-        test = test.replace(".shtml","");
-    }
-    //跳转到id为test的页面
-    element.tabChange('docDemoTabBrief', test);
-    //…
+
 
     function getQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
@@ -101,4 +93,14 @@ layui.use(['element','table','form','jquery','layer'],function () {
             return null;
         }
     }
+    //调转到指定的选项卡
+    //获取url中id的参数
+    var test = getQueryString("id");
+    if (test!=null) {
+        test = test.replace(".shtml","");
+    }
+
+    //跳转到id为test的页面
+    element.tabChange('docDemoTabBrief', test);
+    //…
 });

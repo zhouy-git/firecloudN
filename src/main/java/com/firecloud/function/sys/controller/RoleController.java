@@ -50,7 +50,6 @@ public class RoleController {
         IPage<Role> page = new Page<>(roleVo.getPage(), roleVo.getLimit());
         queryWrapper.like(StringUtils.isNoneBlank(roleVo.getName()),"name", roleVo.getName());
         queryWrapper.like(StringUtils.isNoneBlank(roleVo.getRemark()), "remark", roleVo.getRemark());
-        queryWrapper.like(roleVo.getAvailable() != null, "available", roleVo.getAvailable());
         queryWrapper.orderByAsc("createtime");
         this.roleService.page(page, queryWrapper);
         return new DataGridView(page.getTotal(), page.getRecords());
@@ -70,15 +69,14 @@ public class RoleController {
         List<Integer> currentRolePermissions = this.roleService.queryRolePermissionsIdByRid(roleId);
 
 
-        List<Permission> currentPermissions ;
-        if (currentRolePermissions.size()>0) { //如果有ID就去查询
-            currentPermissions = permissionService.list(queryWrapper);
+        List<Permission> currentPermissions;
+        //如果有ID就去查询
+        if (currentRolePermissions.size()>0) {
             queryWrapper.in("id", currentRolePermissions);
+            currentPermissions  = permissionService.list(queryWrapper);
         }else {
             currentPermissions = new ArrayList<>();
         }
-
-
         List<TreeNode> nodes = new ArrayList<>();
 
         for (Permission p1 : allPermissions) {
@@ -91,7 +89,7 @@ public class RoleController {
                     break;
                 }
             }
-            Boolean spread = p1.getOpen() == null || p1.getOpen()==1?true:false;
+            Boolean spread = (p1.getOpen()== null || p1.getOpen()==1)?true:false;
             nodes.add(new TreeNode(p1.getId(), p1.getPid(), p1.getTitle(), spread, checkArr));
         }
 

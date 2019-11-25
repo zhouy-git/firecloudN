@@ -36,13 +36,6 @@
 		        <input type="text" name="remark"    autocomplete="off" class="layui-input">
 		      </div>
 		    </div>
-		    <div class="layui-inline">
-		      <label class="layui-form-label">是否可用</label>
-		      <div class="layui-input-inline">
-		      	  <input type="radio" name="available" value="1"  title="可用" >
-	        	  <input type="radio" name="available" value="0" title="不可用" >
-		      </div>
-		    </div>
             <button type="button" class="layui-btn" lay-submit="" lay-filter="doSearch"><span class="layui-icon layui-icon-search"></span>查询</button>
             <button type="reset" class="layui-btn layui-btn-warm"><span class="layui-icon layui-icon-refresh-1"></span>重置</button>
 		  </div>
@@ -134,7 +127,7 @@ layui.extend({
 		    	  return d.available==1?'<font color=blue>可用</font>':'<font color=red>不可用</font>';
 		      }}
 		      ,{field:'createtime', title:'创建时间',align:'center'}
-		      ,{fixed: 'right', title:'操作', toolbar: '#roleRowBar',align:'center',width:'300'}
+		      ,{fixed: 'right', title:'操作', toolbar: '#roleRowBar',align:'center',width:'360'}
 		    ] ]
 		});
 		
@@ -247,7 +240,8 @@ layui.extend({
 			    	$.post("/role/saveRolePermission",params,function(res){
 			    		layer.msg(res.msg);
 			    		layer.close(mainIndex);
-			    	})
+			    	});
+			    	return false;
 			    },
 			    btn2: function(index, layero){
 			    //return false 开启该代码可禁止点击该按钮关闭

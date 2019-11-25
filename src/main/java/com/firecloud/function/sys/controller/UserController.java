@@ -65,13 +65,13 @@ public class UserController {
 
         for (User user : users) {
             Integer deptid = user.getDeptid();
-            if (deptid != null) {
-                Dept one = this.deptService.getById(deptid);
-                user.setDeptname(one.getTitle());
+            Dept dept = this.deptService.getById(deptid);
+            if (dept != null) {
+                user.setDeptname(dept.getTitle());
             }
             Integer mgr = user.getMgr();
-            if(mgr != null) {
-                User one = this.userService.getById(mgr);
+            User one = this.userService.getById(mgr);
+            if(one != null) {
                 user.setLeadername(one.getName());
             }
         }
@@ -125,7 +125,6 @@ public class UserController {
         }
         return map;
     }
-
     /**
      * 添加用户
      */
@@ -147,7 +146,6 @@ public class UserController {
             return ResultObj.ADD_ERROR;
         }
     }
-
     /**
      * 根据id查询用户
      * @param id
@@ -157,7 +155,11 @@ public class UserController {
     public DataGridView loadUserById(Integer id) {
         return new DataGridView(this.userService.getById(id));
     }
-
+    /**
+     * 更新用户
+     * @param userVo
+     * @return
+     */
     @RequestMapping("updateUser")
     public ResultObj updateUser(UserVo userVo) {
 
@@ -170,7 +172,11 @@ public class UserController {
         }
 
     }
-
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
     @RequestMapping("deleteUser")
     public ResultObj deleteUser(Integer id) {
         try {
@@ -182,7 +188,11 @@ public class UserController {
         }
 
     }
-
+    /**
+     * 重置密码
+     * @param id
+     * @return
+     */
     @RequestMapping("resetPwd")
     public ResultObj resetPwd(Integer id) {
         try {
@@ -199,6 +209,11 @@ public class UserController {
         }
     }
 
+    /**
+     * 根据部门ID加载用户
+     * @param deptid
+     * @return
+     */
     @RequestMapping("loadUserByDeptId")
     public DataGridView loadUserByDeptId(Integer deptid) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
@@ -209,9 +224,15 @@ public class UserController {
         return new DataGridView(users);
     }
 
+    /**
+     * 分配权限列表
+     * @param id
+     * @return
+     */
+    @RequestMapping("initRoleByUserId")
     public DataGridView initRoleByUserId(Integer id) {
         //查询所有可用的角色
-        QueryWrapper<Role> queryWrapper = new QueryWrapper<Role>();
+        QueryWrapper<Role> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("available", Constast.AVAILABLE_TRUE);
         List<Map<String, Object>> listMaps = this.roleService.listMaps(queryWrapper);
 
@@ -229,8 +250,18 @@ public class UserController {
             }
             map.put("LAY_CHECKED", LAY_CHECKED);
         }
-
         return new DataGridView(Long.valueOf(listMaps.size()), listMaps);
+    }
+
+    @RequestMapping("saveUserRole")
+    public ResultObj saveUserRole(Integer uid, Integer[] ids) {
+        try {
+            this.userService.saveUserRole(uid, ids);
+            return ResultObj.DEAL_SUCCESS;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return ResultObj.DISPATCH_ERROR;
+        }
 
     }
 

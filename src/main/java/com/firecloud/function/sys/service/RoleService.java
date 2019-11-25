@@ -21,10 +21,10 @@ public interface RoleService extends IService<Role> {
 
     /**
      * 保存菜单和权限之间的关系
-     * @param roleId
+     * @param rid
      * @param ids
      */
-    void saveRolePermission(Integer roleId, Integer[] ids);
+    void saveRolePermission(Integer rid, Integer[] ids);
 
     /**
      * 根据用户的id查询角色id

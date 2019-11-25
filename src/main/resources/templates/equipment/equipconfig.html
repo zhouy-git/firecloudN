@@ -74,7 +74,6 @@
     </div>
 <!--打开历史数据弹出层结束-->
 
-
 <!-- 添加和修改的弹出层开始 -->
 <div style="display: none;padding: 5px" id="addOrUpdateDiv">
     <form action="" method="post" class="layui-form layui-form-pane" id="dataFrm" lay-filter="dataFrm">
@@ -85,7 +84,6 @@
             </div>
         </div>
         <div class="layui-form-item">
-
             <label class="layui-form-label">状态名称</label>
             <div class="layui-input-block" style="width: 50%;">
                 <input type="text" name="statusname" id="equipmentname" lay-verify="required"  autocomplete="off" placeholder="请输入状态名称" class="layui-input">
@@ -107,8 +105,10 @@
         
         <div class="layui-form-item">
             <div class="layui-input-block" style="text-align: center; margin: 30px auto;">
-                <button type="button" class="layui-btn" lay-submit="" lay-filter="doSubmit" id="doSubmit" ><span class="layui-icon layui-icon-add-1"></span>提交</button>
-                <button type="reset" class="layui-btn layui-btn-warm"><span class="layui-icon layui-icon-refresh-1"></span>重置</button>
+                <button type="button" class="layui-btn" lay-submit="" lay-filter="doSubmit" id="doSubmit" >
+                    <span class="layui-icon layui-icon-add-1"></span>提交</button>
+                <button type="reset" class="layui-btn layui-btn-warm">
+                    <span class="layui-icon layui-icon-refresh-1"></span>重置</button>
             </div>
         </div>
     </form>
@@ -123,19 +123,16 @@
         var layer = layui.layer;
         var table = layui.table;
         var $ = layui.jquery;
-
         //自定义格式
         laydate.render({
             elem: '#startTime'
             ,type: 'datetime'
         });
-
         //自定义格式
         laydate.render({
             elem: '#endTime'
             ,type: 'datetime'
         });
-
         var tableIns = table.render({
             elem: '#equipconfigTable'
             ,url:'/equipconfig/loadAllequipconfig'
@@ -157,8 +154,6 @@
                 ,{fixed: 'right', title:'操作', toolbar: '#equipconfigRowBar', align:'center',width:'240'}
             ] ]
         });
-
-
         //模糊查询
         //监听提交 lay-filter="search"
         form.on('submit(doSearch)', function(data){
@@ -234,7 +229,7 @@
                 type:1,
                 content:$("#addOrUpdateDiv"),
                 area:['800px','600px'],
-                title:'修改角色',
+                title:'修改设备',
                 success:function(){
                     $("#dataFrm")[0].reset();
                     //装载新的数据

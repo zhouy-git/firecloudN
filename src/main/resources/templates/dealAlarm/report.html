@@ -11,17 +11,16 @@
     <link rel="stylesheet" href="/resources/css/deal/report.css">
     <link rel="stylesheet" href="/resources/layui/css/layui.css">
 </head>
-<body>
-
+<body style="height: 100%;">
    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
        <ul class="layui-tab-title">
            <li lay-id="fire" class="layui-this">火警</li>
            <li lay-id="hideDan">异常</li>
            <li lay-id="trouble">故障</li>
        </ul>
-       <div class="layui-tab-content">
+       <div class="layui-tab-content" style="width: 100%; height: 100%;">
             <div class="layui-tab-item layui-show">
-                <iframe id="fire" src="/api/getPage?pageName=dealAlarm/fire" style="width: 100%; height: 100%" frameborder="0"></iframe>
+                <iframe id="fire" src="/api/getPage?pageName=dealAlarm/fire" style="width: 100%; height: 100%"   frameborder="0"></iframe>
             </div>
            <div class="layui-tab-item">
                <iframe id="trouble" src="/api/getPage?pageName=dealAlarm/trouble" style="width: 100%; height: 100%" frameborder="0" scrolling="auto" overflow="hidden"></iframe>
@@ -35,10 +34,9 @@
    <script src="/resources/layui/layui.js" charset="UTF-8"></script>
     <script src="/resources/js/report/report.js" th:inline="none"></script>
     <script type="text/javascript" th:inline="none">
-        var $, element;
-        layui.use(['jquery','element'],function () {
-            $ = layui.jquery;
-            element = layui.element;
+
+        layui.use(['table','form','jquery','layer'], function(){
+            var table = layui.table, form = layui.form, $ = layui.jquery, layer=layui.layer;
 
             function FramenWH() {
                 var h = $(window).height() - 100;

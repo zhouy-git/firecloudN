@@ -21,54 +21,71 @@
             </blockquote>
         </div>
         <script src="https://cdn.bootcss.com/echarts/3.7.0/echarts.min.js"></script>
+        <script src="/resources/layui/layui.js" charset="UTF-8"></script>
         <script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'));
-        // 指定图表的配置项和数据
-        option = {
-            backgroundColor: '#DBDBDB',
 
-            color: ['#3398DB'],
-            tooltip : {
-                trigger: 'axis',
-                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                }
-            },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
-            },
-            xAxis : [
-                {
-                    type : 'category',
-                    data : ['总设备数', '在线设备数', '离线设备数', '故障设备数'],
-                    axisTick: {
-                        alignWithLabel: true
+        layui.use(['element','jquery', 'layer'],function () {
+            var element = layui.element, layer = layui.layer, $ = layui.jquery;
+            $(document).ready(function () {
+                getOnline();
+            });
+
+            //设备在线柱状图
+            function getOnline() {
+                $.ajax({
+                    url: '/equipmentfo/getOnline',
+                    type: 'post',
+                    data: '',
+                    success: function (data) {
+                        // 基于准备好的dom，初始化echarts实例
+                        var myChart = echarts.init(document.getElementById('main'));
+                        // 指定图表的配置项和数据
+                        option = {
+                            backgroundColor: '#DBDBDB',
+                            color: ['#3398DB'],
+                            tooltip: {
+                                trigger: 'axis',
+                                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                                }
+                            },
+                            grid: {
+                                left: '3%',
+                                right: '4%',
+                                bottom: '3%',
+                                containLabel: true
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    data: ['总设备数(' + data.allCount + ')', '在线设备数(' + data.zx + ')', '离线设备数(' + data.lx + ')', '故障设备数(' + data.gz + ')'],
+                                    axisTick: {
+                                        alignWithLabel: true
+                                    }
+                                }
+                            ],
+                            yAxis: [
+                                {
+                                    type: 'value'
+                                }
+                            ],
+                            series: [
+                                {
+                                    type: 'bar',
+                                    barWidth: 40,
+                                    barMaxWidth: 40,
+                                    data: [data.allCount, data.zx, data.lx, data.gz]
+                                }
+                            ]
+
+                        };
+                        // 使用刚指定的配置项和数据显示图表。
+                        myChart.setOption(option);
                     }
-                }
-            ],
-            yAxis : [
-                {
-                    type : 'value'
-                }
-            ],
-            series : [
-                {
-                    type:'bar',
-                    barWidth: '60%',
-                    data:[10, 12, 15, 33]
-                }
-            ]
+                })
+            }
+        })
 
-        };
-
-
-
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
     </script>
     </body>
 </html>

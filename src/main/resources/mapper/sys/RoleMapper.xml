@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.firecloud.function.sys.mapper.RoleMapper">
-    <delete id="deleteRolePermissionByid">
+    <delete id="deleteRolePermissionByRid">
       delete from sys_role_permission where rid = #{value}
     </delete>
 
@@ -11,7 +11,7 @@
     </delete>
 
 
-    <select id="queryRolePermissionsIdByRid" resultType="java.lang.Integer">
+    <select id="queryRolePermissionsIdByRid" resultType="integer">
         select pid from sys_role_permission where rid = #{value}
     </select>
 
@@ -23,5 +23,10 @@
     <select id="queryUserRoleIdsByUid" resultType="integer">
         select rid from sys_role_user where uid = #{value}
     </select>
+
+    <!--保存用户和角色的关系-->
+    <insert id="insertUserRole">
+      insert into sys_role_user(uid, rid) values (#{uid}, #{rid})
+    </insert>
 
 </mapper>

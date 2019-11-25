@@ -4,7 +4,12 @@
 
 
 
-    <select id="getEquipmentByDevId" parameterType="java.lang.String" resultType="com.firecloud.function.sys.domain.Equipment">
+    <select id="getEquipmentByDevId" parameterType="string" resultType="com.firecloud.function.sys.domain.Equipment">
         select devid,devicename, devicemodel,installlocation,underbuild,floorarea from equipment where devid = #{devid}
+    </select>
+
+
+    <select id="getOnlineRes" parameterType="string" resultType="integer">
+        select count(1) from equipment ${ew.customSqlSegment}
     </select>
 </mapper>

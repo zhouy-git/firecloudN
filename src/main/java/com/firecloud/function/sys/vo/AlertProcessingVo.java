@@ -33,4 +33,7 @@ public class AlertProcessingVo extends AlertProcessing {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date endTime;
 
+
+
+
 }

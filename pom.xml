@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.zhouy</groupId>
     <artifactId>firecloud</artifactId>
-    <version>1.11.12</version>
+    <version>1.11.21</version>
     <name>firecloud</name>
     <description>消防云</description>
 

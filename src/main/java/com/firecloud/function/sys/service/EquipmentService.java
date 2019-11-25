@@ -1,7 +1,9 @@
 package com.firecloud.function.sys.service;
 
+
 import com.firecloud.function.sys.domain.Equipment;
 import com.baomidou.mybatisplus.extension.service.IService;
+
 
 /**
  * <p>
@@ -25,4 +27,7 @@ public interface EquipmentService extends IService<Equipment> {
     Equipment updateEquipmentById(Equipment entity);
 
     Equipment getEquipmentByDevId(String devid);
+
+    Integer getOnlineRes(String param);
+
 }

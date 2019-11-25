@@ -25,21 +25,21 @@
         <div class="c1-middle-box">
             <div class="m-d1" style="background-color: rgb(0, 0, 255);">
                 <div id="bj_total" class="lef-name-res">
-                    <p id="bjTotal" th:text="${bj}">
+                    <p id="bjTotal">
                         <span class="name">个</span>
                     </p>
                     <span class="name">
                         报警总数
                     </span>
                 </div>
-                <div class="right-img">
+            <div class="right-img">
                     <img th:src="@{/resources/images/index/jb.png}" alt="">
                 </div>
             </div>
 
             <div id="fire" class="m-d1" style="background-color: rgb(187, 0, 0);">
                 <div class="lef-name-res">
-                    <p id="fireTotal" th:text="${hj}">
+                    <p id="fireTotal">
                         <span class="name">个</span>
                     </p>
                     <span class="name">
@@ -52,7 +52,7 @@
             </div>
                 <div id="yc" class="m-d1" style="background-color: #4E72DA;">
                     <div class="lef-name-res">
-                        <p id="ycTotal" th:text="${yc}">
+                        <p id="ycTotal">
                             <span class="name">个</span>
                         </p>
                         <span class="name">
@@ -65,7 +65,7 @@
                 </div>
                 <div id="gz" class="m-d1" style="background-color: #FFB800">
                     <div class="lef-name-res">
-                        <p id="gzTotal" th:text="${gz}">
+                        <p id="gzTotal">
                             <span class="name">个</span>
                         </p>
                         <span class="name">
@@ -123,35 +123,35 @@
                 <div class="adgzdw-center">
                     <ul class="center-dw-ul">
                         <li>
-                            <span class="font-danger-css">联网单位360</span>
+                            <span class="font-danger-css">金鹰D</span>
                             <strong>3</strong>
                             <div class="layui-progress">
                                 <div class="layui-progress-bar layui-bg-green" lay-percent="30%"></div>
                             </div>
                         </li>
                         <li>
-                            <span class="font-danger-css">网易多媒体互联公司</span>
+                            <span class="font-danger-css">金鹰C</span>
                             <strong>4</strong><br>
                             <div class="layui-progress">
                                 <div class="layui-progress-bar layui-bg-green" lay-percent="40%"></div>
                             </div>
                         </li>
                         <li>
-                            <span class="font-danger-css">三盛股份有限公司</span>
+                            <span class="font-danger-css">万达大楼</span>
                             <strong>5</strong>
                             <div class="layui-progress">
                                 <div class="layui-progress-bar layui-bg-green" lay-percent="50%"></div>
                             </div>
                         </li>
                         <li>
-                            <span class="font-danger-css">辉煌国际</span>
+                            <span class="font-danger-css">中医院门诊部</span>
                             <strong>7</strong>
                             <div class="layui-progress">
                                 <div class="layui-progress-bar layui-bg-green" lay-percent="70%"></div>
                             </div>
                         </li>
                         <li>
-                            <span class="font-danger-css">百度搜索技术有限公司</span>
+                            <span class="font-danger-css">万达大楼D</span>
                             <strong>6</strong>
                             <div class="layui-progress">
                                 <div class="layui-progress-bar layui-bg-green" lay-percent="60%"></div>
@@ -176,20 +176,7 @@
     <div class="div4">
 
         <div class="div4-pc">
-            <!--<div class="top-pic">
-                <div class="top-pic-left">
-                    <img th:src="@{/resources/images/index/bottom-water.png}" alt="">
-                    <p>水位报警:
-                        <span>0个</span>
-                    </p>
-                </div>
-                <div class="top-pic-right">
-                    <img th:src="@{/resources/images/index/watertemperature.png}" alt="">
-                    <p>水温报警:
-                        <span>0个</span>
-                    </p>
-                </div>
-            </div>-->
+
             <div class="top-pic-hydrostatic">
                 <img th:src="@{/resources/images/index/bottom-water.png}" alt="">
                 <p>报警数:
@@ -342,106 +329,16 @@
             <div class="center-n4f">
                 <div class="lwdwbj" id="scrollBlock">
                     <ul id="contentBlock">
-                        <li>
+                        <li th:each="alertPro:${alerModel.processingList}">
                             <p>
-                                <span class="font-danger-css">编码型烟感（智能烟感）</span>
+                                设备:<span class="font-danger-css" th:text="${alertPro.devName}"></span>
+                                <strong th:text="${alertPro.underbuilding}"></strong>
                             </p>
                             <p>
-                                展厅
-                                <strong>2019-06-28 22:33:00</strong>
-                            </p>
-
-                        </li>
-                        <li>
-                            <p>
-                                <span class="font-danger-css">开关量烟感（继电器烟感）</span>
-                            </p>
-                            <p>
-                                机房
-                                <strong>2019-06-28 19:47:09</strong>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <span class="font-danger-css">多线烟感（传统型烟感）</span>
-                            </p>
-                            <p>
-                                会议室一
-                                <strong>2019-06-29 18:20:14</strong>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <span class="font-danger-css">离子式感烟探测器</span>
-                            </p>
-                            <p>
-                                会议室二
-                                <strong>2019-06-29 18:20:14</strong>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <span class="font-danger-css">Lora烟感</span>
-                            </p>
-                            <p>
-                                会议室三
-                                <strong>2019-06-29 18:29:14</strong>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <span class="font-danger-css">独立型烟感器</span>
-                            </p>
-                            <p>
-                                展厅二
-                                <strong>2019-06-30 19:31:08</strong>
+                                位置:<span th:text="${alertPro.location}"></span>
+                                <strong th:text="${#dates.format(alertPro.alarmtime,'yyyy-MM-dd HH:mm:ss')}"></strong>
                             </p>
 
-                        </li>
-                        <li>
-                            <p>
-                                <span class="font-danger-css">多线烟感（传统型烟感）</span>
-                            </p>
-                            <p>
-                                展厅三
-                                <strong>2019-06-30 19:31:08</strong>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <span class="font-danger-css">多线烟感（传统型烟感）</span>
-                            </p>
-                            <p>
-                                展厅四
-                                <strong>2019-06-30 19:31:08</strong>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <span class="font-danger-css">多线烟感（传统型烟感）</span>
-                            </p>
-                            <p>
-                                展厅六
-                                <strong>2019-06-31 19:31:08</strong>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <span class="font-danger-css">多线烟感（传统型烟感）</span>
-                            </p>
-                            <p>
-                                展厅七
-                                <strong>2019-06-31 19:31:08</strong>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <span class="font-danger-css">多线烟感（传统型烟感）</span>
-                            </p>
-                            <p>
-                                展厅八
-                                <strong>2019-06-31 19:31:08</strong>
-                            </p>
                         </li>
                     </ul>
                 </div>

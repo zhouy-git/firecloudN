@@ -40,19 +40,15 @@ public class LoginfoController {
      */
     @RequestMapping("loadAllLoginfo")
     public DataGridView loadAllLoginfo(LoginfoVo loginfoVo) {
-
         IPage<Loginfo> page = new Page<>(loginfoVo.getPage(), loginfoVo.getLimit());
         QueryWrapper<Loginfo> queryWrapper = new QueryWrapper<>();
         queryWrapper.like(StringUtils.isNoneBlank(loginfoVo.getLoginname()),"loginname", loginfoVo.getLoginname());
         queryWrapper.like(StringUtils.isNoneBlank(loginfoVo.getLoginip()),"loginip", loginfoVo.getLoginip());
         queryWrapper.ge(loginfoVo.getStartTime()!=null, "logintime",loginfoVo.getStartTime());
         queryWrapper.le(loginfoVo.getEndTime()!=null, "logintime",loginfoVo.getEndTime());
-
         //根据时间排序
         queryWrapper.orderByDesc("logintime");
-
         this.loginfoService.page(page, queryWrapper);
-
         return new DataGridView(page.getTotal(), page.getRecords());
     }
 

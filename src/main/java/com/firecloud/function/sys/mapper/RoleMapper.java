@@ -18,9 +18,9 @@ import java.util.List;
 public interface RoleMapper extends BaseMapper<Role> {
     /**
      * 根据角色id删除sys_role_permission中间表
-     * @param id
+     * @param rid
      */
-    void deleteRolePermissionByid(Serializable id);
+    void deleteRolePermissionByRid(Serializable rid);
 
     /**
      * 根据角色id删除sys_role_user
@@ -39,4 +39,8 @@ public interface RoleMapper extends BaseMapper<Role> {
 
 
     List<Integer> queryUserRoleIdsByUid(Integer id);
+
+
+    //保存角色和用户的关系
+    void insertUserRole(@Param("uid") Integer uid,@Param("rid") Integer rid);
 }

@@ -43,6 +43,11 @@ public class ResultObj {
      */
     public static final ResultObj  RESET_SUCCESS=new ResultObj(Constast.OK, "重置成功");
     public static final ResultObj  RESET_ERROR=new ResultObj(Constast.ERROR, "重置失败");
+    /**
+     * 处理
+     */
+    public static final ResultObj  DEAL_SUCCESS=new ResultObj(Constast.OK, "处理成功");
+    public static final ResultObj  DEAL_ERROR=new ResultObj(Constast.OK, "处理失败");
 
 
     private Integer code;

@@ -209,4 +209,6 @@ html body {
 .layui-tab-content {
     padding: 0 !important;
     overflow-x: hidden;
+    height: 100%;
+    width: 100%;
 }

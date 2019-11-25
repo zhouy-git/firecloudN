@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.firecloud.function.sys.common.Constast;
 import com.firecloud.function.sys.domain.Permission;
 import com.firecloud.function.sys.mapper.DevAlermMapper;
+import com.firecloud.function.sys.service.AlertProcessingService;
 import com.firecloud.function.sys.service.DevAlermService;
 import com.firecloud.function.sys.service.PermissionService;
 import lombok.extern.slf4j.Slf4j;
@@ -56,11 +57,11 @@ public class FireCloudFunctionTests {
     }
 
     @Autowired
-    private DevAlermService devAlermService;
+    private AlertProcessingService AlermService;
 
     @Test
     public void testMybatisPlus() {
-
+        log.info("获取首页滚动的数据"+this.AlermService.getTopShowMain(10));
     }
 
 }

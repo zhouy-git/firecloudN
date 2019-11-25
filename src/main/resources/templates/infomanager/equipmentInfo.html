@@ -25,31 +25,6 @@
                 </div>
             </div>
 
-        <div class="layui-inline">
-            <label class="layui-form-label">所属建筑</label>
-            <div class="layui-input-inline">
-                <input type="text" name="underbuild" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">楼层区域</label>
-            <div class="layui-input-inline">
-                <input type="text" name="floorarea" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-
-            <div class="layui-inline">
-                <label class="layui-form-label">开始时间</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="startTime" id="startTime" readonly="readonly"  placeholder="yyyy-MM-dd HH:mm:ss" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">结束时间</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="endTime" id="endTime" readonly="readonly" placeholder="yyyy-MM-dd HH:mm:ss" class="layui-input">
-                </div>
-            </div>
         <button id="doSearch" class="layui-btn"  lay-submit="" lay-filter="doSearch">
             <i class="layui-icon">&#xe615;</i>
         </button>
@@ -83,7 +58,7 @@
 
             <button type="button" lay-event="detail" class="layui-btn layui-btn-sm layui-btn">
                 <span class="layui-icon layui-icon-about"></span>
-                数据详情
+               详情
             </button>
         </div>
     </div>
@@ -196,7 +171,7 @@
             ,url:'/equipmentfo/loadAllEquipment'
             ,toolbar: '#EquipmentToolBar' //开启头部工具栏，并为其绑定左侧模板
             ,page: true
-            ,height: 'full-170'
+            ,height: 'full-151'
             ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
                 title: '提示'
                 ,layEvent: 'LAYTABLE_TIPS'
@@ -205,20 +180,20 @@
             ,title: '设备数据表'
             ,cols: [ [
                 {type: 'checkbox', fixed: 'left'}
-                ,{field:'devid', title:'设备ID', fixed: 'left',sort: true,width:'160'}
-                ,{field:'devicename', title:'设备名称', align:'center',width:'207'}
+                ,{field:'devid', title:'设备ID', fixed: 'left',sort: true,width:'180'}
+                ,{field:'devicename', title:'设备名称', align:'center',width:'135'}
                /* ,{field:'status', title:'状态', align:'center'}*/
-                ,{field:'devicemodel', title:'设备型号', align:'center',width:'170'}
-                ,{field:'underbuild', title:'所属建筑', align:'center',width:'140'}
-                ,{field:'floorarea', title:'楼层区域', align:'center',width:'140'}
-                ,{field:'installlocation', title:'安装位置', align:'center',width:'190'}
-                ,{field:'networkstate', title:'联网状态', align:'center',width:'120',templet:function(d){
+                ,{field:'devicemodel', title:'设备型号', align:'center',width:'95'}
+                ,{field:'underbuild', title:'所属建筑', align:'center',width:'125'}
+                ,{field:'floorarea', title:'楼层区域', align:'center',width:'95'}
+                ,{field:'installlocation', title:'安装位置', align:'center',width:'95'}
+                ,{field:'networkstate', title:'联网状态', align:'center',width:'95',templet:function(d){
                         return d.networkstate==1?'<span color=green>在线</span>':'<span color=#808080>离线</span>';
                     }}
-                ,{field:'devicestatus', title:'设备状态', align:'center',width:'120'}
-                ,{field:'statusName', title:'设备状态名称', align:'center',width:'120'}
-                ,{field:'nettime', title:'入网时间', align:'center',width:'200'}
-                ,{fixed: 'right', title:'操作', toolbar: '#EquipmentRowBar', align:'center',width:'240'}
+              /*  ,{field:'devicestatus', title:'设备状态', align:'center',width:'120'}*/
+                ,{field:'statusName', title:'设备状态名称', align:'center',width:'115'}
+                ,{field:'nettime', title:'入网时间', align:'center',width:'170'}
+                ,{fixed: 'right', title:'操作', toolbar: '#EquipmentRowBar', align:'center',width:'220'}
             ] ]
         });
 
@@ -361,8 +336,12 @@
            mainIndex = layer.open({
                 type:1,
                 content:$("#showDevDetail"),
-                area:['1200px','600px'], //页面大小
+                area:['90%','80%'], //页面大小
+                btn: '关闭',
+                btnAlign: 'c', //按钮居中
                 title: '设备数据表',
+                shade: 0 ,//不显示遮罩
+                yes: function(){layer.closeAll();},
                 success:function(){
                     initequuipment(data);
                 }

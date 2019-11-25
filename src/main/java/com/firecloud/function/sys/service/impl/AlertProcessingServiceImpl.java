@@ -6,6 +6,8 @@ import com.firecloud.function.sys.service.AlertProcessingService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -17,4 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AlertProcessingServiceImpl extends ServiceImpl<AlertProcessingMapper, AlertProcessing> implements AlertProcessingService {
 
+    @Override
+    public List<AlertProcessing> getTopShowMain(Integer number) {
+        return this.getBaseMapper().getTopShowMain(number);
+    }
 }

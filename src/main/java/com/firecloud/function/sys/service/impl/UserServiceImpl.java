@@ -5,9 +5,11 @@ import com.firecloud.function.sys.mapper.RoleMapper;
 import com.firecloud.function.sys.mapper.UserMapper;
 import com.firecloud.function.sys.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.io.Serializable;
 
 /**
@@ -22,6 +24,8 @@ import java.io.Serializable;
 @Transactional
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
+    @Autowired
+    private RoleMapper roleMapper;
 
     @Override
     public boolean save(User entity) {
@@ -43,8 +47,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public boolean removeById(Serializable id) {
 
-        this.getBaseMapper().deleteRoleUserById(id);
+        this.roleMapper.deleteRoleUserById(id);
 
         return super.removeById(id);
+    }
+
+    @Override
+    public void saveUserRole(Integer uid, Integer[] ids) {
+        this.getBaseMapper().deleteRoleUserById(uid);
+        if (null != ids && ids.length > 0) {
+            for (Integer rid : ids) {
+                this.roleMapper.insertUserRole(uid, rid);
+            }
+        }
     }
 }

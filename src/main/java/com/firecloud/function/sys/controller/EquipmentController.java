@@ -28,7 +28,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -130,13 +132,26 @@ public class EquipmentController {
     @RequestMapping("deleteEquipment")
     public ResultObj deleteEquipment(String id) {
         try {
-            log.info("deleteEquipment"+id);
             this.equipmentService.removeById(id);
             return ResultObj.DELETE_SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
             return ResultObj.DELETE_ERROR;
         }
+    }
+
+    @RequestMapping("getOnline")
+    public Map getOnline() {
+        Map<String, Integer> map = new HashMap<>();
+        Integer all = this.equipmentService.getOnlineRes("all");
+        map.put("allCount",all);
+        Integer zx = this.equipmentService.getOnlineRes("1");
+        map.put("zx",zx);
+        Integer lx = this.equipmentService.getOnlineRes("0");
+        map.put("lx",lx);
+        Integer gz = this.equipmentService.getOnlineRes("gz");
+        map.put("gz",gz);
+        return map;
     }
 }
 

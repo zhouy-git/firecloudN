@@ -19,122 +19,35 @@ layui.use(['element','jquery', 'layer'], function() {
     }
 
     $(document).ready(function() {
+        //获取近4个月的报警数据
+        getFMonths();
 
         //首页报警数据
-        $.ajax({
-            url: "/main/mainMapRes",
-            type: "post",
-            data: {},
-            success : function (data) {
-                $("#bjTotal").text(data.bj);
-                $("#fireTotal").text(data.hj);
-                $('#ycTotal').text(data.yc);
-                $('#gzTotal').text(data.gz);
-            }
-        });
+        IndexBjData();
 
         //获取近一周的统计图
-        $.ajax({
-            url: "/main/week",
-            type: "post",
-            data: {},
-            success : function (data) {
-                //一周报警次数
-                var option = {
-                    tooltip:{
-                        trigger: 'axis'
-                    },
-                    legend:{
-                        data:['一周报警次数']
-                    },
-                    //折线图的大小，和显示y轴和x轴数据
-                    grid: {
-                        left: '2%',right: '2%', bottom: '1%', top: '5%', containLabel: true
-                    },
-                    xAxis:{
-                        type: 'category',
-                        data: data.data.categories
-                    },
-                    yAxis:{
-                        type: 'value'
-                    },
-                    series:[{
-                        name:'报警次数',
-                        type:'line',
-                        data: data.data.datas
-                    }]
-                };
-                //初始化echarts实例
-                var myChartoneweek = echarts.init(document.getElementById('echarts-dwtype'));
+        WeekBar();
 
-                //使用制定的配置项和数据显示图表
-                myChartoneweek.setOption(option);
-
-            }
-        })
-
-        //获取近四个月柱状图
-        $.ajax({
-            url : "/main/month",
-            type: "post",
-            data: {},
-            success : function (data) {
-                // 基于准备好的dom，初始化echarts实例
-                var myChartN4m = echarts.init(document.getElementById('echarts-n4m'));
-                // 指定图表的配置项和数据
-                var option = {
-                    /*title: {
-                        text: 'ECharts 入门示例'
-                    },*/
-                    tooltip: {},
-                    /*legend: { 图标展示
-                        data:['销量']
-                    },*/
-                    //折线图的大小，和显示y轴和x轴数据
-                    grid: {
-                        left: '2%',right: '2%', bottom: '3%', top: '5%', containLabel: true
-                    },
-                    xAxis: {
-                        data: data.data.categories
-                    },
-                    yAxis: {},
-                    series: [{
-                        name: '报警次数',
-                        type: 'bar',
-                        data: data.data.data
-                    }]
-                };
-
-                // 使用刚指定的配置项和数据显示图表。
-                myChartN4m.setOption(option);
-            }
-        });
-
-        $('#bj_total').click(function () {
-
-        });
-
-        $('#fire').click(function () {
-            clearInterval(dangIfo);
-            layerOpen('火警','fire');
-
-        });
-
-        $('#yc').click(function () {
-            clearInterval(ycInfo);
-            layerOpen('异常','hideDan');
-
-
-        });
-        $('#gz').click(function () {
-            clearInterval(gzInfo);
-            layerOpen('故障','trouble');
-        });
+        //跑马灯数据
+        getTopShowMain();
 
         var dangIfo;
         var ycInfo;
         var gzInfo;
 
+        $('#fire').click(function () {
+            clearInterval(dangIfo);
+            layerOpen('火警','fire');
+        });
+
+        $('#yc').click(function () {
+            clearInterval(ycInfo);
+            layerOpen('异常','hideDan');
+        });
+        $('#gz').click(function () {
+            clearInterval(gzInfo);
+            layerOpen('故障','trouble');
+        });
 
 
 
@@ -156,8 +69,8 @@ layui.use(['element','jquery', 'layer'], function() {
     //判断当前浏览器是否支持WebSocket
     if('WebSocket' in window){
         websocket = new WebSocket("ws://39.104.16.168:8182/websocket/1234");
-    }
-    else{
+        //websocket = new WebSocket("ws://localhost:8182/websocket/1234");
+    }else{
         alert('Not support websocket')
     }
 
@@ -169,7 +82,7 @@ layui.use(['element','jquery', 'layer'], function() {
     //连接成功建立的回调方法
     websocket.onopen = function(event){
         send();
-        console.log("建立连接成功：")
+        layer.msg('websocket建立连接成功');
     }
 
     //接收到消息的回调方法
@@ -209,20 +122,135 @@ layui.use(['element','jquery', 'layer'], function() {
             },1000);
         }
     }
-    //连接关闭的回调方法
-    websocket.onclose = function(){
-        console.log('Socket连接关闭')
-    }
     //关闭连接
     function closeWebSocket(){
         websocket.close();
     }
+    //连接关闭的回调方法
+    websocket.onclose = function(){
+        console.log('Socket连接关闭');
+        layer.msg('websocket建立连接失败!');
+        closeWebSocket();
+    }
+
     //发送消息
     function send(){
         var message = $('#fireTotal').text();
         websocket.send(message);
     }
+
     });
+
+    //跑马灯数据
+    function getTopShowMain() {
+        $.ajax({
+            url: "/main/getTopShowMain",
+            type: "get",
+            data: {},
+            success : function (data) {
+            }
+        });
+    }
+
+
+    //获取近一周的统计图
+    function WeekBar() {
+        $.ajax({
+            url: "/main/week",
+            type: "post",
+            data: {},
+            success : function (data) {
+                //一周报警次数
+                var option = {
+                    tooltip:{
+                        trigger: 'axis'
+                    },
+                    legend:{
+                        data:['一周报警次数']
+                    },
+                    //折线图的大小，和显示y轴和x轴数据
+                    grid: {
+                        left: '2%',right: '2%', bottom: '1%', top: '5%', containLabel: true
+                    },
+                    xAxis:{
+                        type: 'category',
+                        data: data.data.categories
+                    },
+                    yAxis:{
+                        type: 'value'
+                    },
+                    series:[{
+                        name:'报警次数',
+                        type:'line',
+                        data: data.data.datas
+                    }]
+                };
+                //初始化echarts实例
+                var myChartoneweek = echarts.init(document.getElementById('echarts-dwtype'));
+
+                //使用制定的配置项和数据显示图表
+                myChartoneweek.setOption(option);
+
+            }
+        })
+    }
+
+    //首页报警数据
+    function IndexBjData() {
+        $.ajax({
+            url: "/main/mainMapRes",
+            type: "post",
+            data: {},
+            success : function (data) {
+                $("#bjTotal").text(data.bj);
+                $("#fireTotal").text(data.hj);
+                $('#ycTotal').text(data.yc);
+                $('#gzTotal').text(data.gz);
+            }
+        });
+    }
+
+    //获取近四个月柱状图
+    function getFMonths() {
+
+        $.ajax({
+            url : "/main/month",
+            type: "post",
+            data: {},
+            success : function (data) {
+                // 基于准备好的dom，初始化echarts实例
+                var myChartN4m = echarts.init(document.getElementById('echarts-n4m'));
+                // 指定图表的配置项和数据
+                var option = {
+                    /*title: {
+                        text: 'ECharts 入门示例'
+                    },*/
+                    tooltip: {},
+                    /*legend: { 图标展示
+                        data:['销量']
+                    },*/
+                    //折线图的大小，和显示y轴和x轴数据
+                    grid: {
+                        left: '2%',right: '2%', bottom: '3%', top: '5%', containLabel: true
+                    },
+                    xAxis: {
+                        data: data.data.categories
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '报警次数',
+                        type: 'bar',
+                        data: data.data.data
+                    }]
+                };
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChartN4m.setOption(option);
+            }
+        });
+    }
+
+
     // 基于准备好的dom，初始化echarts实例
     var myChartN4m = echarts.init(document.getElementById('echarts-dayTotal'));
     // 指定图表的配置项和数据
@@ -292,7 +320,6 @@ layui.use(['element','jquery', 'layer'], function() {
                 }
             },
         },
-
         series: [
             {
                 name: '预期',
@@ -352,12 +379,10 @@ layui.use(['element','jquery', 'layer'], function() {
                 }
             }
         ],
-
         color: ['#00EE00', '#FF9F7F','#FFD700']
     };
     // 使用刚指定的配置项和数据显示图表。
     myChartN4m.setOption(option);
-
 
     /**
      * 画饼图，动态饼图统计
@@ -482,7 +507,7 @@ layui.use(['element','jquery', 'layer'], function() {
             info();
         },3000);
 
-        /* $(parent).hover(
+         /*$(parent).hover(
              function(){clearInterval(timing);},
              function(){timing = setInterval("info()",2000);}
          )*/
@@ -499,14 +524,25 @@ layui.use(['element','jquery', 'layer'], function() {
                 ++index;
             })
         }
-    })
-
-
-
+    });
 
     //地图
     var map = new BMap.Map("div-mapinfo");
-    map.centerAndZoom(new BMap.Point(114.51808,38.051267), 11);
+    var point = new BMap.Point(114.203484,38.25593);
+    map.centerAndZoom(point, 14);
+
+    var marker = new BMap.Marker(point);        // 创建标注
+    map.addOverlay(marker);                     // 将标注添加到地图中
+
+    //添加标注
+    map.addOverlay(new BMap.Marker(new BMap.Point(114.19256,38.26137)));
+    map.addOverlay(new BMap.Marker(new BMap.Point(114.203484,38.259103)));
+    map.addOverlay(new BMap.Marker(new BMap.Point(114.209233,38.259557)));
+    map.addOverlay(new BMap.Marker(new BMap.Point(114.201184,38.259557)));
+    map.addOverlay(new BMap.Marker(new BMap.Point(114.197232,38.2663)));
+    map.addOverlay(new BMap.Marker(new BMap.Point(114.22339,38.270436)));
+    map.addOverlay(new BMap.Marker(new BMap.Point(114.20255,38.253096)));
+    map.addOverlay(new BMap.Marker(new BMap.Point(114.228708,38.265903)));
 
     //添加控件
     map.addControl(new BMap.NavigationControl());
@@ -514,11 +550,12 @@ layui.use(['element','jquery', 'layer'], function() {
     map.addControl(new BMap.ScaleControl());
     map.addControl(new BMap.OverviewMapControl());
     map.addControl(new BMap.MapTypeControl());
-    map.setCurrentCity("石家庄市"); // 仅当设置城市信息时，MapTypeControl的切换功能才能可用
+    /* map.setCurrentCity("平山县"); // 仅当设置城市信息时，MapTypeControl的切换功能才能可用
+     map.centerAndZoom( "平山县");*/
 
-    //超过两秒钟自动回到定位点
-    /*window.setTimeout(function(){
-        map.panTo(new BMap.Point(116.409, 39.918));
+    /*//超过两秒钟自动回到定位点
+    window.setTimeout(function(){
+        map.panTo(new BMap.Point(114.203484,38.25593));
     }, 2000);*/
     function showInfo() {
         map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放,默认禁用
@@ -531,25 +568,23 @@ layui.use(['element','jquery', 'layer'], function() {
         //地图点击时间
 
     });
-
-　　a.on("mouseout",function(){
-      map.disableScrollWheelZoom(); //关闭鼠标滚轮缩放
-      return false;
+    a.on("mouseout",function(){
+        map.disableScrollWheelZoom(); //关闭鼠标滚轮缩放
+        return false;
     });
 
-    var local = new BMap.LocalSearch(map, {
-        renderOptions:{map: map}
-    });
-    local.search("政府");
+    /*    var local = new BMap.LocalSearch(map, {
+            renderOptions:{map: map}
+        });
+        local.search("政府");
 
-    var local = new BMap.LocalSearch(map,
-        { renderOptions:{map: map, autoViewport: true}});
-    local.searchNearby("商场");
+        var local = new BMap.LocalSearch(map,
+            { renderOptions:{map: map, autoViewport: true}});
+        local.searchNearby("商场");
 
-    var local = new BMap.LocalSearch(map,
-        { renderOptions:{map: map}});
-    local.searchInBounds("银行", map.getBounds());
-
+        var local = new BMap.LocalSearch(map,
+            { renderOptions:{map: map}});
+        local.searchInBounds("银行", map.getBounds());*/
 });
 
 

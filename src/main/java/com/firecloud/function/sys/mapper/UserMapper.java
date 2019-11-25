@@ -15,7 +15,7 @@ import java.io.Serializable;
  * @since 2019-10-12
  */
 public interface UserMapper extends BaseMapper<User> {
-
+    //根据用户角色id删除sys_role_user
     void deleteRoleUserById(@Param("id") Serializable id);
 
 }

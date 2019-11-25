@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.firecloud.function.sys.mapper.AlertProcessingMapper">
+
+
+    <select id="getTopShowMain" resultType="com.firecloud.function.sys.domain.AlertProcessing">
+        select UNDERBUILDING,UNIT_TYPE,DEV_NAME,ALARMTIME,LOCATION,ALREAM_TYPE
+        from alert_processing order by ALARMTIME desc limit ${number};
+    </select>
+
+</mapper>

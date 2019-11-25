@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>火警</title>
@@ -33,8 +33,8 @@
         <div class="left-img">
         </div>
         <div class="div1-pc-right">
-            <p>27</p>
-            <span>本月异常数</span>
+            <p>8</p>
+            <span>本月上报数</span>
         </div>
     </div>
     <div class="div1-pc">
@@ -42,8 +42,26 @@
 
         </div>
         <div class="div1-pc-right">
-            <p>1</p>
-            <span>本周异常数</span>
+            <p>5</p>
+            <span>本周上报数</span>
+        </div>
+    </div>
+    <div class="div1-pc">
+        <div class="left-img">
+
+        </div>
+        <div class="div1-pc-right">
+            <p>3</p>
+            <span>今日上报数</span>
+        </div>
+    </div>
+    <div class="div1-pc">
+        <div class="left-img">
+
+        </div>
+        <div class="div1-pc-right">
+            <p>3</p>
+            <span>今日已处理</span>
         </div>
     </div>
     <div class="div1-pc">
@@ -52,25 +70,7 @@
         </div>
         <div class="div1-pc-right">
             <p>0</p>
-            <span>今日异常数</span>
-        </div>
-    </div>
-    <div class="div1-pc">
-        <div class="left-img">
-
-        </div>
-        <div class="div1-pc-right">
-            <p>0</p>
-            <span>今日已处理异常数</span>
-        </div>
-    </div>
-    <div class="div1-pc">
-        <div class="left-img">
-
-        </div>
-        <div class="div1-pc-right">
-            <p>4</p>
-            <span>今日未处理异常数</span>
+            <span>今日未处理</span>
         </div>
     </div>
 </div>
@@ -80,18 +80,123 @@
 <table class="layui-hide" id="testFire" lay-filter="testFire"></table>
 <!--表格数据结束-->
 
+
+<!--打开历史数据弹出层结束-->
+<!-- 添加和修改的弹出层开始 -->
+<div style="display: none;padding: 5px" id="addOrUpdateDiv">
+    <form action="" method="post" class="layui-form layui-form-pane" id="dataFrm" lay-filter="dataFrm">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">设备ID</label>
+                <div class="layui-input-block" style="width: 50%;">
+                    <input type="text" name="devId" class="layui-input" autocomplete="off" placeholder="请输入设备ID" lay-verify="required">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">设备型号</label>
+                <div class="layui-input-block" style="width: 50%;">
+                    <input type="text" name="unitType" id="unitType" lay-verify="required"  autocomplete="off" placeholder="请输入设备型号" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">设备名称</label>
+                <div class="layui-input-block" style="width: 50%;">
+                    <input type="text" name="devName" id="devName" lay-verify="required"  autocomplete="off" placeholder="请输入设备型号" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">设备状态</label>
+                <div class="layui-input-block" style="width: 50%;">
+                    <input type="text" name="devStatus" id="devStatus" lay-verify="required"  autocomplete="off" placeholder="请输入设备型号" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">所属建筑</label>
+                <div class="layui-input-block" style="width: 50%;">
+                    <input type="text" id="underbuilding" name="underbuilding" lay-verify="required" autocomplete="off" placeholder="所属建筑" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">楼层区域</label>
+                <div class="layui-input-block" style="width: 50%;">
+                    <input type="text" id="floorarea" name="floorarea" lay-verify="required" autocomplete="off" placeholder="请输入楼层区域" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">安装位置</label>
+                <div class="layui-input-block" style="width: 50%;">
+                    <input type="text" id="location" name="location" lay-verify="required" autocomplete="off" placeholder="" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">报警时间</label>
+                <div class="layui-input-block" style="width: 50%;">
+                    <input type="text" id="alarmtime" name="alarmtime" lay-verify="required" autocomplete="off" placeholder="" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">报警内容</label>
+                <div class="layui-input-block" style="width: 50%;">
+                    <input type="text" id="alarmcontent" name="alarmcontent" lay-verify="required" autocomplete="off" placeholder="" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">是否处理</label>
+                <div class="layui-input-block" style="width: 50%;">
+                    <input type="text" id="isdeal" name="isdeal" lay-verify="required" autocomplete="off" placeholder="" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">处理人</label>
+                <div class="layui-input-block" style="width: 50%;">
+                    <input type="text" id="dealpeople" name="dealpeople" th:value="*{session.user.name}" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">处理时间</label>
+                <div class="layui-input-block" style="width: 50%;">
+                    <input type="text" id="dealtime" name="dealtime" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+</div>
+<!-- 添加和修改的弹出层结束 -->
+
+
 <!--头部工具栏开始-->
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm layui-bg-green" lay-event="getCheckData">批量处理</button>
+        <button class="layui-btn layui-btn-sm layui-bg-green" lay-event="batchDeleteAlerm">批量删除</button>
     </div>
 </script>
 <!--头部工具栏结束-->
 
 <!--数据行工具栏开始-->
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+   <!-- <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
+
+    <a class="layui-btn layui-btn-sm" lay-event="detail">详情</a>
 </script>
 <!--数据行工具栏结束-->
 
@@ -105,10 +210,16 @@
 <script src="/resources/layui/layui.js" charset="UTF-8"></script>
 <script src="/resources/js/report/report.js"></script>
 <script type="text/javascript">
-    layui.use(['table','form'], function(){
-        var table = layui.table, form = layui.form;
+    layui.use(['table','form','jquery','layer','laydate'], function(){
+        var table = layui.table, form = layui.form, $ = layui.jquery,
+            layer=layui.layer,laydate = layui.laydate;
 
-        table.render({
+        laydate.render({
+            elem: '#dealtime'
+            ,type: 'datetime'
+        });
+
+        var tableIns = table.render({
             elem: '#testFire'
             ,url:'/alertPro/getBreakDownAllInfo'
             //,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
@@ -118,7 +229,7 @@
                 [
                     {checkbox: 'true'}
                     ,{field:'id', title: '序号', sort: true}
-                    ,{field:'devId', title: '设备ID',width: 185} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                    ,{field:'devId', title: '设备ID',width: 170} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
                     ,{field:'devName', title: '设备名称',align: 'center'}
                     ,{field:'statusName', title: '设备状态', align: 'center'}
                     ,{field:'unitType', title: '设备型号', align: 'center'}
@@ -133,7 +244,7 @@
                     //,{field:'dealpeople', title: '处理人',  align: 'center'}
                     //,{field:'dealtime', title: '处理时间',  align: 'center'}
                     //,{field:'alreamType', title: '报警类型',  align: 'center'}
-                    //,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+                    ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:100, align:'center'}
                 ]
             ]
             ,page: true
@@ -145,7 +256,6 @@
 
         //头工具栏事件
         table.on('toolbar(testFire)', function(obj){
-            alert(111);
             var checkStatus = table.checkStatus(obj.config.id);
             switch(obj.event){
                 case 'getCheckData':
@@ -156,38 +266,74 @@
                     var data = checkStatus.data;
                     layer.msg('选中了：'+ data.length + ' 个');
                     break;
-                case 'isAll':
-                    layer.msg(checkStatus.isAll ? '全选': '未全选');
-                    break;
-
-                //自定义头工具栏右侧图标 - 提示
-                case 'LAYTABLE_TIPS':
-                    layer.alert('这是工具栏右侧自定义的一个图标按钮');
+                case 'batchDeleteAlerm':
+                    batchDeleteAlerm();
                     break;
             };
         });
 
         //监听行工具事件
-        table.on('tool(testFire)', function(obj){
+        table.on('tool(testFire)', function(obj) {
             var data = obj.data;
-            console.log(obj)
-            if(obj.event === 'del'){
-                layer.confirm('真的删除行么', function(index){
-                    obj.del();
-                    layer.close(index);
-                });
-            } else if(obj.event === 'edit'){
-                layer.prompt({
-                    formType: 2
-                    ,value: data.email
-                }, function(value, index){
-                    obj.update({
-                        email: value
-                    });
-                    layer.close(index);
-                });
+            if (obj.event === 'detail') {
+                openUpdateDeptLayer(data);
             }
         });
+
+
+
+        var mainIndex;
+        //打开修改的弹出层
+        function openUpdateDeptLayer(data) {
+            mainIndex = layer.open({
+                type:1,
+                content:$("#addOrUpdateDiv"),
+                area: ['100%','100%'],
+                title: '设备详情',
+                btn: '关闭',
+                btnAlign: 'c', //按钮居中
+                success: function () {
+                    //重置内容
+                    $('#dataFrm')[0].reset();
+                    //装载新的数据
+                    form.val("dataFrm",data);
+                    //url = "/alertPro/updateAlert";
+                }
+            });
+        }
+
+        //批量删除
+        function batchDeleteAlerm() {
+            //得到选中行
+            var  checkStatus = table.checkStatus('testFire');
+            var dataLength = checkStatus.data.length;
+            //如果选中行大于0
+            if(dataLength > 0) {
+                //弹出选择框
+                layer.confirm('你确定要删除选中行数据吗？', {icon: 3, title: '提示'}, function (index) {
+                    var  data = checkStatus.data; //选中行的数据
+                    var ids = '';
+                    $.each(data, function (index, item) {
+                        if (index == 0){
+                            ids += "ids=" + item.id;
+                        }else {
+                            ids += "&ids=" + item.id;
+                        }
+                    });
+
+                    $.post("/alertPro/batchDeleteAlerm", ids, function (res) {
+                        if (res.code == 200) {
+                            tableIns.reload();
+                        }
+                        layer.msg(res.msg);
+                    })
+                });
+                layer.close(mainIndex);
+
+            }else {
+                layer.msg('请选中行');
+            }
+        }
     });
 </script>
 

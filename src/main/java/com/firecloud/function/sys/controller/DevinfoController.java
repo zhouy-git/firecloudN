@@ -49,12 +49,8 @@ public class DevinfoController {
         IPage<Devinfo> page = new Page<>(devinfoVo.getPage(), devinfoVo.getLimit());
         QueryWrapper<Devinfo> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().like(StringUtils.isNoneBlank(devinfoVo.getDevId()), Devinfo::getDevId, devinfoVo.getDevId());
-        queryWrapper.lambda().like(StringUtils.isNoneBlank(devinfoVo.getDevStatus()), Devinfo::getDevStatus, devinfoVo.getDevStatus());
-        //大于创建时间
-        queryWrapper.lambda().ge(devinfoVo.getDataDate()!=null, Devinfo::getDataDate, devinfoVo.getDataDate());
-        //小于创建时间
-        queryWrapper.lambda().le(devinfoVo.getDataDate()!=null, Devinfo::getDataDate, devinfoVo.getDataDate());
         queryWrapper.orderByDesc("DATA_DATE");
+        queryWrapper.orderByDesc("DATA_TIME");
         this.noticeService.page(page, queryWrapper);
         List<Devinfo> devinfoList = page.getRecords();
         for (Devinfo devinfo : devinfoList) {

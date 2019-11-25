@@ -22,13 +22,13 @@ import java.util.List;
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements RoleService {
 
     @Override
-    public boolean removeById(Serializable id) {
+    public boolean removeById(Serializable rid) {
         //xml中写的mapper
-        this.getBaseMapper().deleteRolePermissionByid(id);
+        this.getBaseMapper().deleteRolePermissionByRid(rid);
         //xml中写的mapper
-        this.getBaseMapper().deleteRoleUserById(id);
+        this.getBaseMapper().deleteRoleUserById(rid);
 
-        return super.removeById(id);
+        return super.removeById(rid);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         RoleMapper roleMapper = this.getBaseMapper();
 
         //根据rid删除已经存在的pid
-        roleMapper.deleteRolePermissionByid(rid);
+        roleMapper.deleteRolePermissionByRid(rid);
 
         if (ids != null && ids.length > 0) {
             for (Integer pid : ids) {

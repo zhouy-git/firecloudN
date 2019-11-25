@@ -42,23 +42,18 @@ public class DevAlermController {
     public DataGridView loadAllDevAlarm(DevAlermVo devAlermVo) {
 
         IPage<DevAlerm> page = new Page<>(devAlermVo.getPage(), devAlermVo.getLimit());
-
         QueryWrapper<DevAlerm> queryWrapper = new QueryWrapper<>();
-
         queryWrapper.like(StringUtils.isNoneBlank(devAlermVo.getDevId()), "dev_id", devAlermVo.getDevId());
-
         queryWrapper.like(StringUtils.isNoneBlank(devAlermVo.getDevStatus()), "dev_status", devAlermVo.getDevStatus());
         //大于创建时间
         queryWrapper.ge(devAlermVo.getNetDate()!=null, "net_date", devAlermVo.getNetDate());
         //小于创建时间
         queryWrapper.le(devAlermVo.getNetDate()!=null, "net_date", devAlermVo.getNetDate());
-
         queryWrapper.orderByDesc("net_date");
         this.devAlermService.page(page, queryWrapper);
         List<DevAlerm> devAlermsList = page.getRecords();
         for (DevAlerm devAlerm : devAlermsList) {
             String dev_stausid = devAlerm.getDevStatus();
-
             EquipConfig equipConfig = this.equipConfigService.getById(dev_stausid);
             if (equipConfig !=null) {
                 devAlerm.setStatusName(equipConfig.getStatusname());
